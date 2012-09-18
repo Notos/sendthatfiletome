@@ -353,7 +353,7 @@ class DB_MYSQL {
   }
   function createSystemTable() {
   	$this->query("CREATE TABLE system ( databaseVersion decimal(5,3) );");
-  	$this->query("INSERTO INTO system ( databaseVersion ) values ( 1.000 );");
+  	$this->query("INSERT INTO system ( databaseVersion ) values ( 1.000 );");
   }
 }
 ?>
