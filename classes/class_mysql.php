@@ -342,7 +342,7 @@ class DB_MYSQL {
 	}
 
   function updateDatabase() {
-    $this->query('SELECT * FROM system');
+    $this->query("SHOW TABLES LIKE 'system'");
     if($this->record_count() == 0) {
       $this->createSystemTable();
     }
