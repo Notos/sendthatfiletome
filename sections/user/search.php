@@ -49,7 +49,7 @@ $Pages=get_pages($Page,$NumResults,USERS_PER_PAGE,9);
 echo $Pages;
 ?>
 	</div>
-	<form class="search_form" name="users" action="user.php" method="get">
+	<form action="user.php" method="get">
 	<input type="hidden" name="action" value="search" />
 		<table class="layout" width="100%">
 			<tr>
@@ -85,4 +85,9 @@ foreach($Results as $Result) {
 	</div>
 </div>
 
-<? show_footer(); ?>
+
+
+
+<?
+show_footer();
+?>

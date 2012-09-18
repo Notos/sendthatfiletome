@@ -57,7 +57,7 @@ show_header("Service Stats");
 			<tr>
 				<td>Cache:</td>
 				<td>
-					<form class="delete_form" name="cache" action="" method="post">
+					<form action="" method="post">
 						<input type="hidden" name="action" value="service_stats" />
 						<input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
 						<input type="hidden" name="global_flush" value="1" />

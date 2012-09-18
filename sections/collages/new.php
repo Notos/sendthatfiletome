@@ -21,7 +21,7 @@ if (!empty($Error)) { ?>
 	<div class="save_message error"><?=display_str($Error)?></div>
 	<br />
 <? } ?>
-	<form class="create_form" name="collage" action="collages.php" method="post">
+	<form action="collages.php" method="post" name="newcollage">
 		<input type="hidden" name="action" value="new_handle" />
 		<input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
 		<table class="layout">

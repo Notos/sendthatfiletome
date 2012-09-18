@@ -36,12 +36,15 @@ define('FOOTER_FILE',SERVER_ROOT.'/design/publicfooter.php');
 	<tr>
 		<td align="center" valign="middle">
 			<div id="logo">
+			</div>
+			<div>
 				<ul>
-					<li><a href="index.php">Home</a></li>
-					<li><a href="login.php">Login</a></li>
-<? if (OPEN_REGISTRATION) { ?> 
-					<li><a href="register.php">Register</a></li>
+					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;
+					<a href="login.php">Login</a>&nbsp;&nbsp;&nbsp;
+<? if (OPEN_REGISTRATION) { ?>
+					<a href="register.php">Register</a>
 <? } ?>
 				</ul>
 			</div>
+			<br>
 

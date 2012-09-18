@@ -41,4 +41,22 @@ function all_bookmarks($Type, $UserID = false) {
 	}
 	return $Bookmarks;
 }
+
+
+/// -------------- Functions by TomBombadil
+
+   function pt($table) {
+     echo "<table border=1>";
+     $rn = 1;
+     foreach($table as $index=>$row) {
+       echo "<tr>";
+       echo "<td>".$rn++."</td>";
+       foreach($row as $field=>$value) {
+         echo "<td>" . $value . "</td>";
+       }
+       echo "</tr>";
+     }
+     echo "</table>";
+   }
+
 ?>

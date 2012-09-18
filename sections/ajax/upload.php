@@ -25,10 +25,17 @@ switch($UploadForm) {
 		$TorrentForm->audiobook_form();
 		break;
 	
+        case 'TV Shows':
+                $TorrentForm->tvshow_form();
+                break;
+
 	case 'Applications':
 	case 'Comics':
 	case 'E-Books':
 	case 'E-Learning Videos':
+	case 'Movies':
+	case 'Games':
+	case 'XXX':
 		$TorrentForm->simple_form($_GET['categoryid']);
 		break;
 	default:

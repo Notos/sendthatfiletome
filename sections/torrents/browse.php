@@ -480,7 +480,7 @@ if(!is_array($TorrentCache)) {
 	} else {
 		// Build SQL for disabled grouping
 		if (!$TimeField) { $TimeField="t.Time"; }
-		$DB->query("SELECT $SCFR
+		$DB->query("xSELECT $SCFR
 						g.ID,
 						g.Name,
 						g.Year AS s2,

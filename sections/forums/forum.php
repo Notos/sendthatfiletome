@@ -76,7 +76,7 @@ show_header('Forums > '. $Forums[$ForumID]['Name']);
 		<div id="searchforum" class="hidden center">
 			<div style="display: inline-block;">
 				<h3>Search this forum:</h3>
-				<form class="search_form" name="forum" action="forums.php" method="get">
+				<form action="forums.php" method="get">
 					<table cellpadding="6" cellspacing="1" border="0" class="layout border">	
 						<input type="hidden" name="action" value="search" />
 						<input type="hidden" name="forums[]" value="<?=$ForumID?>" />
@@ -100,8 +100,7 @@ show_header('Forums > '. $Forums[$ForumID]['Name']);
 				<br />
 			</div>
 		</div>
-<?     
-/*
+<?     	
 	if(check_perms('users_mod')) {
 	$DB->query("SELECT ForumID from subscribed_forums WHERE ForumID='$ForumID' AND SubscriberID='$LoggedUser[ID]'");
         if($DB->record_count() == 0) { ?>
@@ -109,9 +108,7 @@ show_header('Forums > '. $Forums[$ForumID]['Name']);
 <?      } else { ?> 
 		[<a href="forums.php?action=forum_subscribe&amp;perform=remove&amp;forumid=<?=$ForumID?>&amp;auth=<?=$LoggedUser['AuthKey']?>">Unsubscribe from Forum</a>]
 <?      } 
-	}
- */
-?>
+	}?>
 
 	</div>
 <? if(check_perms('site_moderate_forums')) { ?>

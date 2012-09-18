@@ -109,7 +109,7 @@ if ($DB->record_count() == 0) {
 	if ($ViewString != 'Resolved' && $IsStaff) {
 		// Open multiresolve form
 ?>
-		<form class="manage_form" name="staff_messages" method="post" action="staffpm.php" id="messageform">
+		<form method="post" action="staffpm.php" id="messageform">
 			<input type="hidden" name="action" value="multiresolve" />
 			<input type="hidden" name="view" value="<?=strtolower($View)?>" />
 <?
@@ -182,12 +182,14 @@ if ($DB->record_count() == 0) {
 	// Close table and multiresolve form
 ?>
 			</table>
-<? 	if ($ViewString != 'Resolved' && $IsStaff) { ?>
+<? 		if ($ViewString != 'Resolved' && $IsStaff) { ?>
 			<input type="submit" value="Resolve selected" />
+<?		} ?>
 		</form>
 <?
-	}
+
 }
+
 ?>
 	</div>
 	<div class="linkbox">

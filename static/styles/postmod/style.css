@@ -34,7 +34,7 @@ body {
 	overflow: auto;
 }
 
-table tbody, .main_column, .sidebar, .box, .thin, .pad, #threadpoll, #poll {
+table tbody, .main_column, .sidebar, .box, .thin, .pad, #threadpoll, #polls {
 	color: #444;
 }
 
@@ -187,7 +187,7 @@ ul.thin li { margin:0px 0px; padding:0px; }
 }
 
 #logo {
-	width: 138px;
+	width: 279px;
 	height: 37px;
 	background: url('images/woodlogo.png') no-repeat top left;
 	margin: 23px 0 0 11px;
@@ -763,7 +763,7 @@ tr.group td,
 tr.torrent td {
 	color: #646054;
 }
-.torrent_table.grouping tr.torrent {
+.torrent_table tr.torrent {
 	background-color:#EFEFEF;
 }
 

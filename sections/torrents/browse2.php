@@ -23,6 +23,7 @@
 include(SERVER_ROOT.'/sections/bookmarks/functions.php');
 include(SERVER_ROOT.'/sections/torrents/functions.php');
 
+// broken?
 
 // The "order by x" links on columns headers
 function header_link($SortKey,$DefaultWay="desc") {
@@ -372,7 +373,9 @@ if(count($Queries)>0) {
 }
 
 $SS->set_index(SPHINX_INDEX.' delta');
+
 $Results = $SS->search($Query, '', 0, array(), '', '');
+
 if(check_perms('site_search_many')) {
 	$TorrentCount = $SS->TotalResults;
 } else {
@@ -427,7 +430,7 @@ show_header('Browse Torrents','browse');
 
 
 ?>
-<form class="search_form" name="torrents" method="get" action="">
+<form name="filter" method="get" action=''>
 <div class="filter_torrents">
 	<h3>
 		Filter		

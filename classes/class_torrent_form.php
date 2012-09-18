@@ -23,6 +23,15 @@ class TORRENT_FORM {
 	var $TorrentID = false;
 	var $Disabled = '';
 	var $DisabledFlag = false;
+        var $tvTypes = array();
+        var $countries = array();
+        var $origins = array();
+        var $genres = array();
+        var $containers = array();
+        var $codecs = array();
+        var $sources = array();
+        var $resolutions = array();
+	
 	
 	function TORRENT_FORM($Torrent = false, $Error = false, $NewTorrent = true) {
 		
@@ -30,14 +39,17 @@ class TORRENT_FORM {
 		$this->Torrent = $Torrent;
 		$this->Error = $Error;
 		
-		global $Categories, $Formats, $Bitrates, $Media, $TorrentID;
+		global $Categories, $Formats, $Bitrates, $Media, $TorrentID, $tvTypes;
 		
 		$this->Categories = $Categories;
 		$this->Formats = $Formats;
 		$this->Bitrates = $Bitrates;
 		$this->Media = $Media;
 		$this->TorrentID = $TorrentID;
-		
+                $this->tvTypes = $tvTypes;
+
+                $this->getTypesFromDatabase();
+
 		if($this->Torrent && $this->Torrent['GroupID']) {
 			$this->Disabled = ' disabled="disabled"';
 			$this->DisabledFlag = true;
@@ -45,6 +57,67 @@ class TORRENT_FORM {
 	}
 
 
+        function getTypesFromDatabase() {
+          global $DB;
+
+          $DB->query("SELECT * from origin");
+          if($DB->record_count() > 0) {
+            $this->origins = $DB->to_array(false, MYSQLI_BOTH, false);
+            $this->origins = $this->newArrayFromField($this->origins, 'Name');
+          }
+          $DB->query("SELECT * from country");
+          if($DB->record_count() > 0) {
+            $this->countries = $DB->to_array(false, MYSQLI_BOTH, false);
+            $this->countries = $this->newArrayFromField($this->countries, 'Name');
+          }
+          $DB->query("SELECT * from genre");
+          if($DB->record_count() > 0) {
+            $this->genres = $DB->to_array(false, MYSQLI_BOTH, false);
+            $this->genres = $this->newArrayFromField($this->genres, 'Name');
+          }
+          $DB->query("SELECT * from container");
+          if($DB->record_count() > 0) {
+            $this->containers = $DB->to_array(false, MYSQLI_BOTH, false);
+            $this->containers = $this->newArrayFromField($this->containers, 'Name');
+          }
+          $DB->query("SELECT * from codec");
+          if($DB->record_count() > 0) {
+            $this->codecs = $DB->to_array(false, MYSQLI_BOTH, false);
+            $this->codecs = $this->newArrayFromField($this->codecs, 'Name');
+          }
+          $DB->query("SELECT * from source");
+          if($DB->record_count() > 0) {
+            $this->sources = $DB->to_array(false, MYSQLI_BOTH, false);
+            $this->sources = $this->newArrayFromField($this->sources, 'Name');
+          }
+          $DB->query("SELECT * from resolution");
+          if($DB->record_count() > 0) {
+            $this->resolutions = $DB->to_array(false, MYSQLI_BOTH, false);
+            $this->resolutions = $this->newArrayFromField($this->resolutions, 'Name');
+          }
+        }
+
+        function newArrayFromField($array, $field) {
+          $ret = array();
+          foreach($array as $key => $values) {
+            $ret[] = $values[$field];
+          }
+          return $ret;
+        }
+
+        function buildSelect($array, $field, $currentValue, $name, $onChange) {
+          echo "<select name=\"$name\" onchange=\"$onChange\">";
+          echo "<option value=\"\">---</option>";
+          foreach(display_array($array) as $value) {
+                  echo "<option value='$value'";
+                  if($value == $currentValue) { echo " selected='selected'"; }
+                  echo ">";
+                  echo $value;
+                  echo "</option>\n";
+          }
+          echo "</select>";
+        }
+        
 	function head() {
 		global $LoggedUser;
 ?>
@@ -59,7 +132,7 @@ class TORRENT_FORM {
 			echo '<p style="color: red;text-align:center;">'.$this->Error.'</p>';
 		}
 ?>
-	<form class="create_form" name="torrent" action="" enctype="multipart/form-data" method="post" id="upload_table" onsubmit="$('#post').raw().disabled = 'disabled'">
+	<form action="" enctype="multipart/form-data" method="post" id="upload_table" onsubmit="$('#post').raw().disabled = 'disabled'">
 		<div>
 			<input type="hidden" name="submit" value="true" />
 			<input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
@@ -729,6 +802,138 @@ function hide() {
 		</table>
 <?
 	}//function audiobook_form
+
+
+
+	function tvshow_form() { 
+		$Torrent = $this->Torrent;
+?>
+		<table cellpadding="3" cellspacing="1" border="0" class="layout border slice" width="100%">
+		
+                        <tr>
+                                <td class="label">Show type</td>
+                                <td> 
+                                  <? $this->buildSelect($this->tvTypes, "tvType", $Torrent['tvType'], "tvType", "Format()" ); ?>
+                                </td>
+                        </tr>
+				
+		
+		
+		
+<?		if($this->NewTorrent){ ?>
+			<tr id="title_tr">
+				<td class="label">Show Title</td>
+				<td>
+					<input type="text" id="title" name="title" size="60" value="<?=display_str($Torrent['Title']) ?>" /> (i.e.: Game of Thrones)
+				</td>
+			</tr>
+                        <tr id="title_tr">
+                                <td class="label">Season Number</td>
+                                <td>
+                                        <input type="text" id="tvSeason" name="tvSeason" size="10" value="<?=display_str($Torrent['tvSeason']) ?>" /> (i.e.: 1)
+                                </td>
+                        </tr>
+                        <tr id="title_tr">
+                                <td class="label">Episode Number</td>
+                                <td>
+                                        <input type="text" id="tvEpisode" name="tvEpisode" size="10" value="<?=display_str($Torrent['tvEpisode']) ?>" /> (i.e.: 5)
+                                </td>
+                        </tr>
+			
+<?		} ?>
+
+                        <tr>
+                                <td class="label">Origin</td>
+                                <td>
+                                  <? $this->buildSelect($this->origins, "tvOrigin", $Torrent['tvOrigin'], "tvOrigin", "Format()" ); ?>
+                                </td>
+                        </tr>
+
+                        <tr>
+                                <td class="label">Country</td>
+                                <td>
+                                  <? $this->buildSelect($this->countries, "tvCountry", $Torrent['tvCountry'], "tvCountry", "Format()" ); ?>
+                                </td>
+                        </tr>
+
+			<tr id="year_tr">
+				<td class="label">Year</td>
+				<td>
+					<input type="text" id="year" name="year" size="5" value="<?=display_str($Torrent['Year']) ?>" />
+				</td>
+			</tr>
+
+			<tr>
+
+
+
+                        <tr>
+                                <td class="label">Genre</td>
+                                <td>
+                                  <? $this->buildSelect($this->genres, "tvGenre", $Torrent['tvGenre'], "tvGenre", "Format()" ); ?>
+                                </td>
+                        </tr>
+
+                        <tr>
+                                <td class="label">Container</td>
+                                <td>
+                                  <? $this->buildSelect($this->containers, "tvContainer", $Torrent['tvContainer'], "tvContainer", "Format()" ); ?>
+                                </td>
+                        </tr>
+
+                        <tr>
+                                <td class="label">Codec</td>
+                                <td>
+                                  <? $this->buildSelect($this->codecs, "tvCodec", $Torrent['tvCodec'], "tvCodec", "Format()" ); ?>
+                                </td>
+                        </tr>
+
+                        <tr>
+                                <td class="label">Source</td>
+                                <td>
+                                  <? $this->buildSelect($this->sources, "tvSource", $Torrent['tvSource'], "tvSource", "Format()" ); ?>
+                                </td>
+                        </tr>
+
+                        <tr>
+                                <td class="label">Resolution</td>
+                                <td>
+                                  <? $this->buildSelect($this->resolutions, "tvResolution", $Torrent['tvResolution'], "tvResolution", "Format()" ); ?>
+                                </td>
+                        </tr>
+
+
+<?		if($this->NewTorrent) { ?> 
+			<tr>
+				<td class="label">Tags</td>
+				<td>
+					<input type="text" id="tags" name="tags" size="60" value="<?=display_str($Torrent['TagList']) ?>" />
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Image (optional)</td>
+				<td>
+					<input type="text" id="image" name="image" size="60" value="<?=display_str($Torrent['Image']) ?>" <?=$this->Disabled?>/>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Description</td>
+				<td>
+					<textarea name="album_desc" id="album_desc" cols="60" rows="8"><?=display_str($Torrent['GroupDescription']); ?></textarea>
+					<p class="min_padding">Contains information like the track listing, and maybe a review.</p>
+				</td>
+			</tr>
+<?		}?> 
+			<tr>
+				<td class="label">Release Description (optional)</td>
+				<td>
+					<textarea name="release_desc" id="release_desc" cols="60" rows="8"><?=display_str($Torrent['TorrentDescription']); ?></textarea>
+					<p class="min_padding">Contains information like encoder settings, and/or a log of the ripping process.</p>
+				</td>
+			</tr>
+		</table>
+<?
+	}//function tvshow_form
 
 
 

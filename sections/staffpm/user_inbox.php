@@ -44,7 +44,7 @@ if ($DB->record_count() == 0) {
 } else {
 	// Messages, draw table
 ?>
-		<form class="manage_form" name="staff_messages" method="post" action="staffpm.php" id="messageform">
+		<form method="post" action="staffpm.php" id="messageform">
 			<input type="hidden" name="action" value="multiresolve" />
 			<h3>Open messages</h3>
 			<table class="message_table checkboxes">
@@ -113,4 +113,8 @@ if ($DB->record_count() == 0) {
 ?>
 	</div>
 </div>
-<? show_footer(); ?>
+<?
+
+show_footer();
+
+?>

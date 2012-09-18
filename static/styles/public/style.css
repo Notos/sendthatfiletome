@@ -75,12 +75,12 @@ input[type="text"]:invalid, input[type="password"]:invalid {
 }
 
 #logo {
-	height: 60px;
-	width: 244px;
+	height: 328px;
+	width: 739px;
 	background-image: url('images/logo.png');
 	background-repeat: no-repeat;
-	background-position: top left;
-	padding: 50px 0px 0px 0px;
+	background-position: bottom left;
+	padding: 70px 0px 0px 0px;
 	text-align: center;
 }
 

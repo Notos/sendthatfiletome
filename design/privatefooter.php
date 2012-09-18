@@ -29,6 +29,7 @@
 		<strong>Date:</strong> <?=date('M d Y, H:i')?>
 
 	</p>
+	<p> <a href="user.php?clearcache=1"> Cache </a> </p>
 	</div>
 <? if (DEBUG_MODE || check_perms('site_debug')) { ?>
 	<!-- Begin Debugging -->
