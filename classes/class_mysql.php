@@ -145,17 +145,18 @@ class DB_MYSQL {
 	protected $Row;
 	protected $Errno = 0;
 	protected $Error = '';
-	
+
 	public $Queries = array();
 	public $Time = 0.0;
-	
+	public $DatabaseVersion = '';
+
 	protected $Database = '';
 	protected $Server = '';
 	protected $User = '';
 	protected $Pass = '';
 	protected $Port = 0;
 	protected $Socket = '';
-	
+
 	function __construct($Database = SQLDB, $User = SQLLOGIN, $Pass = SQLPASS, $Server = SQLHOST, $Port = SQLPORT, $Socket = SQLSOCK) {
 		$this->Database = $Database;
 		$this->Server = $Server;
@@ -169,7 +170,7 @@ class DB_MYSQL {
 		global $LoggedUser, $Cache, $Debug, $argv;
 		$DBError='MySQL: '.strval($Msg).' SQL error: '.strval($this->Errno).' ('.strval($this->Error).')';
 		if ($this->Errno == 1194) { send_irc('PRIVMSG '.ADMIN_CHAN.' :'.$this->Error); }
-		/*if ($this->Errno == 1194) { 
+		/*if ($this->Errno == 1194) {
 			preg_match("Table '(\S+)' is marked as crashed and should be repaired", $this->Error, $Matches);
 		} */
 		$Debug->analysis('!dev DB Error',$DBError,3600*24);
@@ -191,7 +192,9 @@ class DB_MYSQL {
 				$this->Errno = mysqli_connect_errno();
 				$this->Error = mysqli_connect_error();
 				$this->halt('Connection failed (host:'.$this->Server.':'.$this->Port.')');
-			}
+			} else {
+        $this->updateDatabase();
+      }
 		}
 	}
 
@@ -207,7 +210,7 @@ class DB_MYSQL {
 			}
 			$Debug->analysis('Non-Fatal Deadlock:',$Query,3600*24);
 			trigger_error("Database deadlock, attempt $i");
-			
+
 			sleep($i*rand(2, 5)); // Wait longer as attempts increase
 		}
 		$QueryEndTime=microtime(true);
@@ -338,5 +341,19 @@ class DB_MYSQL {
 		mysqli_data_seek($this->QueryID, 0);
 	}
 
+  function updateDatabase() {
+    $this->query('SELECT * FROM system');
+    if($this->record_count() == 0) {
+      $this->createSystemTable();
+    }
+    // require(SERVER_ROOT.'/classes/database.schemas.php');
+    
+   //$result = mysql_query("SHOW COLUMNS FROM `table` LIKE 'fieldname'");
+   //$exists = (mysql_num_rows($result))?TRUE:FALSE;
+  }
+  function createSystemTable() {
+  	$this->query("CREATE TABLE system ( databaseVersion decimal(5,3) );");
+  	$this->query("INSERTO INTO system ( databaseVersion ) values ( 1.000 );");
+  }
 }
 ?>
