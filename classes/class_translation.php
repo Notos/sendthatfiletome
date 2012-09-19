@@ -72,7 +72,7 @@ class TRANSLATION {
       return $this->translate($message, $lID, $cCode);
     }
     
-    public setLanguage($lid, $cc) {
+    public function setLanguage($lid, $cc) {
       $this->languageID = $li;
       $this->countryCode = $cc;
     }
