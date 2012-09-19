@@ -17,7 +17,6 @@ class TRANSLATION {
       $this->internalCache = $Cache;
 
       $this->loadLanguages(); /// load the list of enabled/disabled languages
-      echo "load languages --- 1";
       $this->currentLanguageID = $this->defaultLanguageID;
       $this->currentCountryCode = $this->defaultCountryCode;
 
