@@ -69,7 +69,7 @@ echo "---- 20";
 echo "---- 21";
         foreach($translations as $record) {
 echo "---- 22";
-          echo "|=".$record[2]."-".$record[0]."-".$record[1]]." = ".$record[3].."=|";
+          echo "|=".$record[2]."-".$record[0]."-".$record[1]." = ".$record[3].."=|";
           $this->messages[$record[2]][$record[0]][$record[1]] = $record[3];
 echo "---- 23";
         }
