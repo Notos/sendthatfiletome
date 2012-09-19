@@ -65,6 +65,7 @@ CREATE TABLE `origin` (
 
 CREATE TABLE `country` (
   `CountryID` int(10) NOT NULL AUTO_INCREMENT,
+  `CountryCode` char(2) NOT NULL,
   `Name` varchar(64) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`CountryID`),
   UNIQUE KEY `Name` (`Name`)
@@ -108,111 +109,260 @@ CREATE TABLE `resolution` (
 
  /* ---- Inserts ----- */
 
-INSERT INTO country (Name) VALUES ('Afghanistan');
-INSERT INTO country (Name) VALUES ('Albania');
-INSERT INTO country (Name) VALUES ('Algeria');
-INSERT INTO country (Name) VALUES ('Andorra');
-INSERT INTO country (Name) VALUES ('Angola');
-INSERT INTO country (Name) VALUES ('Antigua Barbuda');
-INSERT INTO country (Name) VALUES ('Argentina');
-INSERT INTO country (Name) VALUES ('Australia');
-INSERT INTO country (Name) VALUES ('Austria');
-INSERT INTO country (Name) VALUES ('Bahamas');
-INSERT INTO country (Name) VALUES ('Bangladesh');
-INSERT INTO country (Name) VALUES ('Barbados');
-INSERT INTO country (Name) VALUES ('Belgium');
-INSERT INTO country (Name) VALUES ('Belize');
-INSERT INTO country (Name) VALUES ('Bosnia Herzegovina');
-INSERT INTO country (Name) VALUES ('Brazil');
-INSERT INTO country (Name) VALUES ('Bulgaria');
-INSERT INTO country (Name) VALUES ('Burkina Faso');
-INSERT INTO country (Name) VALUES ('Cambodia');
-INSERT INTO country (Name) VALUES ('anada');
-INSERT INTO country (Name) VALUES ('Chile');
-INSERT INTO country (Name) VALUES ('hina');
-INSERT INTO country (Name) VALUES ('Colombia');
-INSERT INTO country (Name) VALUES ('Congo');
-INSERT INTO country (Name) VALUES ('Costa Rica');
-INSERT INTO country (Name) VALUES ('Croatia');
-INSERT INTO country (Name) VALUES ('Cuba');
-INSERT INTO country (Name) VALUES ('Czech Republic');
-INSERT INTO country (Name) VALUES ('Denmark');
-INSERT INTO country (Name) VALUES ('Dominican Republic');
-INSERT INTO country (Name) VALUES ('Ecuador');
-INSERT INTO country (Name) VALUES ('Egypt');
-INSERT INTO country (Name) VALUES ('Estonia');
-INSERT INTO country (Name) VALUES ('Fiji');
-INSERT INTO country (Name) VALUES ('inland');
-INSERT INTO country (Name) VALUES ('rance');
-INSERT INTO country (Name) VALUES ('ermany');
-INSERT INTO country (Name) VALUES ('Greece');
-INSERT INTO country (Name) VALUES ('Guatemala');
-INSERT INTO country (Name) VALUES ('Honduras');
-INSERT INTO country (Name) VALUES ('Hong Kong');
-INSERT INTO country (Name) VALUES ('Hungary');
-INSERT INTO country (Name) VALUES ('Iceland');
-INSERT INTO country (Name) VALUES ('India');
-INSERT INTO country (Name) VALUES ('Ireland');
-INSERT INTO country (Name) VALUES ('Isle de Muerte');
-INSERT INTO country (Name) VALUES ('Israel');
-INSERT INTO country (Name) VALUES ('taly');
-INSERT INTO country (Name) VALUES ('Jamaica');
-INSERT INTO country (Name) VALUES ('Japan');
-INSERT INTO country (Name) VALUES ('Kiribati');
-INSERT INTO country (Name) VALUES ('Kuwait');
-INSERT INTO country (Name) VALUES ('Kyrgyzstan');
-INSERT INTO country (Name) VALUES ('Laos');
-INSERT INTO country (Name) VALUES ('Latvia');
-INSERT INTO country (Name) VALUES ('Lebanon');
-INSERT INTO country (Name) VALUES ('Lithuania');
-INSERT INTO country (Name) VALUES ('Luxembourg');
-INSERT INTO country (Name) VALUES ('Macedonia');
-INSERT INTO country (Name) VALUES ('Malaysia');
-INSERT INTO country (Name) VALUES ('Mexico');
-INSERT INTO country (Name) VALUES ('Nauru');
-INSERT INTO country (Name) VALUES ('Netherlands');
-INSERT INTO country (Name) VALUES ('Netherlands Antilles');
-INSERT INTO country (Name) VALUES ('New Zealand');
-INSERT INTO country (Name) VALUES ('Nigeria');
-INSERT INTO country (Name) VALUES ('North Korea');
-INSERT INTO country (Name) VALUES ('Norway');
-INSERT INTO country (Name) VALUES ('Pakistan');
-INSERT INTO country (Name) VALUES ('Paraguay');
-INSERT INTO country (Name) VALUES ('Peru');
-INSERT INTO country (Name) VALUES ('Philippines');
-INSERT INTO country (Name) VALUES ('Poland');
-INSERT INTO country (Name) VALUES ('Portugal');
-INSERT INTO country (Name) VALUES ('Puerto Rico');
-INSERT INTO country (Name) VALUES ('Romania');
-INSERT INTO country (Name) VALUES ('ussia');
-INSERT INTO country (Name) VALUES ('Senegal');
-INSERT INTO country (Name) VALUES ('Serbia');
-INSERT INTO country (Name) VALUES ('Seychelles');
-INSERT INTO country (Name) VALUES ('Singapore');
-INSERT INTO country (Name) VALUES ('Slovenia');
-INSERT INTO country (Name) VALUES ('South Africa');
-INSERT INTO country (Name) VALUES ('South Korea');
-INSERT INTO country (Name) VALUES ('Spain');
-INSERT INTO country (Name) VALUES ('Sri Lanka');
-INSERT INTO country (Name) VALUES ('weden');
-INSERT INTO country (Name) VALUES ('Switzerland');
-INSERT INTO country (Name) VALUES ('Taiwan');
-INSERT INTO country (Name) VALUES ('Thailand');
-INSERT INTO country (Name) VALUES ('Togo');
-INSERT INTO country (Name) VALUES ('Trinidad & Tobago');
-INSERT INTO country (Name) VALUES ('Turkey');
-INSERT INTO country (Name) VALUES ('Turkmenistan');
-INSERT INTO country (Name) VALUES ('Ukraine');
-INSERT INTO country (Name) VALUES ('Union of Soviet Socialist Repu');
-INSERT INTO country (Name) VALUES ('United Kingdom');
-INSERT INTO country (Name) VALUES ('nited States of America');
-INSERT INTO country (Name) VALUES ('Uruguay');
-INSERT INTO country (Name) VALUES ('Uzbekistan');
-INSERT INTO country (Name) VALUES ('Vanuatu');
-INSERT INTO country (Name) VALUES ('Venezuela');
-INSERT INTO country (Name) VALUES ('Vietnam');
-INSERT INTO country (Name) VALUES ('Western Samoa');
-INSERT INTO country (Name) VALUES ('Yugoslavia');
+INSERT INTO country (CountryCode, Name) VALUES ('AF', 'Afghanistan');
+INSERT INTO country (CountryCode, Name) VALUES ('AX', 'Åland Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('AL', 'Albania');
+INSERT INTO country (CountryCode, Name) VALUES ('DZ', 'Algeria');
+INSERT INTO country (CountryCode, Name) VALUES ('AS', 'American Samoa');
+INSERT INTO country (CountryCode, Name) VALUES ('AD', 'Andorra');
+INSERT INTO country (CountryCode, Name) VALUES ('AO', 'Angola');
+INSERT INTO country (CountryCode, Name) VALUES ('AI', 'Anguilla');
+INSERT INTO country (CountryCode, Name) VALUES ('AQ', 'Antarctica');
+INSERT INTO country (CountryCode, Name) VALUES ('AG', 'Antigua and Barbuda');
+INSERT INTO country (CountryCode, Name) VALUES ('AR', 'Argentina');
+INSERT INTO country (CountryCode, Name) VALUES ('AM', 'Armenia');
+INSERT INTO country (CountryCode, Name) VALUES ('AW', 'Aruba');
+INSERT INTO country (CountryCode, Name) VALUES ('AU', 'Australia');
+INSERT INTO country (CountryCode, Name) VALUES ('AT', 'Austria');
+INSERT INTO country (CountryCode, Name) VALUES ('AZ', 'Azerbaijan');
+INSERT INTO country (CountryCode, Name) VALUES ('BS', 'Bahamas');
+INSERT INTO country (CountryCode, Name) VALUES ('BH', 'Bahrain');
+INSERT INTO country (CountryCode, Name) VALUES ('BD', 'Bangladesh');
+INSERT INTO country (CountryCode, Name) VALUES ('BB', 'Barbados');
+INSERT INTO country (CountryCode, Name) VALUES ('BY', 'Belarus');
+INSERT INTO country (CountryCode, Name) VALUES ('BE', 'Belgium');
+INSERT INTO country (CountryCode, Name) VALUES ('BZ', 'Belize');
+INSERT INTO country (CountryCode, Name) VALUES ('BJ', 'Benin');
+INSERT INTO country (CountryCode, Name) VALUES ('BM', 'Bermuda');
+INSERT INTO country (CountryCode, Name) VALUES ('BT', 'Bhutan');
+INSERT INTO country (CountryCode, Name) VALUES ('BO', 'Bolivia');
+INSERT INTO country (CountryCode, Name) VALUES ('BA', 'Bosnia and Herzegovina');
+INSERT INTO country (CountryCode, Name) VALUES ('BW', 'Botswana');
+INSERT INTO country (CountryCode, Name) VALUES ('BV', 'Bouvet Island');
+INSERT INTO country (CountryCode, Name) VALUES ('BR', 'Brazil');
+INSERT INTO country (CountryCode, Name) VALUES ('IO', 'British Indian Ocean Territory');
+INSERT INTO country (CountryCode, Name) VALUES ('BN', 'Brunei Darussalam');
+INSERT INTO country (CountryCode, Name) VALUES ('BG', 'Bulgaria');
+INSERT INTO country (CountryCode, Name) VALUES ('BF', 'Burkina Faso');
+INSERT INTO country (CountryCode, Name) VALUES ('BI', 'Burundi');
+INSERT INTO country (CountryCode, Name) VALUES ('KH', 'Cambodia');
+INSERT INTO country (CountryCode, Name) VALUES ('CM', 'Cameroon');
+INSERT INTO country (CountryCode, Name) VALUES ('CA', 'Canada');
+INSERT INTO country (CountryCode, Name) VALUES ('CV', 'Cape Verde');
+INSERT INTO country (CountryCode, Name) VALUES ('KY', 'Cayman Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('CF', 'Central African Republic');
+INSERT INTO country (CountryCode, Name) VALUES ('TD', 'Chad');
+INSERT INTO country (CountryCode, Name) VALUES ('CL', 'Chile');
+INSERT INTO country (CountryCode, Name) VALUES ('CN', 'China');
+INSERT INTO country (CountryCode, Name) VALUES ('CX', 'Christmas Island');
+INSERT INTO country (CountryCode, Name) VALUES ('CC', 'Cocos (Keeling) Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('CO', 'Colombia');
+INSERT INTO country (CountryCode, Name) VALUES ('KM', 'Comoros');
+INSERT INTO country (CountryCode, Name) VALUES ('CG', 'Congo');
+INSERT INTO country (CountryCode, Name) VALUES ('CD', 'Congo, The Democratic Republic of the');
+INSERT INTO country (CountryCode, Name) VALUES ('CK', 'Cook Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('CR', 'Costa Rica');
+INSERT INTO country (CountryCode, Name) VALUES ('CI', 'Côte D\'Ivoire');
+INSERT INTO country (CountryCode, Name) VALUES ('HR', 'Croatia');
+INSERT INTO country (CountryCode, Name) VALUES ('CU', 'Cuba');
+INSERT INTO country (CountryCode, Name) VALUES ('CY', 'Cyprus');
+INSERT INTO country (CountryCode, Name) VALUES ('CZ', 'Czech Republic');
+INSERT INTO country (CountryCode, Name) VALUES ('DK', 'Denmark');
+INSERT INTO country (CountryCode, Name) VALUES ('DJ', 'Djibouti');
+INSERT INTO country (CountryCode, Name) VALUES ('DM', 'Dominica');
+INSERT INTO country (CountryCode, Name) VALUES ('DO', 'Dominican Republic');
+INSERT INTO country (CountryCode, Name) VALUES ('EC', 'Ecuador');
+INSERT INTO country (CountryCode, Name) VALUES ('EG', 'Egypt');
+INSERT INTO country (CountryCode, Name) VALUES ('SV', 'El Salvador');
+INSERT INTO country (CountryCode, Name) VALUES ('GQ', 'Equatorial Guinea');
+INSERT INTO country (CountryCode, Name) VALUES ('ER', 'Eritrea');
+INSERT INTO country (CountryCode, Name) VALUES ('EE', 'Estonia');
+INSERT INTO country (CountryCode, Name) VALUES ('ET', 'Ethiopia');
+INSERT INTO country (CountryCode, Name) VALUES ('FK', 'Falkland Islands (Malvinas)');
+INSERT INTO country (CountryCode, Name) VALUES ('FO', 'Faroe Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('FJ', 'Fiji');
+INSERT INTO country (CountryCode, Name) VALUES ('FI', 'Finland');
+INSERT INTO country (CountryCode, Name) VALUES ('FR', 'France');
+INSERT INTO country (CountryCode, Name) VALUES ('GF', 'French Guiana');
+INSERT INTO country (CountryCode, Name) VALUES ('PF', 'French Polynesia');
+INSERT INTO country (CountryCode, Name) VALUES ('TF', 'French Southern Territories');
+INSERT INTO country (CountryCode, Name) VALUES ('GA', 'Gabon');
+INSERT INTO country (CountryCode, Name) VALUES ('GM', 'Gambia');
+INSERT INTO country (CountryCode, Name) VALUES ('GE', 'Georgia');
+INSERT INTO country (CountryCode, Name) VALUES ('DE', 'Germany');
+INSERT INTO country (CountryCode, Name) VALUES ('GH', 'Ghana');
+INSERT INTO country (CountryCode, Name) VALUES ('GI', 'Gibraltar');
+INSERT INTO country (CountryCode, Name) VALUES ('GR', 'Greece');
+INSERT INTO country (CountryCode, Name) VALUES ('GL', 'Greenland');
+INSERT INTO country (CountryCode, Name) VALUES ('GD', 'Grenada');
+INSERT INTO country (CountryCode, Name) VALUES ('GP', 'Guadeloupe');
+INSERT INTO country (CountryCode, Name) VALUES ('GU', 'Guam');
+INSERT INTO country (CountryCode, Name) VALUES ('GT', 'Guatemala');
+INSERT INTO country (CountryCode, Name) VALUES ('GG', 'Guernsey');
+INSERT INTO country (CountryCode, Name) VALUES ('GN', 'Guinea');
+INSERT INTO country (CountryCode, Name) VALUES ('GW', 'Guinea-Bissau');
+INSERT INTO country (CountryCode, Name) VALUES ('GY', 'Guyana');
+INSERT INTO country (CountryCode, Name) VALUES ('HT', 'Haiti');
+INSERT INTO country (CountryCode, Name) VALUES ('HM', 'Heard Island and McDonald Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('VA', 'Holy See (Vatican City State)');
+INSERT INTO country (CountryCode, Name) VALUES ('HN', 'Honduras');
+INSERT INTO country (CountryCode, Name) VALUES ('HK', 'Hong Kong');
+INSERT INTO country (CountryCode, Name) VALUES ('HU', 'Hungary');
+INSERT INTO country (CountryCode, Name) VALUES ('IS', 'Iceland');
+INSERT INTO country (CountryCode, Name) VALUES ('IN', 'India');
+INSERT INTO country (CountryCode, Name) VALUES ('ID', 'Indonesia');
+INSERT INTO country (CountryCode, Name) VALUES ('IR', 'Iran, Islamic Republic of');
+INSERT INTO country (CountryCode, Name) VALUES ('IQ', 'Iraq');
+INSERT INTO country (CountryCode, Name) VALUES ('IE', 'Ireland');
+INSERT INTO country (CountryCode, Name) VALUES ('IM', 'Isle of Man');
+INSERT INTO country (CountryCode, Name) VALUES ('IL', 'Israel');
+INSERT INTO country (CountryCode, Name) VALUES ('IT', 'Italy');
+INSERT INTO country (CountryCode, Name) VALUES ('JM', 'Jamaica');
+INSERT INTO country (CountryCode, Name) VALUES ('JP', 'Japan');
+INSERT INTO country (CountryCode, Name) VALUES ('JE', 'Jersey');
+INSERT INTO country (CountryCode, Name) VALUES ('JO', 'Jordan');
+INSERT INTO country (CountryCode, Name) VALUES ('KZ', 'Kazakhstan');
+INSERT INTO country (CountryCode, Name) VALUES ('KE', 'Kenya');
+INSERT INTO country (CountryCode, Name) VALUES ('KI', 'Kiribati');
+INSERT INTO country (CountryCode, Name) VALUES ('KP', 'Korea, Democratic People\'s Republic of');
+INSERT INTO country (CountryCode, Name) VALUES ('KR', 'Korea, Republic of');
+INSERT INTO country (CountryCode, Name) VALUES ('KW', 'Kuwait');
+INSERT INTO country (CountryCode, Name) VALUES ('KG', 'Kyrgyzstan');
+INSERT INTO country (CountryCode, Name) VALUES ('LA', 'Lao People\'s Democratic Republic');
+INSERT INTO country (CountryCode, Name) VALUES ('LV', 'Latvia');
+INSERT INTO country (CountryCode, Name) VALUES ('LB', 'Lebanon');
+INSERT INTO country (CountryCode, Name) VALUES ('LS', 'Lesotho');
+INSERT INTO country (CountryCode, Name) VALUES ('LR', 'Liberia');
+INSERT INTO country (CountryCode, Name) VALUES ('LY', 'Libyan Arab Jamahiriya');
+INSERT INTO country (CountryCode, Name) VALUES ('LI', 'Liechtenstein');
+INSERT INTO country (CountryCode, Name) VALUES ('LT', 'Lithuania');
+INSERT INTO country (CountryCode, Name) VALUES ('LU', 'Luxembourg');
+INSERT INTO country (CountryCode, Name) VALUES ('MO', 'Macao');
+INSERT INTO country (CountryCode, Name) VALUES ('MK', 'Macedonia, The Former Yugoslav Republic of');
+INSERT INTO country (CountryCode, Name) VALUES ('MG', 'Madagascar');
+INSERT INTO country (CountryCode, Name) VALUES ('MW', 'Malawi');
+INSERT INTO country (CountryCode, Name) VALUES ('MY', 'Malaysia');
+INSERT INTO country (CountryCode, Name) VALUES ('MV', 'Maldives');
+INSERT INTO country (CountryCode, Name) VALUES ('ML', 'Mali');
+INSERT INTO country (CountryCode, Name) VALUES ('MT', 'Malta');
+INSERT INTO country (CountryCode, Name) VALUES ('MH', 'Marshall Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('MQ', 'Martinique');
+INSERT INTO country (CountryCode, Name) VALUES ('MR', 'Mauritania');
+INSERT INTO country (CountryCode, Name) VALUES ('MU', 'Mauritius');
+INSERT INTO country (CountryCode, Name) VALUES ('YT', 'Mayotte');
+INSERT INTO country (CountryCode, Name) VALUES ('MX', 'Mexico');
+INSERT INTO country (CountryCode, Name) VALUES ('FM', 'Micronesia, Federated States of');
+INSERT INTO country (CountryCode, Name) VALUES ('MD', 'Moldova, Republic of');
+INSERT INTO country (CountryCode, Name) VALUES ('MC', 'Monaco');
+INSERT INTO country (CountryCode, Name) VALUES ('MN', 'Mongolia');
+INSERT INTO country (CountryCode, Name) VALUES ('ME', 'Montenegro');
+INSERT INTO country (CountryCode, Name) VALUES ('MS', 'Montserrat');
+INSERT INTO country (CountryCode, Name) VALUES ('MA', 'Morocco');
+INSERT INTO country (CountryCode, Name) VALUES ('MZ', 'Mozambique');
+INSERT INTO country (CountryCode, Name) VALUES ('MM', 'Myanmar');
+INSERT INTO country (CountryCode, Name) VALUES ('NA', 'Namibia');
+INSERT INTO country (CountryCode, Name) VALUES ('NR', 'Nauru');
+INSERT INTO country (CountryCode, Name) VALUES ('NP', 'Nepal');
+INSERT INTO country (CountryCode, Name) VALUES ('NL', 'Netherlands');
+INSERT INTO country (CountryCode, Name) VALUES ('AN', 'Netherlands Antilles');
+INSERT INTO country (CountryCode, Name) VALUES ('NC', 'New Caledonia');
+INSERT INTO country (CountryCode, Name) VALUES ('NZ', 'New Zealand');
+INSERT INTO country (CountryCode, Name) VALUES ('NI', 'Nicaragua');
+INSERT INTO country (CountryCode, Name) VALUES ('NE', 'Niger');
+INSERT INTO country (CountryCode, Name) VALUES ('NG', 'Nigeria');
+INSERT INTO country (CountryCode, Name) VALUES ('NU', 'Niue');
+INSERT INTO country (CountryCode, Name) VALUES ('NF', 'Norfolk Island');
+INSERT INTO country (CountryCode, Name) VALUES ('MP', 'Northern Mariana Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('NO', 'Norway');
+INSERT INTO country (CountryCode, Name) VALUES ('OM', 'Oman');
+INSERT INTO country (CountryCode, Name) VALUES ('PK', 'Pakistan');
+INSERT INTO country (CountryCode, Name) VALUES ('PW', 'Palau');
+INSERT INTO country (CountryCode, Name) VALUES ('PS', 'Palestinian Territory, Occupied');
+INSERT INTO country (CountryCode, Name) VALUES ('PA', 'Panama');
+INSERT INTO country (CountryCode, Name) VALUES ('PG', 'Papua New Guinea');
+INSERT INTO country (CountryCode, Name) VALUES ('PY', 'Paraguay');
+INSERT INTO country (CountryCode, Name) VALUES ('PE', 'Peru');
+INSERT INTO country (CountryCode, Name) VALUES ('PH', 'Philippines');
+INSERT INTO country (CountryCode, Name) VALUES ('PN', 'Pitcairn');
+INSERT INTO country (CountryCode, Name) VALUES ('PL', 'Poland');
+INSERT INTO country (CountryCode, Name) VALUES ('PT', 'Portugal');
+INSERT INTO country (CountryCode, Name) VALUES ('PR', 'Puerto Rico');
+INSERT INTO country (CountryCode, Name) VALUES ('QA', 'Qatar');
+INSERT INTO country (CountryCode, Name) VALUES ('RE', 'Reunion');
+INSERT INTO country (CountryCode, Name) VALUES ('RO', 'Romania');
+INSERT INTO country (CountryCode, Name) VALUES ('RU', 'Russian Federation');
+INSERT INTO country (CountryCode, Name) VALUES ('RW', 'Rwanda');
+INSERT INTO country (CountryCode, Name) VALUES ('BL', 'Saint Barthélemy');
+INSERT INTO country (CountryCode, Name) VALUES ('SH', 'Saint Helena');
+INSERT INTO country (CountryCode, Name) VALUES ('KN', 'Saint Kitts and Nevis');
+INSERT INTO country (CountryCode, Name) VALUES ('LC', 'Saint Lucia');
+INSERT INTO country (CountryCode, Name) VALUES ('MF', 'Saint Martin');
+INSERT INTO country (CountryCode, Name) VALUES ('PM', 'Saint Pierre and Miquelon');
+INSERT INTO country (CountryCode, Name) VALUES ('VC', 'Saint Vincent and the Grenadines');
+INSERT INTO country (CountryCode, Name) VALUES ('WS', 'Samoa');
+INSERT INTO country (CountryCode, Name) VALUES ('SM', 'San Marino');
+INSERT INTO country (CountryCode, Name) VALUES ('ST', 'Sao Tome and Principe');
+INSERT INTO country (CountryCode, Name) VALUES ('SA', 'Saudi Arabia');
+INSERT INTO country (CountryCode, Name) VALUES ('SN', 'Senegal');
+INSERT INTO country (CountryCode, Name) VALUES ('RS', 'Serbia');
+INSERT INTO country (CountryCode, Name) VALUES ('SC', 'Seychelles');
+INSERT INTO country (CountryCode, Name) VALUES ('SL', 'Sierra Leone');
+INSERT INTO country (CountryCode, Name) VALUES ('SG', 'Singapore');
+INSERT INTO country (CountryCode, Name) VALUES ('SK', 'Slovakia');
+INSERT INTO country (CountryCode, Name) VALUES ('SI', 'Slovenia');
+INSERT INTO country (CountryCode, Name) VALUES ('SB', 'Solomon Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('SO', 'Somalia');
+INSERT INTO country (CountryCode, Name) VALUES ('ZA', 'South Africa');
+INSERT INTO country (CountryCode, Name) VALUES ('GS', 'South Georgia and the South Sandwich Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('ES', 'Spain');
+INSERT INTO country (CountryCode, Name) VALUES ('LK', 'Sri Lanka');
+INSERT INTO country (CountryCode, Name) VALUES ('SD', 'Sudan');
+INSERT INTO country (CountryCode, Name) VALUES ('SR', 'Suriname');
+INSERT INTO country (CountryCode, Name) VALUES ('SJ', 'Svalbard and Jan Mayen');
+INSERT INTO country (CountryCode, Name) VALUES ('SZ', 'Swaziland');
+INSERT INTO country (CountryCode, Name) VALUES ('SE', 'Sweden');
+INSERT INTO country (CountryCode, Name) VALUES ('CH', 'Switzerland');
+INSERT INTO country (CountryCode, Name) VALUES ('SY', 'Syrian Arab Republic');
+INSERT INTO country (CountryCode, Name) VALUES ('TW', 'Taiwan, Province Of China');
+INSERT INTO country (CountryCode, Name) VALUES ('TJ', 'Tajikistan');
+INSERT INTO country (CountryCode, Name) VALUES ('TZ', 'Tanzania, United Republic of');
+INSERT INTO country (CountryCode, Name) VALUES ('TH', 'Thailand');
+INSERT INTO country (CountryCode, Name) VALUES ('TL', 'Timor-Leste');
+INSERT INTO country (CountryCode, Name) VALUES ('TG', 'Togo');
+INSERT INTO country (CountryCode, Name) VALUES ('TK', 'Tokelau');
+INSERT INTO country (CountryCode, Name) VALUES ('TO', 'Tonga');
+INSERT INTO country (CountryCode, Name) VALUES ('TT', 'Trinidad and Tobago');
+INSERT INTO country (CountryCode, Name) VALUES ('TN', 'Tunisia');
+INSERT INTO country (CountryCode, Name) VALUES ('TR', 'Turkey');
+INSERT INTO country (CountryCode, Name) VALUES ('TM', 'Turkmenistan');
+INSERT INTO country (CountryCode, Name) VALUES ('TC', 'Turks and Caicos Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('TV', 'Tuvalu');
+INSERT INTO country (CountryCode, Name) VALUES ('UG', 'Uganda');
+INSERT INTO country (CountryCode, Name) VALUES ('UA', 'Ukraine');
+INSERT INTO country (CountryCode, Name) VALUES ('AE', 'United Arab Emirates');
+INSERT INTO country (CountryCode, Name) VALUES ('GB', 'United Kingdom');
+INSERT INTO country (CountryCode, Name) VALUES ('US', 'United States');
+INSERT INTO country (CountryCode, Name) VALUES ('UM', 'United States Minor Outlying Islands');
+INSERT INTO country (CountryCode, Name) VALUES ('UY', 'Uruguay');
+INSERT INTO country (CountryCode, Name) VALUES ('UZ', 'Uzbekistan');
+INSERT INTO country (CountryCode, Name) VALUES ('VU', 'Vanuatu');
+INSERT INTO country (CountryCode, Name) VALUES ('VE', 'Venezuela');
+INSERT INTO country (CountryCode, Name) VALUES ('VN', 'Viet Nam');
+INSERT INTO country (CountryCode, Name) VALUES ('VG', 'Virgin Islands, British');
+INSERT INTO country (CountryCode, Name) VALUES ('VI', 'Virgin Islands, U.S.');
+INSERT INTO country (CountryCode, Name) VALUES ('WF', 'Wallis And Futuna');
+INSERT INTO country (CountryCode, Name) VALUES ('EH', 'Western Sahara');
+INSERT INTO country (CountryCode, Name) VALUES ('YE', 'Yemen');
+INSERT INTO country (CountryCode, Name) VALUES ('ZM', 'Zambia');
+INSERT INTO country (CountryCode, Name) VALUES ('ZW', 'Zimbabwe');
+
+INSERT INTO country (CountryCode, Name) VALUES ('JH', 'Johab'); /* This is for Korean dialect */
+
+INSERT INTO country (CountryCode, Name) VALUES ('NY', 'Nynorsk'); /* This is for Norwegian dialect */
+INSERT INTO country (CountryCode, Name) VALUES ('BK', 'Bokmal'); /* This is for Norwegian dialect */
+
+INSERT INTO country (CountryCode, Name) VALUES ('YC', 'Cyrillic'); /* This is for Serbian dialect */
+INSERT INTO country (CountryCode, Name) VALUES ('LN', 'Latin'); /* This is for Serbian dialect */
 
 
 INSERT INTO genre (Name) VALUES ("Action");
@@ -308,26 +458,151 @@ EOT;
 /* --- Version 1.002 will create a table into the metadata --- */
 
 CREATE TABLE `language` (
-  `LanguageID` int(10) NOT NULL AUTO_INCREMENT,
-  `CountryID` integer NOT NULL,
-  `OriginalName` varchar(128) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `LanguageID` char(2) NOT NULL,
+  `CountryCode` char(2),
   `EnglishName` varchar(64) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  PRIMARY KEY (`LanguageID`),
-  UNIQUE KEY `Name` (`EnglishName`)
+  `OriginalName` varchar(128) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `Enabled` boolean DEFAULT false,
+  PRIMARY KEY (`LanguageID`, `CountryCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
 
-EOT;
-
-      $this->versions['1.003'] = <<<EOT
 
 CREATE TABLE `message` (
-  `LanguageID` int(10) NOT NULL AUTO_INCREMENT,
-  `CountryID` integer NOT NULL,
-  `OriginalName` varchar(128) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `LanguageID` char(2) NOT NULL,
+  `CountryCode` char(2),
   `EnglishName` varchar(64) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  PRIMARY KEY (`LanguageID`),
+  `OriginalName` varchar(128) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `Enabled` boolean DEFAULT false,
+  PRIMARY KEY (`LanguageID`, `CountryCode`),
   UNIQUE KEY `Name` (`EnglishName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+
+/* ---- Inserts ----- */
+
+insert into language (LanguageID, CountryCode, EnglishName) values ('AF','','Afrikaans');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SQ','','Albanian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','SA','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','IQ','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','EG','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','LY','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','DZ','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','MA','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','TN','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','OM','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','YE','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','SY','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','JO','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','LB','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','KW','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','AE','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','BH','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('AR','QA','Arabic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EU','','Basque');
+insert into language (LanguageID, CountryCode, EnglishName) values ('BG','','Bulgarian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('BE','','Belarusian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('CA','','Catalan');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ZH','TW','Chinese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ZH','CN','Chinese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ZH','HK','Chinese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ZH','SG','Chinese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('HR','','Croatian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('CS','','Czech');
+insert into language (LanguageID, CountryCode, EnglishName) values ('DA','','Danish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('NL','','Dutch');
+insert into language (LanguageID, CountryCode, EnglishName) values ('NL','BE','Dutch');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','US','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','GB','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','AU','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','CA','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','NZ','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','IE','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','ZA','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','JM','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','BZ','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EN','TT','English');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ET','','Estonian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FO','','Faeroese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FA','','Farsi');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FI','','Finnish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FR','','French');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FR','BE','French');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FR','CA','French');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FR','CH','French');
+insert into language (LanguageID, CountryCode, EnglishName) values ('FR','LU','French');
+insert into language (LanguageID, CountryCode, EnglishName) values ('GD','','Gaelic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('GA','','Irish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('DE','','German');
+insert into language (LanguageID, CountryCode, EnglishName) values ('DE','CH','German');
+insert into language (LanguageID, CountryCode, EnglishName) values ('DE','AT','German');
+insert into language (LanguageID, CountryCode, EnglishName) values ('DE','LU','German');
+insert into language (LanguageID, CountryCode, EnglishName) values ('DE','LI','German');
+insert into language (LanguageID, CountryCode, EnglishName) values ('EL','','Greek');
+insert into language (LanguageID, CountryCode, EnglishName) values ('HE','','Hebrew');
+insert into language (LanguageID, CountryCode, EnglishName) values ('HI','','Hindi');
+insert into language (LanguageID, CountryCode, EnglishName) values ('HU','','Hungarian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('IS','','Icelandic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ID','','Indonesian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('IT','','Italian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('IT','CH','Italian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('JA','','Japanese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('KO','','Korean');
+insert into language (LanguageID, CountryCode, EnglishName) values ('KO','JH','Korean');
+insert into language (LanguageID, CountryCode, EnglishName) values ('LV','','Latvian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('LT','','Lithuanian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('MK','','Macedonian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('MS','','Malaysian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('MT','','Maltese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('NO','NY','Norwegian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('NO','BK','Norwegian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('PL','','Polish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('PT','BR','Portuguese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('PT','','Portuguese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('RM','','Rhaeto-Romanic');
+insert into language (LanguageID, CountryCode, EnglishName) values ('RO','','Romanian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('RO','MO','Romanian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('RU','','Russian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('RU','MO','Russian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SZ','','Sami');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SR','YC','Serbian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SR','LN','Serbian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SK','','Slovak');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SL','','Slovenian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SB','','Sorbian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','MX','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','GT','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','CR','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','PA','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','DO','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','VE','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','CO','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','PE','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','AR','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','EC','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','CL','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','UY','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','PY','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','BO','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','SV','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','HN','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','NI','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ES','PR','Spanish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SX','','Sutu');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SV','','Swedish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('SV','FI','Swedi');
+insert into language (LanguageID, CountryCode, EnglishName) values ('TH','','Thai');
+insert into language (LanguageID, CountryCode, EnglishName) values ('TS','','Tsonga');
+insert into language (LanguageID, CountryCode, EnglishName) values ('TN','','Tswana');
+insert into language (LanguageID, CountryCode, EnglishName) values ('TR','','Turkish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('UK','','Ukrainian');
+insert into language (LanguageID, CountryCode, EnglishName) values ('UR','','Urdu');
+insert into language (LanguageID, CountryCode, EnglishName) values ('VE','','Venda');
+insert into language (LanguageID, CountryCode, EnglishName) values ('VI','','Vietnamese');
+insert into language (LanguageID, CountryCode, EnglishName) values ('XH','','Xhosa');
+insert into language (LanguageID, CountryCode, EnglishName) values ('JI','','Yiddish');
+insert into language (LanguageID, CountryCode, EnglishName) values ('ZU','','Zulu');
+
 
 EOT;
       
@@ -335,3 +610,5 @@ EOT;
 }
   
 ?>
+
+
