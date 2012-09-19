@@ -7,15 +7,14 @@ class TRANSLATION {
     private $defaultLanguageID = 'EN';
     private $defaultCountryCode = 'US';
 
-    private $languageID;
-    private $countryCode;
-
+    private $currentLanguageID;
+    private $currentCountryCode;
 
     function __construct() {
       global $Cache;
 
-      $this->languageID = $this->defaultLanguageID;
-      $this->countryCode = $this->defaultCountryCode;
+      $this->currentLanguageID = $this->defaultLanguageID;
+      $this->currentCountryCode = $this->defaultCountryCode;
 
       $this->internalCache = $Cache;
       $this->messages = $this->internalCache->get_value('messages');
@@ -24,22 +23,37 @@ class TRANSLATION {
       }
     }
 
-    private function translate($message, $languageID, $countryCode) {
+    public function translate($message, $languageID = '', $countryCode = '') {
+      if (!isset($languageID) or Empty($languageID)) $languageID = $this->currentLanguageID;
+      if (!isset($countryCode) or Empty($countryCode)) $countryCode = $this->currentCountryCode;
+
+      $ret = __translate($message, $languageID, $countryCode);
+
+      if (!isset($ret) or Empty($ret)) {
+        $ret = $message; /// no empty messages, ever
+      }
+
+      return $ret;
+    }
+
+    private function __translate($message, $languageID, $countryCode) {
       global $DB;
+      
+      /// message is already loaded?
       if ( isset($this->messages[$message]) ) {
-        if ( $this->isDefaultLanguage($languageID, $countryCode) or isset($this->messages[$message][$languageID][$countryCode])  ) {
+        if ( $this->isDefaultLanguage($languageID, $countryCode) or isset($this->messages[$message][$languageID][$countryCode]) ) {
           return $this->messages[$message][$languageID][$countryCode]; /// default language will always be present in the array
         }
       }
 
-      /// we also will have to find a near language (excluding country code)
+      /// TOOD: find a messages in a near language (excluding country code)
       if ( $this->isDefaultLanguage($languageID, $countryCode) ) {
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."')");
       } else {
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."') or (LanguageID = '$languageID' and CountryCode = '$countryCode') ");
       }
 
-      if ($DB->record_count() == 0) {
+      if ($DB->record_count() == 0) { /// message still not in database, let's add a default language record for it
         $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode] = $message;
         $this->addTranslationToDatabase($message, $this->defaultLanguageID, $this->defaultCountryCode, $message);
         $this->cacheIt();
@@ -51,11 +65,9 @@ class TRANSLATION {
         }
         $this->cacheIt();
         if ( isset($this->messages[$message][$languageID][$countryCode])  ) {
-          return $this->messages[$message][$languageID][$countryCode];
+          return $this->messages[$message][$languageID][$countryCode]; /// found it translated
         } else {
-          print_r($this->messages);
-
-          return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// now we have a default language
+          return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// looks it has just a default language version of this message
         }
       }
     }
@@ -73,12 +85,6 @@ class TRANSLATION {
 
       $hash = SHA1($message);
       $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$lID', '$cCode', '$hash', '$message', '$translatedMessage');");
-    }
-
-    public function t($message, $lID = '', $cCode = '') {
-      if (!isset($lID) or Empty($lID)) $lID = $this->defaultLanguageID;
-      if (!isset($cCode) or Empty($cCode)) $cCode = $this->defaultCountryCode;
-      return $this->translate($message, $lID, $cCode);
     }
 
     public function setLanguage($lid, $cc) {

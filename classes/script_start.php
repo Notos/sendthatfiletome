@@ -195,7 +195,7 @@ if(isset($LoginCookie)) {
 				));
 		$Cache->commit_transaction(0);
 	}
-	
+
 	// Notifications
 	if(isset($LoggedUser['Permissions']['site_torrents_notify'])) {
 		$LoggedUser['Notify'] = $Cache->get_value('notify_filters_'.$LoggedUser['ID']);
@@ -2468,7 +2468,7 @@ function isset_request($Request, $Keys=NULL, $AllowEmpty = False, $Error=0) {
 function TT($message) {
   global $TR; /// translation object
 
-  return $TR->t($message);
+  return $TR->translate($message);
 }
 
 /**
