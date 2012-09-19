@@ -19,12 +19,14 @@ $DB->query("SELECT
 			i.StyleURL,
 			i.SiteOptions,
 			i.UnseededAlerts,
-			p.Level AS Class
+			p.Level AS Class,
+			m.CountryCode,
+			m.LanguageID
 			FROM users_main AS m
 			JOIN users_info AS i ON i.UserID = m.ID
 			LEFT JOIN permissions AS p ON p.ID=m.PermissionID
 			WHERE m.ID = '".db_string($UserID)."'");
-list($Username,$Email,$IRCKey,$Paranoia,$Info,$Avatar,$Country,$StyleID,$StyleURL,$SiteOptions,$UnseededAlerts,$Class)=$DB->next_record(MYSQLI_NUM, array(3,9));
+list($Username,$Email,$IRCKey,$Paranoia,$Info,$Avatar,$Country,$StyleID,$StyleURL,$SiteOptions,$UnseededAlerts,$Class,$CountryCode,$LanguageID)=$DB->next_record(MYSQLI_NUM, array(3,9));
 
 
 if($UserID != $LoggedUser['ID'] && !check_perms('users_edit_profiles', $Class)) {
@@ -32,8 +34,8 @@ if($UserID != $LoggedUser['ID'] && !check_perms('users_edit_profiles', $Class)) 
 }
 
 $Paranoia = unserialize($Paranoia);
-if(!is_array($Paranoia)) { 
-	$Paranoia = array(); 
+if(!is_array($Paranoia)) {
+	$Paranoia = array();
 }
 
 function paranoia_level($Setting) {
