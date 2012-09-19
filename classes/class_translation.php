@@ -104,6 +104,9 @@ class TRANSLATION {
         foreach($languages as $record) {
           $this->languages[$record[0]][$record[1]] = $record[4]; /// build a list of enabled languages
         }
+        echo "<pre>";
+        print_r($this->languages);
+        echo "</pre>";
       }
     }
 
