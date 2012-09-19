@@ -99,7 +99,7 @@ class TRANSLATION {
     private function loadLanguages() {
       $this->languages = $this->internalCache->get_value('languages');
       echo "before loading <pre>"; print_r($this->languages); echo "</pre> count = ".count($this->languages)."<br>";
-      if ( !isset($this->languages) or count($this->languages) == 0 ) {
+      if ( !isset($this->languages) or count($this->languages) < 10 ) {
         echo "loading... <pre>"; print_r($this->languages); echo "</pre><br>";
 
         $this->languages = array(); /// wasn't cached
