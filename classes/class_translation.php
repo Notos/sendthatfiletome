@@ -98,10 +98,10 @@ class TRANSLATION {
     
     private function loadLanguages() {
       $this->languages = $this->internalCache->get_value('languages');
-      echo "<pre>";
-      print_r($this->languages);
-      echo "</pre>";
+      echo "before loading <pre>"; print_r($this->languages); echo "</pre><br>";
       if ( !isset($this->languages) or count($this->languages) == 0 ) {
+        echo "loading... <pre>"; print_r($this->languages); echo "</pre><br>";
+
         $this->languages = array(); /// wasn't cached
         $DB->query("select LanguageID, CountryCode, EnglishName, OriginalName, Enabled from language"); /// get the full language listing
         $languages = $DB->to_array(0, MYSQLI_NUM);
