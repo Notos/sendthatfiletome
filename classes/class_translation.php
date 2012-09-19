@@ -100,9 +100,8 @@ class TRANSLATION {
       global $DB;
       
       $this->languages = $this->internalCache->get_value('languages');
-      echo "before loading <pre>"; print_r($this->languages); echo "</pre> count = ".count($this->languages)."<br>";
       if ( !isset($this->languages) or count($this->languages) < 10 ) {
-        echo "loading... <pre>"; print_r($this->languages); echo "</pre><br>";
+        // echo "loading... <pre>"; print_r($this->languages); echo "</pre><br>";
 
         $this->languages = array(); /// wasn't cached
         $DB->query("select LanguageID, CountryCode, EnglishName, OriginalName, Enabled from language"); /// get the full language listing
@@ -110,9 +109,6 @@ class TRANSLATION {
         foreach($languages as $record) {
           $this->languages[$record[0]][$record[1]] = $record[4]; /// build a list of enabled languages
         }
-        echo "<pre>";
-        print_r($this->languages);
-        echo "</pre>";
       }
     }
 
