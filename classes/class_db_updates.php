@@ -26,7 +26,9 @@ class UPDATE_DATABASE {
           foreach($ddls as $ddl) {
             
             try {
-              $DB->query($ddl); /// update metadata
+              if (trim($ddl)) {
+                $DB->query($ddl); /// update metadata
+              }
             } catch(Exception $e) {
               echo "Error: ".$e->getMessage();
             }
