@@ -197,7 +197,7 @@ INSERT INTO country (Name) VALUES ('Switzerland');
 INSERT INTO country (Name) VALUES ('Taiwan');
 INSERT INTO country (Name) VALUES ('Thailand');
 INSERT INTO country (Name) VALUES ('Togo');
-INSERT INTO country (Name) VALUES ('Trinidad &amp; Tobago');
+INSERT INTO country (Name) VALUES ('Trinidad & Tobago');
 INSERT INTO country (Name) VALUES ('Turkey');
 INSERT INTO country (Name) VALUES ('Turkmenistan');
 INSERT INTO country (Name) VALUES ('Ukraine');
