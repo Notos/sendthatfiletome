@@ -8,7 +8,7 @@
   
   //-----------------------------------------------------------------------------------//*/
   
-class UPDATE_DATABASE {                                                                         
+class CUSTOMIZE_METADATA {                                                                         
     public $versions = array();
     
     function __construct() {
@@ -40,7 +40,7 @@ class UPDATE_DATABASE {
       }
     }
 
-    function dropAllExtraTables() {
+    function dropAllExtraTables() { /// for testing purposes
       global $DB;
 
       $DB->query("DROP TABLE IF EXISTS `system`;");

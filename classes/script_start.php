@@ -47,6 +47,7 @@ require(SERVER_ROOT.'/classes/class_useragent.php'); //Require the useragent cla
 require(SERVER_ROOT.'/classes/class_time.php'); //Require the time class
 require(SERVER_ROOT.'/classes/class_search.php'); //Require the searching class
 require(SERVER_ROOT.'/classes/class_paranoia.php'); //Require the paranoia check_paranoia function
+require(SERVER_ROOT.'/classes/class_translation.php'); //Require the translation class
 require(SERVER_ROOT.'/classes/regex.php');
 
 $Debug = new DEBUG;
@@ -59,7 +60,7 @@ $Cache = new CACHE;
 $Enc = new CRYPT;
 $UA = new USER_AGENT;
 $SS = new SPHINX_SEARCH;
-
+$TR = new TRANSLATION;
 
 //Begin browser identification
 

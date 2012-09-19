@@ -346,10 +346,10 @@ class DB_MYSQL {
     if($this->record_count() == 0) {
       $this->createSystemTable();
     }
-    require(SERVER_ROOT.'/classes/class_db_updates.php');
+    require(SERVER_ROOT.'/classes/class_db_updates.php'); /// only required here
     
-    $UD = new UPDATE_DATABASE(); /// just construct it to the update procedure start
-    unset($UD); /// as soon as it's done, destroy the object
+    $CM = new CUSTOMIZE_METADATA(); /// just construct it to fire customization procedure 
+    unset($CM); /// as soon as it's done, destroy the object
   }
   
   function createSystemTable() {
