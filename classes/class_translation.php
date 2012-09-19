@@ -2,6 +2,7 @@
 
 class TRANSLATION {
     private $messages;
+    private $languages;
     private $internalCache;
 
     private $defaultLanguageID = 'EN';
@@ -13,6 +14,7 @@ class TRANSLATION {
     function __construct() {
       global $Cache;
 
+      $this->loadLanguages(); /// load the list of enabled/disabled languages
       $this->currentLanguageID = $this->defaultLanguageID;
       $this->currentCountryCode = $this->defaultCountryCode;
 
@@ -38,6 +40,11 @@ class TRANSLATION {
 
     private function __translate($message, $languageID, $countryCode) {
       global $DB;
+
+      if ( ! $this->languages[$languageID][$countryCode] ) { /// if the language is not enabled in the system, use default
+        $languageID = $this->defaultLanguageID;
+        $countryCode = $this->defaultCountryCode;
+      }
 
       /// message is already loaded?
       if ( isset($this->messages[$message]) ) {
@@ -85,6 +92,18 @@ class TRANSLATION {
 
       $hash = SHA1($message);
       $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$lID', '$cCode', '$hash', '$message', '$translatedMessage');");
+    }
+    
+    private function loadLanguages() {
+      $this->languages = $this->internalCache->get_value('languages');
+      if ( !isset($this->languages) ) {
+        $this->languages = array(); /// wasn't cached
+        $DB->query("select LanguageID, CountryCode, EnglishName, OriginalName, Enabled from language"); /// get the full language listing
+        $languages = $DB->to_array(0, MYSQLI_NUM);
+        foreach($languages as $record) {
+          $this->languages[$record[0]][$record[1]] = [$record[4]; /// build a list of enabled languages
+        }
+      }
     }
 
     public function setLanguage($lid, $cc) {
