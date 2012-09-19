@@ -81,6 +81,8 @@ echo "---- 26";
 echo "---- 27";
         } else {
 echo "---- 28";
+          print_r($this->messages);
+
           return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// now we have a default language
 echo "---- 291";
         }
