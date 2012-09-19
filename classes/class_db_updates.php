@@ -41,7 +41,7 @@ class UPDATE_DATABASE {
       echo "ddl = $ddl <br><br> autocommit = $autocommit<br><br>";
 
             try {
-              $DB->query($ddl); /// update metadata
+              // $DB->query($ddl); /// update metadata
             } catch(Exception $e) {
               $DB->query("ROLLBACK;");
               echo "Error: ".$e->getMessage();
