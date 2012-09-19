@@ -26,37 +26,67 @@ class TRANSLATION {
 
     private function translate($message, $languageID, $countryCode) {
       global $DB;
-      
+echo "---- 1";
       if ( isset($this->messages[$message]) ) {
+echo "---- 2";
         if ( $this->isDefaultLanguage($languageID, $countryCode) or isset($this->messages[$message][$languageID][$countryCode])  ) {
+echo "---- 3";
           return $this->messages[$message][$languageID][$countryCode]; /// default language will always be present in the array
+echo "---- 4";
         }
+echo "---- 5";
       }
+echo "---- 6";
 
+echo "---- 7";
       /// we also will have to find a near language (excluding country code)
+echo "---- 8";
       if ( $this->isDefaultLanguage($languageID, $countryCode) ) {
+echo "---- 9";
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."')");
+echo "---- 10";
       } else {
+echo "---- 11";
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."') or (LanguageID = '$languageID' and CountryCode = '$countryCode') ");
+echo "---- 12";
       }
+echo "---- 13";
 
+echo "---- 14";
       if ($DB->record_count() == 0) {
+echo "---- 15";
         $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode] = $message;
+echo "---- 16";
         $this->addTranslationToDatabase($message, $this->defaultLanguageID, $this->defaultCountryCode, $message);
+echo "---- 17";
         $this->cacheIt();
+echo "---- 18";
         return $message;
+echo "---- 19";
       } else {
+echo "---- 20";
         $translations = $DB->to_array(0, MYSQLI_NUM);
+echo "---- 21";
         foreach($translations as $record) {
+echo "---- 22";
           $this->messages[$record[0]][$record[1]][$record[2]] = $record[3];
+echo "---- 23";
         }
+echo "---- 24";
         $this->cacheIt();
+echo "---- 25";
         if ( isset($this->messages[$message][$languageID][$countryCode])  ) {
+echo "---- 26";
           return $this->messages[$message][$languageID][$countryCode];
+echo "---- 27";
         } else {
+echo "---- 28";
           return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// now we have a default language
+echo "---- 291";
         }
+echo "---- 30";
       }
+echo "---- 31";
     }
 
     private function cacheIt() {
