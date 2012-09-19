@@ -105,8 +105,8 @@ echo "---- 31";
     }
 
     public function t($message, $lID = '', $cCode = '') {
-      if (!isset($lID)) $lID = $this->defaultLanguageID;
-      if (!isset($cCode)) $cCode = $this->defaultCountryCode;
+      if (!isset($lID) or Empty($lID)) $lID = $this->defaultLanguageID;
+      if (!isset($cCode) or Empty($cCode)) $cCode = $this->defaultCountryCode;
       return $this->translate($message, $lID, $cCode);
     }
 
