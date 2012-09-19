@@ -19,7 +19,7 @@ class UPDATE_DATABASE {
     function updateDatabase() {
       global $DB;
       
-      $DB->query("select databaseVersion from system");
+      $DB->query("select databaseVersion from system;");
       list($databaseVersion) = $DB->next_record();
       
       $DB->query("START TRANSACTION;");
@@ -29,9 +29,14 @@ class UPDATE_DATABASE {
         if ($databaseVersion < $version) {
           $ddls = explode(";", $ddlcommands);
           foreach($ddls as $ddl) {
-            $DB->query($ddl); /// update metadata
+            try {
+              $DB->query($ddl); /// update metadata
+            } catch(Exception $e) {
+              $DB->query("ROLLBACK;");
+              echo "Error: ".$e->getMessage();
+            }
           }
-          $DB->query("update system set databaseVersion = $version"); /// set the new database version
+          $DB->query("update system set databaseVersion = $version;"); /// set the new database version
           $databaseVersion = $version;
         }
       }
@@ -106,7 +111,7 @@ CREATE TABLE `resolution` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-/* ---- Inserts ----- */
+ ---- Inserts ----- 
 
 INSERT INTO country (Name) VALUES ('Afghanistan');
 INSERT INTO country (Name) VALUES ('Albania');
