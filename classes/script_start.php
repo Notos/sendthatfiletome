@@ -215,7 +215,7 @@ if(isset($LoginCookie)) {
 	
 	
 	if($LoggedUser['IP'] != $_SERVER['REMOTE_ADDR'] && !check_perms('site_disable_ip_history')) {
-	
+
 		if(site_ban_ip($_SERVER['REMOTE_ADDR'])) {
 			error('Your IP has been banned.');
 		}
@@ -512,7 +512,7 @@ function get_permissions_for_user($UserID, $CustomPermissions = false) {
 	
 		list($CustomPermissions) = $DB->next_record(MYSQLI_NUM, false);
 	}
-	
+
 	if (!empty($CustomPermissions) && !is_array($CustomPermissions)) {
 		$CustomPermissions = unserialize($CustomPermissions);
 	}
@@ -1453,7 +1453,7 @@ function delete_artist($ArtistID) {
 
 	$DB->query("SELECT Name FROM artists_group WHERE ArtistID = ".$ArtistID);
 	list($Name) = $DB->next_record(MYSQLI_NUM, false);
-	
+
 	// Delete requests
 	$DB->query("SELECT RequestID FROM requests_artists WHERE ArtistID=".$ArtistID." AND ArtistID != 0");
 	$Requests = $DB->to_array();
@@ -1585,7 +1585,7 @@ function update_hash($GroupID) {
 		WHERE ta.GroupID=$GroupID AND ta.Importance IN ('1', '4', '5', '6')
 		GROUP BY tg.ID
 		ON DUPLICATE KEY UPDATE ArtistName=values(ArtistName)");
-	
+
 	$Cache->delete_value('torrents_details_'.$GroupID);
 	$Cache->delete_value('torrent_group_'.$GroupID);
 
@@ -2401,7 +2401,7 @@ function freeleech_torrents($TorrentIDs, $FreeNeutral = 1, $FreeLeechType = 0) {
 	if(!is_array($TorrentIDs)) {
 		$TorrentIDs = array($TorrentIDs);
 	}
-	
+
 	$DB->query("UPDATE torrents SET FreeTorrent = '".$FreeNeutral."', FreeLeechType = '".$FreeLeechType."' WHERE ID IN (".implode(", ", $TorrentIDs).")");
 	$DB->query("SELECT ID, GroupID, info_hash FROM torrents WHERE ID IN (".implode(", ", $TorrentIDs).") ORDER BY GroupID ASC");
 	$Torrents = $DB->to_array(false, MYSQLI_NUM, false);
@@ -2422,7 +2422,7 @@ function freeleech_torrents($TorrentIDs, $FreeNeutral = 1, $FreeLeechType = 0) {
 
 /**
  * Convenience function to allow for passing groups to freeleech_torrents()
- */	
+ */
 function freeleech_groups($GroupIDs, $FreeNeutral = 1, $FreeLeechType = 0) {
 	global $DB;
 
@@ -2458,6 +2458,24 @@ function isset_request($Request, $Keys=NULL, $AllowEmpty = False, $Error=0) {
             }
         }
     }
+}
+
+/**
+ * Just translate and return the message translated
+ *
+ * @param $message string   The Message to be translated to the current language
+ */
+function TT($message) {
+  return $TR->t($message);
+}
+
+/**
+ * Translate and echoes the message
+ *
+ * @param $message string   The Message to be translated to the current language
+ */
+function T($message) {
+  echo TT($message);
 }
 
 $Debug->set_flag('ending function definitions');

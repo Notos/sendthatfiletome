@@ -164,16 +164,16 @@ if($NewSubscriptions === FALSE) {
 	<div id="menu">
 		<h4 class="hidden">Site Menu</h4>
 		<ul>
-			<li id="nav_index"><a href="index.php">Home</a></li>
-			<li id="nav_torrents"><a href="torrents.php">Torrents</a></li>
-			<li id="nav_collages"><a href="collages.php">Collages</a></li>
-			<li id="nav_requests"><a href="requests.php">Requests</a></li>
-			<li id="nav_forums"><a href="forums.php">Forums</a></li>
-			<li id="nav_irc"><a href="chat.php">IRC</a></li>
-			<li id="nav_top10"><a href="top10.php">Top 10</a></li>
-			<li id="nav_rules"><a href="rules.php">Rules</a></li>
-			<li id="nav_wiki"><a href="wiki.php">Wiki</a></li>
-			<li id="nav_staff"><a href="staff.php">Staff</a></li>
+			<li id="nav_index"><a href="index.php"><? T("Home"); ?></a></li>
+			<li id="nav_torrents"><a href="torrents.php"><? T("Torrents"); ?></a></li>
+			<li id="nav_collages"><a href="collages.php"><? T("Collages"); ?></a></li>
+			<li id="nav_requests"><a href="requests.php"><? T("Requests"); ?></a></li>
+			<li id="nav_forums"><a href="forums.php"><? T("Forums"); ?></a></li>
+			<li id="nav_irc"><a href="chat.php"><? T("IRC"); ?></a></li>
+			<li id="nav_top10"><a href="top10.php"><? T("Top 10"); ?></a></li>
+			<li id="nav_rules"><a href="rules.php"><? T("Rules"); ?></a></li>
+			<li id="nav_wiki"><a href="wiki.php"><? T("Wiki"); ?></a></li>
+			<li id="nav_staff"><a href="staff.php"><? T("Staff"); ?></a></li>
 		</ul>
 	</div>
 <?
