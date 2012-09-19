@@ -44,6 +44,9 @@ class UPDATE_DATABASE {
       global $DB;
 
       $DB->query("DROP TABLE IF EXISTS `system`;");
+      $DB->query("CREATE TABLE system ( databaseVersion decimal(5,3) );");
+      $DB->query("INSERT INTO system ( databaseVersion ) values ( 1.000 );");
+      
       $DB->query("DROP TABLE IF EXISTS `origin`;");
       $DB->query("DROP TABLE IF EXISTS `country`;");
       $DB->query("DROP TABLE IF EXISTS `genre`;");
