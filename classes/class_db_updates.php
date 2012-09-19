@@ -22,7 +22,7 @@ class UPDATE_DATABASE {
       $DB->query("select databaseVersion from system;");
       list($databaseVersion) = $DB->next_record();
       
-      $DB->query("SET AUTOCOMMIT=0;");
+      $DB->autoCommit(FALSE);
       $DB->query("START TRANSACTION;");
       
       foreach($this->versions as $version => $ddlcommands) {
@@ -43,7 +43,7 @@ class UPDATE_DATABASE {
       }
       
       $DB->query("COMMIT;");
-      $DB->query("SET AUTOCOMMIT=1;");
+      $DB->autoCommit(TRUE);
     }
 
     //-----------------------------------------------------------------------------------    

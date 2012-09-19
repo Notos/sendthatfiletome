@@ -356,5 +356,9 @@ class DB_MYSQL {
   	$this->query("CREATE TABLE system ( databaseVersion decimal(5,3) );");
   	$this->query("INSERT INTO system ( databaseVersion ) values ( 1.000 );");
   }
+  
+  function autoCommit($mode) {
+    mysqli_autocommit( $this->LinkID, $mode );
+  }
 }
 ?>
