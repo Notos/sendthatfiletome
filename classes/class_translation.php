@@ -27,7 +27,7 @@ class TRANSLATION {
       if (!isset($languageID) or Empty($languageID)) $languageID = $this->currentLanguageID;
       if (!isset($countryCode) or Empty($countryCode)) $countryCode = $this->currentCountryCode;
 
-      $ret = __translate($message, $languageID, $countryCode);
+      $ret = $this->__translate($message, $languageID, $countryCode);
 
       if (!isset($ret) or Empty($ret)) {
         $ret = $message; /// no empty messages, ever
@@ -38,7 +38,7 @@ class TRANSLATION {
 
     private function __translate($message, $languageID, $countryCode) {
       global $DB;
-      
+
       /// message is already loaded?
       if ( isset($this->messages[$message]) ) {
         if ( $this->isDefaultLanguage($languageID, $countryCode) or isset($this->messages[$message][$languageID][$countryCode]) ) {
