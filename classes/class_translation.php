@@ -82,7 +82,7 @@ echo "---- 27";
         } else {
 echo "---- 28";
           print_r($this->messages);
-echo "---- 29 -- message = ".$this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode];
+echo "---- 29 -- message = $message + ".$this->defaultLanguageID." + ".$this->defaultCountryCode." = ".$this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode];
 
           return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// now we have a default language
         }
