@@ -12,6 +12,7 @@ class UPDATE_DATABASE {
     public $versions = array();
     
     function __construct() {
+      $this->dropAllExtraTables(); /// for testing purposes
       $this->populateVersions();
       $this->updateDatabase();
     }
@@ -39,6 +40,21 @@ class UPDATE_DATABASE {
       }
     }
 
+    function dropAllExtraTables() {
+      global $DB;
+
+      $DB->query("DROP TABLE `system`;");
+      $DB->query("DROP TABLE `origin`;");
+      $DB->query("DROP TABLE `country`;");
+      $DB->query("DROP TABLE `genre`;");
+      $DB->query("DROP TABLE `container`;");
+      $DB->query("DROP TABLE `codec`;");
+      $DB->query("DROP TABLE `source`;");
+      $DB->query("DROP TABLE `resolution`;");
+      $DB->query("DROP TABLE `language`;");
+      $DB->query("DROP TABLE `message`;");
+    }
+    
     //-----------------------------------------------------------------------------------    
     //-----------------------------------------------------------------------------------    
     //-----------------------------------------------------------------------------------    
@@ -508,7 +524,6 @@ insert into language (LanguageID, CountryCode, EnglishName) values ('EN','NZ','E
 insert into language (LanguageID, CountryCode, EnglishName) values ('EN','IE','English');
 insert into language (LanguageID, CountryCode, EnglishName) values ('EN','ZA','English');
 insert into language (LanguageID, CountryCode, EnglishName) values ('EN','JM','English');
-insert into language (LanguageID, CountryCode, EnglishName) values ('EN','','English');
 insert into language (LanguageID, CountryCode, EnglishName) values ('EN','BZ','English');
 insert into language (LanguageID, CountryCode, EnglishName) values ('EN','TT','English');
 insert into language (LanguageID, CountryCode, EnglishName) values ('ET','','Estonian');
@@ -595,10 +610,24 @@ insert into language (LanguageID, CountryCode, EnglishName) values ('ZU','','Zul
 
 
 EOT;
+
+      $this->versions['1.003'] = <<<EOT
+      
+update language set OriginalName = EnglishName;
+update language set Enabled = TRUE where LanguageID = 'EN' and CountryCode = 'US';
+
+CREATE TABLE `message` (
+  `LanguageID` char(2) NOT NULL,
+  `CountryCode` char(2),
+  `EnglishMessage` varchar(256) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `TranslatedMessage` varchar(512) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  PRIMARY KEY (`LanguageID`, `CountryCode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+      
+EOT;
+      
       
     }
 }
   
 ?>
-
-
