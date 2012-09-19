@@ -106,7 +106,7 @@ CREATE TABLE `resolution` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
- ---- Inserts ----- 
+/* ---- Inserts ----- */
 
 INSERT INTO country (Name) VALUES ('Afghanistan');
 INSERT INTO country (Name) VALUES ('Albania');
