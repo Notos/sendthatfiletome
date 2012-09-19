@@ -43,16 +43,16 @@ class UPDATE_DATABASE {
     function dropAllExtraTables() {
       global $DB;
 
-      $DB->query("DROP TABLE `system`;");
-      $DB->query("DROP TABLE `origin`;");
-      $DB->query("DROP TABLE `country`;");
-      $DB->query("DROP TABLE `genre`;");
-      $DB->query("DROP TABLE `container`;");
-      $DB->query("DROP TABLE `codec`;");
-      $DB->query("DROP TABLE `source`;");
-      $DB->query("DROP TABLE `resolution`;");
-      $DB->query("DROP TABLE `language`;");
-      $DB->query("DROP TABLE `message`;");
+      $DB->query("DROP TABLE IF EXISTS `system`;");
+      $DB->query("DROP TABLE IF EXISTS `origin`;");
+      $DB->query("DROP TABLE IF EXISTS `country`;");
+      $DB->query("DROP TABLE IF EXISTS `genre`;");
+      $DB->query("DROP TABLE IF EXISTS `container`;");
+      $DB->query("DROP TABLE IF EXISTS `codec`;");
+      $DB->query("DROP TABLE IF EXISTS `source`;");
+      $DB->query("DROP TABLE IF EXISTS `resolution`;");
+      $DB->query("DROP TABLE IF EXISTS `language`;");
+      $DB->query("DROP TABLE IF EXISTS `message`;");
     }
     
     //-----------------------------------------------------------------------------------    
