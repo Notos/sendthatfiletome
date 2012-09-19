@@ -44,6 +44,7 @@ class TRANSLATION {
         $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode] = $message;
         $this->addTranslationToDatabase($message, $this->defaultLanguageID, $this->defaultCountryCode, $message);
         $this->cacheIt();
+        return $message;
       } else {
         $translations = $DB->to_array(0, MYSQLI_NUM);
         foreach($translations as $record) {
