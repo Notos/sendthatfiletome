@@ -101,7 +101,7 @@ class TRANSLATION {
         $DB->query("select LanguageID, CountryCode, EnglishName, OriginalName, Enabled from language"); /// get the full language listing
         $languages = $DB->to_array(0, MYSQLI_NUM);
         foreach($languages as $record) {
-          $this->languages[$record[0]][$record[1]] = [$record[4]; /// build a list of enabled languages
+          $this->languages[$record[0]][$record[1]] = $record[4]; /// build a list of enabled languages
         }
       }
     }
