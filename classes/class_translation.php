@@ -24,6 +24,8 @@ class TRANSLATION {
     }
 
     public function translate($message, $languageID = '', $countryCode = '') {
+      echo "$languageID,$countryCode";
+
       if (!isset($languageID) or Empty($languageID)) $languageID = $this->currentLanguageID;
       if (!isset($countryCode) or Empty($countryCode)) $countryCode = $this->currentCountryCode;
 

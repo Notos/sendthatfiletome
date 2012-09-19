@@ -2466,9 +2466,9 @@ function isset_request($Request, $Keys=NULL, $AllowEmpty = False, $Error=0) {
  * @param $message string   The Message to be translated to the current language
  */
 function TT($message) {
-  global $TR; /// translation object
+  global $TR,$LoggedUser; /// translation object
 
-  return $TR->translate($message);
+  return $TR->translate($message, $LoggedUser['Language'], $LoggedUser['Country']);
 }
 
 /**
