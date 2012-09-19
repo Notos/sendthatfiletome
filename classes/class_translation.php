@@ -14,11 +14,12 @@ class TRANSLATION {
     function __construct() {
       global $Cache;
 
+      $this->internalCache = $Cache;
+
       $this->loadLanguages(); /// load the list of enabled/disabled languages
       $this->currentLanguageID = $this->defaultLanguageID;
       $this->currentCountryCode = $this->defaultCountryCode;
 
-      $this->internalCache = $Cache;
       $this->messages = $this->internalCache->get_value('messages');
       if ( !isset($this->messages) ) {
         $this->messages = array(); /// wasn't cached
