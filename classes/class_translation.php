@@ -6,7 +6,7 @@ class TRANSLATION {
     
     private $defaultLanguageID = 'EN';
     private $defaultCountryCode = 'US';
-    
+
     private $languageID;
     private $countryCode;
 
@@ -39,7 +39,7 @@ class TRANSLATION {
       } else {
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = $message and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."') or (LanguageID = '$languageID' and CountryCode = '$countryCode') "); 
       }
-      
+
       if ($DB->record_count() == 0) {
         $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode] = $message;
         $this->addTranslationToDatabase($message, $this->defaultLanguageID, $this->defaultCountryCode, $message);
@@ -71,7 +71,7 @@ class TRANSLATION {
       if (!isset($cCode)) $cCode = $this->defaultCountryCode;
       return $this->translate($message, $lID, $cCode);
     }
-    
+
     public function setLanguage($lid, $cc) {
       $this->languageID = $li;
       $this->countryCode = $cc;
