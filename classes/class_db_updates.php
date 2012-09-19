@@ -70,15 +70,17 @@ class CUSTOMIZE_METADATA {
 
 
     function populateVersions() {
-  
-      //-----------------------------------------------------------------------------------    
+
+      //-----------------------------------------------------------------------------------
       // Add all your MySQL DDL here following the pattern of version 1.001
-      //-----------------------------------------------------------------------------------    
-      
+      //-----------------------------------------------------------------------------------
+
+/*--------------------------------------------------------------------------------------------------*/
       $this->versions['1.001'] = <<<EOT
-      
+/*--------------------------------------------------------------------------------------------------*/
+
 /* --- Version 1.001 will create some tables into the metadata --- */
-      
+
 CREATE TABLE `origin` (
   `OriginID` int(10) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
@@ -477,7 +479,10 @@ INSERT INTO origin (Name) VALUES ("Mixed");
 
 EOT;
 
+/*--------------------------------------------------------------------------------------------------*/
       $this->versions['1.002'] = <<<EOT
+/*--------------------------------------------------------------------------------------------------*/
+
 /* --- Version 1.002 will create a table into the metadata --- */
 
 CREATE TABLE `language` (
@@ -618,7 +623,9 @@ insert into language (LanguageID, CountryCode, EnglishName) values ('ZU','','Zul
 
 EOT;
 
+/*--------------------------------------------------------------------------------------------------*/
       $this->versions['1.003'] = <<<EOT
+/*--------------------------------------------------------------------------------------------------*/
 
 update language set OriginalName = EnglishName;
 update language set Enabled = TRUE where LanguageID = 'EN' and CountryCode = 'US';
@@ -634,6 +641,15 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
 
 EOT;
+
+/*--------------------------------------------------------------------------------------------------*/
+      $this->versions['1.004'] = <<<EOT
+/*--------------------------------------------------------------------------------------------------*/
+
+alter table users_main add Country char(2) DEFAULT '';
+
+EOT;
+
 
     }
 }
