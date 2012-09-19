@@ -67,6 +67,7 @@ class TRANSLATION {
     }
 
     private function addTranslationToDatabase($message, $lID, $cCode, $translatedMessage) {
+      global $DB;
       $DB->query("insert into message (LanguageID, CountryCode, EnglishMessage, TranslatedMessage) values ('$message', '$lID', '$cCode', '$translatedMessage');");
     }
 
