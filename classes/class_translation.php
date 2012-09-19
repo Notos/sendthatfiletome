@@ -13,10 +13,10 @@ class TRANSLATION {
 
     function __construct() {
       global $Cache;
-      
+
       $this->languageID = $this->defaultLanguageID;
       $this->countryCode = $this->defaultCountryCode;
-      
+
       $this->internalCache = $Cache;
       $this->messages = $this->internalCache->get_value('messages');
       if ( !isset($this->messages) ) {
@@ -40,7 +40,7 @@ echo "---- 6";
 
 echo "---- 7";
       /// we also will have to find a near language (excluding country code)
-echo "---- 8";
+echo "---- 8 ---- $languageID, $countryCode";
       if ( $this->isDefaultLanguage($languageID, $countryCode) ) {
 echo "---- 9";
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."')");
