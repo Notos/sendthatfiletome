@@ -22,6 +22,8 @@ class UPDATE_DATABASE {
       $DB->query("select databaseVersion from system");
       list($databaseVersion) = $DB->next_record();
       
+      $DB->query("START TRANSACTION;");
+      
       foreach($this->versions as $version => $ddlcommands) {
         $version = floatval($version);
         if ($databaseVersion < $version) {
@@ -33,6 +35,8 @@ class UPDATE_DATABASE {
           $databaseVersion = $version;
         }
       }
+      
+      $DB->query("COMMIT;");
     }
 
     //-----------------------------------------------------------------------------------    
@@ -102,7 +106,7 @@ CREATE TABLE `resolution` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-/* ---- Inserts ----- */
+ ---- Inserts ----- 
 
 INSERT INTO country (Name) VALUES ('Afghanistan');
 INSERT INTO country (Name) VALUES ('Albania');
