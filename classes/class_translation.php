@@ -69,7 +69,7 @@ echo "---- 20";
 echo "---- 21";
         foreach($translations as $record) {
 echo "---- 22";
-          $this->messages[$record[0]][$record[1]][$record[2]] = $record[3];
+          $this->messages[$record[2]][$record[0]][$record[1]] = $record[3];
 echo "---- 23";
         }
 echo "---- 24";
@@ -82,7 +82,7 @@ echo "---- 27";
         } else {
 echo "---- 28";
           print_r($this->messages);
-echo "---- 29 -- message = $message + ".$this->defaultLanguageID." + ".$this->defaultCountryCode." = ".$this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode];
+echo "---- 29 -- message = $message + ".$this->defaultLanguageID." + ".$this->defaultCountryCode." = ".$this->messages['Home']['EN']['US'];
 
           return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// now we have a default language
         }
