@@ -376,7 +376,9 @@ function user_heavy_info($UserID) {
 			i.RestrictedForums,
 			i.PermittedForums,
 			m.FLTokens,
-			m.PermissionID
+			m.PermissionID,
+			m.Language,
+			m.Country
 			FROM users_main AS m
 			INNER JOIN users_info AS i ON i.UserID=m.ID
 			WHERE m.ID='$UserID'");
@@ -387,7 +389,7 @@ function user_heavy_info($UserID) {
 		} else {
 			$HeavyInfo['CustomPermissions'] = array();
 		}
-		
+
 		if (!empty($HeavyInfo['RestrictedForums'])) {
 			$RestrictedForums = array_map('trim', explode(',', $HeavyInfo['RestrictedForums']));
 		} else {
