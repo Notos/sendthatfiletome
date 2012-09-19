@@ -1,31 +1,35 @@
 <?
   /*//-----------------------------------------------------------------------------------//
-  
+
     This is the class that updates the database schema, basically it has
-     
+
      - a property: versions (maintained by site owner)
      - a method: update
-  
+
   //-----------------------------------------------------------------------------------//*/
-  
-class CUSTOMIZE_METADATA {                                                                         
+
+class CUSTOMIZE_METADATA {
     public $versions = array();
-    
+
     function __construct() {
       // $this->dropAllExtraTables(); /// for testing purposes
       $this->populateVersions();
       $this->updateDatabase();
     }
-    
+
     function updateDatabase() {
       global $DB;
-      
+
       foreach($this->versions as $version => $ddlcommands) {
         $version = floatval($version);
+
+        $DB->query("select databaseVersion from system");
+        list($databaseVersion) = $DB->next_record();
+
         if ($databaseVersion < $version) {
+          echo "$databaseVersion < $version";
           $ddls = explode(";", $ddlcommands);
           foreach($ddls as $ddl) {
-            
             try {
               if (trim($ddl)) {
                 $DB->query($ddl); /// update metadata
@@ -46,7 +50,7 @@ class CUSTOMIZE_METADATA {
       $DB->query("DROP TABLE IF EXISTS `system`;");
       $DB->query("CREATE TABLE system ( databaseVersion decimal(5,3) );");
       $DB->query("INSERT INTO system ( databaseVersion ) values ( 1.000 );");
-      
+
       $DB->query("DROP TABLE IF EXISTS `origin`;");
       $DB->query("DROP TABLE IF EXISTS `country`;");
       $DB->query("DROP TABLE IF EXISTS `genre`;");
@@ -64,7 +68,7 @@ class CUSTOMIZE_METADATA {
     //-----------------------------------------------------------------------------------    
     //-----------------------------------------------------------------------------------    
 
-    
+
     function populateVersions() {
   
       //-----------------------------------------------------------------------------------    
@@ -615,7 +619,7 @@ insert into language (LanguageID, CountryCode, EnglishName) values ('ZU','','Zul
 EOT;
 
       $this->versions['1.003'] = <<<EOT
-      
+
 update language set OriginalName = EnglishName;
 update language set Enabled = TRUE where LanguageID = 'EN' and CountryCode = 'US';
 
@@ -626,11 +630,11 @@ CREATE TABLE `message` (
   `TranslatedMessage` varchar(512) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`LanguageID`, `CountryCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-      
+
 EOT;
-      
-      
+
+
     }
 }
-  
+
 ?>
