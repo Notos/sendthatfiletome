@@ -467,16 +467,6 @@ CREATE TABLE `language` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
 
 
-CREATE TABLE `message` (
-  `LanguageID` char(2) NOT NULL,
-  `CountryCode` char(2),
-  `EnglishName` varchar(64) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  `OriginalName` varchar(128) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  `Enabled` boolean DEFAULT false,
-  PRIMARY KEY (`LanguageID`, `CountryCode`),
-  UNIQUE KEY `Name` (`EnglishName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
-
 /* ---- Inserts ----- */
 
 insert into language (LanguageID, CountryCode, EnglishName) values ('AF','','Afrikaans');
