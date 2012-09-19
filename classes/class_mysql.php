@@ -346,11 +346,12 @@ class DB_MYSQL {
     if($this->record_count() == 0) {
       $this->createSystemTable();
     }
-    // require(SERVER_ROOT.'/classes/database.schemas.php');
+    require(SERVER_ROOT.'/classes/class_db_updates.php');
     
-   //$result = mysql_query("SHOW COLUMNS FROM `table` LIKE 'fieldname'");
-   //$exists = (mysql_num_rows($result))?TRUE:FALSE;
+    $UD = new UPDATE_DATABASE(); /// just construct it to the update procedure start
+    unset($UD); /// as soon as it's done, destroy the object
   }
+  
   function createSystemTable() {
   	$this->query("CREATE TABLE system ( databaseVersion decimal(5,3) );");
   	$this->query("INSERT INTO system ( databaseVersion ) values ( 1.000 );");
