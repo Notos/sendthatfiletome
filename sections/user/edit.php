@@ -7,7 +7,7 @@ if(!is_number($UserID)){
 
 
 
-$DB->query("SELECT 
+$DB->query("SELECT
 			m.Username,
 			m.Email,
 			m.IRCKey,
@@ -20,13 +20,13 @@ $DB->query("SELECT
 			i.SiteOptions,
 			i.UnseededAlerts,
 			p.Level AS Class,
-			m.CountryCode,
-			m.LanguageID
+			m.Country,
+			m.Language
 			FROM users_main AS m
 			JOIN users_info AS i ON i.UserID = m.ID
 			LEFT JOIN permissions AS p ON p.ID=m.PermissionID
 			WHERE m.ID = '".db_string($UserID)."'");
-list($Username,$Email,$IRCKey,$Paranoia,$Info,$Avatar,$Country,$StyleID,$StyleURL,$SiteOptions,$UnseededAlerts,$Class,$CountryCode,$LanguageID)=$DB->next_record(MYSQLI_NUM, array(3,9));
+list($Username,$Email,$IRCKey,$Paranoia,$Info,$Avatar,$Country,$StyleID,$StyleURL,$SiteOptions,$UnseededAlerts,$Class,$Country,$Language)=$DB->next_record(MYSQLI_NUM, array(3,9));
 
 
 if($UserID != $LoggedUser['ID'] && !check_perms('users_edit_profiles', $Class)) {
@@ -57,9 +57,9 @@ function checked($Checked) {
 $DB->query("SELECT COUNT(x.uid) FROM xbt_snatched AS x INNER JOIN torrents AS t ON t.ID=x.fid WHERE x.uid='$UserID'");
 list($Snatched) = $DB->next_record();
 
-if ($SiteOptions) { 
-	$SiteOptions = unserialize($SiteOptions); 
-} else { 
+if ($SiteOptions) {
+	$SiteOptions = unserialize($SiteOptions);
+} else {
 	$SiteOptions = array();
 }
 
