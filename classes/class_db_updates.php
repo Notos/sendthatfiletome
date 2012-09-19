@@ -22,10 +22,13 @@ class UPDATE_DATABASE {
       $DB->query("select databaseVersion from system");
       list($databaseVersion) = $DB->next_record();
       
-      foreach($this->versions as $version => $ddl) {
+      foreach($this->versions as $version => $ddlcommands) {
         $version = floatval($version);
         if ($databaseVersion < $version) {
-          $DB->query($ddl); /// update metadata
+          $ddls = explode(";", $ddlcommands);
+          foreach($ddls as $ddl) {
+            $DB->query($ddl); /// update metadata
+          }
           $DB->query("update system set databaseVersion = $version"); /// set the new database version
           $databaseVersion = $version;
         }
