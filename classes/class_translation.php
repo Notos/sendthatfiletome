@@ -1,6 +1,6 @@
 <?
 
-class TRANSLATION {                                                                         
+class TRANSLATION {
     private $messages;
     private $internalCache;
     
@@ -35,9 +35,9 @@ class TRANSLATION {
       
       /// we also will have to find a near language (excluding country code)
       if ( $this->isDefaultLanguage($languageID, $countryCode) ) {
-        $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = $message and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."')"); 
+        $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."')");
       } else {
-        $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = $message and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."') or (LanguageID = '$languageID' and CountryCode = '$countryCode') "); 
+        $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."') or (LanguageID = '$languageID' and CountryCode = '$countryCode') ");
       }
 
       if ($DB->record_count() == 0) {
@@ -65,7 +65,7 @@ class TRANSLATION {
     private function isDefaultLanguage($lID, $cCode) {
       return ($lID == $this->defaultLanguageID) and ($cCode = $this->defaultCountryCode);
     }
-    
+
     public function t($message, $lID = '', $cCode = '') {
       if (!isset($lID)) $lID = $this->defaultLanguageID;
       if (!isset($cCode)) $cCode = $this->defaultCountryCode;

@@ -12,7 +12,7 @@ class CUSTOMIZE_METADATA {
     public $versions = array();
     
     function __construct() {
-      $this->dropAllExtraTables(); /// for testing purposes
+      // $this->dropAllExtraTables(); /// for testing purposes
       $this->populateVersions();
       $this->updateDatabase();
     }
