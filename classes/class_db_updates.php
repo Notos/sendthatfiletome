@@ -64,7 +64,7 @@ class CUSTOMIZE_METADATA {
     
     //-----------------------------------------------------------------------------------    
     //-----------------------------------------------------------------------------------    
-    //-----------------------------------------------------------------------------------    
+    //-----------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------    
     //-----------------------------------------------------------------------------------    
 
@@ -626,13 +626,14 @@ update language set Enabled = TRUE where LanguageID = 'EN' and CountryCode = 'US
 CREATE TABLE `message` (
   `LanguageID` char(2) NOT NULL,
   `CountryCode` char(2),
+  `EnglishMessageHash` varchar(40) NOT NULL, /* SHA1 will be used to hash */
   `EnglishMessage` varchar(256) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `TranslatedMessage` varchar(512) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  PRIMARY KEY (`LanguageID`, `CountryCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  PRIMARY KEY (`LanguageID`, `CountryCode`, `EnglishMessageHash`), /* Message is too long to be indexed */
+  KEY `EnglishMessage` (`EnglishMessage`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
 
 EOT;
-
 
     }
 }

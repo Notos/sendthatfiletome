@@ -3,14 +3,14 @@
 class TRANSLATION {
     private $messages;
     private $internalCache;
-    
+
     private $defaultLanguageID = 'EN';
     private $defaultCountryCode = 'US';
 
     private $languageID;
     private $countryCode;
 
-    
+
     function __construct() {
       global $Cache;
       
@@ -68,7 +68,9 @@ class TRANSLATION {
 
     private function addTranslationToDatabase($message, $lID, $cCode, $translatedMessage) {
       global $DB;
-      $DB->query("insert into message (LanguageID, CountryCode, EnglishMessage, TranslatedMessage) values ('$lID', '$cCode', '$message', '$translatedMessage');");
+
+      $hash = SHA1($message);
+      $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$lID', '$cCode', '$hash', '$message', '$translatedMessage');");
     }
 
     public function t($message, $lID = '', $cCode = '') {
