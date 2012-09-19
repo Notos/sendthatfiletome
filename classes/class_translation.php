@@ -32,7 +32,7 @@ class TRANSLATION {
           return $this->messages[$message][$languageID][$countryCode]; /// default language will always be present in the array
         }
       }
-      
+
       /// we also will have to find a near language (excluding country code)
       if ( $this->isDefaultLanguage($languageID, $countryCode) ) {
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."')");
@@ -52,18 +52,22 @@ class TRANSLATION {
         $this->cacheIt();
         if ( isset($this->messages[$message][$languageID][$countryCode])  ) {
           return $this->messages[$message][$languageID][$countryCode];
-        } else { 
+        } else {
           return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// now we have a default language
         }
       }
     }
-    
+
     private function cacheIt() {
       $this->internalCache->cache_value('messages', $this->messages);
     }
 
     private function isDefaultLanguage($lID, $cCode) {
       return ($lID == $this->defaultLanguageID) and ($cCode = $this->defaultCountryCode);
+    }
+
+    private function addTranslationToDatabase($message, $lID, $cCode, $translatedMessage) {
+      $DB->query("insert into message (LanguageID, CountryCode, EnglishMessage, TranslatedMessage) values ('$message', '$lID', '$cCode', '$translatedMessage');");
     }
 
     public function t($message, $lID = '', $cCode = '') {
@@ -76,7 +80,7 @@ class TRANSLATION {
       $this->languageID = $li;
       $this->countryCode = $cc;
     }
-    
-}  
-  
+
+}
+
 ?>
