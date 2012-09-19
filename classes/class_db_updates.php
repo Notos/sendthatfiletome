@@ -19,31 +19,15 @@ class UPDATE_DATABASE {
     function updateDatabase() {
       global $DB;
       
-      $DB->query("select databaseVersion from system;");
-      list($databaseVersion) = $DB->next_record();
-      
-      $DB->autoCommit(FALSE);
-
-      $DB->query("SELECT @@autocommit");
-      list($autocommit) = $DB->next_record();
-      echo "autocommit = $autocommit<br>";
-      
-      $DB->query("START TRANSACTION;");
-      
       foreach($this->versions as $version => $ddlcommands) {
         $version = floatval($version);
         if ($databaseVersion < $version) {
           $ddls = explode(";", $ddlcommands);
           foreach($ddls as $ddl) {
             
-      $DB->query("SELECT @@autocommit");
-      list($autocommit) = $DB->next_record();
-      echo "ddl = $ddl <br><br> autocommit = $autocommit<br><br>";
-
             try {
-              // $DB->query($ddl); /// update metadata
+              $DB->query($ddl); /// update metadata
             } catch(Exception $e) {
-              $DB->query("ROLLBACK;");
               echo "Error: ".$e->getMessage();
             }
           }
@@ -51,14 +35,6 @@ class UPDATE_DATABASE {
           $databaseVersion = $version;
         }
       }
-      
-      $DB->query("COMMIT;");
-      $DB->autoCommit(TRUE);
-
-
-      $DB->query("SELECT @@autocommit");
-      list($autocommit) = $DB->next_record();
-      echo "autocommit = $autocommit<br>";
     }
 
     //-----------------------------------------------------------------------------------    
@@ -128,7 +104,7 @@ CREATE TABLE `resolution` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
- ---- Inserts ----- 
+ /* ---- Inserts ----- */
 
 INSERT INTO country (Name) VALUES ('Afghanistan');
 INSERT INTO country (Name) VALUES ('Albania');
