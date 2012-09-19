@@ -38,7 +38,7 @@ class UPDATE_DATABASE {
             
       $DB->query("SELECT @@autocommit");
       list($autocommit) = $DB->next_record();
-      echo "autocommit = $autocommit<br>";
+      echo "ddl = $ddl <br><br> autocommit = $autocommit<br><br>";
 
             try {
               $DB->query($ddl); /// update metadata
