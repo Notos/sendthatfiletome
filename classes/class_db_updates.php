@@ -26,8 +26,7 @@ class UPDATE_DATABASE {
 
       $DB->query("SELECT @@autocommit");
       list($autocommit) = $DB->next_record();
-      echo "autocommit = $autocommit";
-      
+      echo "autocommit = $autocommit<br>";
       
       $DB->query("START TRANSACTION;");
       
@@ -36,6 +35,11 @@ class UPDATE_DATABASE {
         if ($databaseVersion < $version) {
           $ddls = explode(";", $ddlcommands);
           foreach($ddls as $ddl) {
+            
+      $DB->query("SELECT @@autocommit");
+      list($autocommit) = $DB->next_record();
+      echo "autocommit = $autocommit<br>";
+
             try {
               $DB->query($ddl); /// update metadata
             } catch(Exception $e) {
@@ -50,6 +54,11 @@ class UPDATE_DATABASE {
       
       $DB->query("COMMIT;");
       $DB->autoCommit(TRUE);
+
+
+      $DB->query("SELECT @@autocommit");
+      list($autocommit) = $DB->next_record();
+      echo "autocommit = $autocommit<br>";
     }
 
     //-----------------------------------------------------------------------------------    
