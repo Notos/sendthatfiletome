@@ -98,6 +98,9 @@ class TRANSLATION {
     
     private function loadLanguages() {
       $this->languages = $this->internalCache->get_value('languages');
+      echo "<pre>";
+      print_r($this->languages);
+      echo "</pre>";
       if ( !isset($this->languages) or count($this->languages) == 0 ) {
         $this->languages = array(); /// wasn't cached
         $DB->query("select LanguageID, CountryCode, EnglishName, OriginalName, Enabled from language"); /// get the full language listing
