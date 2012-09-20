@@ -18,16 +18,18 @@ $DB->query("SELECT
 	");
 ?>
 
-<table>
-  <tr>
-    <td width="70%">
-  		<div class="head colhead_dark"><strong>Translate it</strong></div>
-    </td>
-    <td width="30%">
-  		<div class="head colhead_dark"><strong>Available languages</strong></div>
-    </td>
-  </tr>
-</table>
+<div class="thin">
+  <table>
+    <tr>
+      <td width="70%">
+    		<div class="head colhead_dark"><strong>Translate it</strong></div>
+      </td>
+      <td width="30%">
+    		<div class="head colhead_dark"><strong>Available languages</strong></div>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <div class="thin">
 	<div class="box" id="recommended">
