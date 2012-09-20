@@ -3,16 +3,6 @@ if(!check_perms('site_translator')){
 	error(403);
 }
 show_header('Translator Manager');
-
-$DB->query("
-SELECT
-  coalesce( concat( l.LanguageID, (case when l.CountryCode is not null and l.CountryCode <> '' then '-' else '' end), l.CountryCode) , '') LanguageID
-, concat(l.EnglishName, (case when c.Name is not null and c.Name <> '' then ' (' else '' end), (case when c.Name is not null and c.Name <> '' then c.Name else '' end), (case when c.Name is not null and c.Name <> ''  then ')' else ''  end)) LanguageName
-, (select count(*) from message xm where xm.LanguageID = 'EN' and xm.CountryCode = 'US' and xm.EnglishMessageHash not in (select xxm.EnglishMessageHash from message xxm where xxm.LanguageID = l.LanguageID and xxm.CountryCode = l.CountryCode)) Missing
-FROM language l left join country c on l.CountryCode = c.CountryCode
-WHERE Enabled = TRUE
-ORDER BY Missing desc
-	");
 ?>
 
 <div class="permissions">
@@ -21,7 +11,7 @@ ORDER BY Missing desc
 			<tr class="colhead">
 				<td colspan="2">Translate it!</td>
 			</tr>
-			<tr><td colspan="2"><strong>Threads (Active)</strong></td></tr>
+			<tr><td colspan="2"><strong><center><? echo TOOLS::languageName('PT-BR');?></center></strong></td></tr>
     </table>
   </div>
 </div>
@@ -35,8 +25,17 @@ ORDER BY Missing desc
 			<tr>
       		<table>
       		  <tr>
-      		    <td>Language</td> <td>Missing</td>
+      		    <td><strong>Language</strong></td> <td><strong>Missing</strong></td>
             </tr>
+            <?$DB->query("
+              SELECT
+                coalesce( concat( l.LanguageID, (case when l.CountryCode is not null and l.CountryCode <> '' then '-' else '' end), l.CountryCode) , '') LanguageID
+              , concat(l.EnglishName, (case when c.Name is not null and c.Name <> '' then ' (' else '' end), (case when c.Name is not null and c.Name <> '' then c.Name else '' end), (case when c.Name is not null and c.Name <> ''  then ')' else ''  end)) LanguageName
+              , (select count(*) from message xm where xm.LanguageID = 'EN' and xm.CountryCode = 'US' and xm.EnglishMessageHash not in (select xxm.EnglishMessageHash from message xxm where xxm.LanguageID = l.LanguageID and xxm.CountryCode = l.CountryCode)) Missing
+              FROM language l left join country c on l.CountryCode = c.CountryCode
+              WHERE Enabled = TRUE
+              ORDER BY Missing desc
+              	");?>
             <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {?>
                 <tr>
           		    <td><?=$LanguageName?></td> <td><?=$Missing?></td>

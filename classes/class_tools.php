@@ -1,10 +1,10 @@
 <?php
 
 class TOOLS {
-  
+
   public function htmlSelect($name, $query, $fieldIndex, $fieldValue, $currentValue, $onChange = '') {
     global $DB;
-    
+
     $DB->query($query); /// this query result must have only 2 fields (index and value)
     $records = $DB->to_array(0, MYSQLI_NUM);
 
@@ -21,7 +21,24 @@ class TOOLS {
     }
     echo "</select>";
   }
-  
+
+  public function languageName($languageIDAndCountryCode) {
+    global $DB;
+
+    list($languageID, $countryCode) = explode("-",$languageIDAndCountryCode);
+
+    $DB->query("
+        SELECT
+          concat(l.EnglishName, (case when c.Name is not null and c.Name <> '' then ' (' else '' end), (case when c.Name is not null and c.Name <> '' then c.Name else '' end), (case when c.Name is not null and c.Name <> ''  then ')' else ''  end)) LanguageName
+        FROM language l left join country c on l.CountryCode = c.CountryCode
+        WHERE l.LanguageID = '$languageID' and l.CountryCode = '$countryCode'
+    ");
+
+    list($name) = $DB->next_record();
+
+    return $name
+  }
+
   public function p($s,$f=false) {
     if ($s == 'zN/A') {
       $s = 'N/A';
