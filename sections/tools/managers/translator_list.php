@@ -34,7 +34,7 @@ $DB->query("
 
 list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
 
-if ( !isset($messageHash) or empty($messageHash) ) ) {
+if ( !isset($messageHash) or empty($messageHash) ) {
   echo "There are no untranslated messages for ".TOOLS::languageName($language);
 } else { /// start of form block ?>
 
