@@ -197,6 +197,11 @@ $Options['DisablePMAvatars'] = (!empty($_POST['disablepmavatars']) ? 1 : 0);
 $Options['Country'] = (!empty($_POST['country']) ? $_POST['country'] : '0');
 $Options['Language'] = (!empty($_POST['language']) ? $_POST['language'] : '');
 
+echo "----O------------------ ".$Options['Country']."<br>";
+echo "----O------------------ ".$Options['Language']."<br>";
+echo "----P------------------ ".$_POST['country']."<br>";
+echo "----P------------------ ".$_POST['language']."<br>";
+
 
 if(isset($LoggedUser['DisableFreeTorrentTop10'])) {
 	$Options['DisableFreeTorrentTop10'] = $LoggedUser['DisableFreeTorrentTop10'];
