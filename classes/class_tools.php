@@ -22,6 +22,42 @@ class TOOLS {
     echo "</select>";
   }
   
+   function p($s,$f=false) {
+     if ($s == 'zN/A') {
+       $s = 'N/A';
+     }
+     if ($f) {
+       $f1 = "<$f>";
+       $f2 = "</$f>";
+     } else {
+       $f1 = "";
+       $f2 = "";
+     }
+     echo $f1.$s.$f2."<br>";
+   }
+
+   function pa($s) {
+        $x = "<pre>";
+        $x .= print_r($s, 1);
+        $x .= "</pre>";
+        print $x;
+   }
+
+   function pt($table) {
+     echo "<table border=1>";
+     $rn = 1;
+     foreach($table as $index=>$row) {
+       echo "<tr>";
+       echo "<td>".$rn++."</td>";
+       foreach($row as $field=>$value) {
+         echo "<td>" . $value . "</td>";
+       }
+       echo "</tr>";
+     }
+     echo "</table>";
+   }
+  
+  
 }
   
 ?>
