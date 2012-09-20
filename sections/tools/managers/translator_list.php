@@ -4,7 +4,7 @@ if(!check_perms('site_translator')){
 }
 show_header('Translator Manager');
 
-$DB->query("SELECT 
+$DB->query("SELECT
 	tr.GroupID,
 	tr.UserID,
 	tg.Name,
@@ -17,9 +17,21 @@ $DB->query("SELECT
 	LIMIT 10
 	");
 ?>
+
+<table>
+  <tr>
+    <td>
+  		<div class="head colhead_dark"><strong>Translate it</strong></div>
+    </td>
+    <td>
+  		<div class="head colhead_dark"><strong>Available languages</strong></div>
+    </td>
+  </tr>
+</table>
+
 <div class="thin">
 	<div class="box" id="recommended">
-		<div class="head colhead_dark"><strong>Recommendations</strong></div>
+		<div class="head colhead_dark"><strong>Translator Manager</strong></div>
 <?		if(!in_array($LoggedUser['ID'], $DB->collect('UserID'))){ ?>
 		<form action="tools.php" method="post" class="pad">
 			<input type="hidden" name="action" value="recommend_add" />
