@@ -255,7 +255,7 @@ echo $Val->GenerateJS('userform');
             <tr>
                 <td class="label"><strong>Country</strong></td>
                 <td>
-                  <? TOOLS::htmlSelect('Country', 'select CountryCode, CountryName from country order by Name', 'CountryCode', 'CountryName', ''); ?>
+                  <? TOOLS::htmlSelect('Country', 'select CountryCode, Name CountryName from country order by Name', 'CountryCode', 'CountryName', ''); ?>
                 </td>
             </tr>
 
