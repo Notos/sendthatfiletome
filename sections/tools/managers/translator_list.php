@@ -11,7 +11,21 @@ show_header('Translator Manager');
 			<tr class="colhead">
 				<td colspan="2">Translate it!</td>
 			</tr>
-			<tr><td colspan="2"><strong><center><? echo TOOLS::languageName('PT-BR');?></center></strong></td></tr>
+			<form>
+  			<tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?></strong></td></tr>
+        <tr><td>
+          <textarea name="originalText" cols="95" rows="15"></textarea>
+        </td></tr>
+
+  			<tr><td colspan="2"><strong><? echo TOOLS::languageName('PT-BR');?></strong></td></tr>
+        <tr><td>
+          <textarea name="originalText" cols="95" rows="15"></textarea>
+        </td></tr>
+
+        <tr><td>
+          <input type="submit" value="Add translation" />
+        </td></tr>
+      </form>
     </table>
   </div>
 </div>
@@ -60,12 +74,6 @@ show_header('Translator Manager');
 					<td rowspan="2" class="label"><strong>Add Recommendation:</strong></td>
 					<td>Link to a torrent group on site. E.g. <strong>http://<?=NONSSL_SITE_URL?>/torrents.php?id=10000</strong></td>
 				</tr>
-				<tr>
-					<td>
-						<input type="text" name="url" size="50" />
-						<input type="submit" value="Add recommendation" />
-					</td>
-				</tr>
 			</table>
 		</form>
 <?		} ?>
@@ -75,13 +83,13 @@ show_header('Translator Manager');
 ?>
 			<li>
 				<strong><?=format_username($UserID, false, false, false)?></strong>
-<?		if($ArtistID){ ?> 
+<?		if($ArtistID){ ?>
 				- <a href="artist.php?id=<?=$ArtistID?>"><?=$ArtistName?></a>
-<?		} ?> 
+<?		} ?>
 				- <a href="torrents.php?id=<?=$GroupID?>"><?=$GroupName?></a>
 <?		if(check_perms('site_manage_recommendations') || $UserID == $LoggedUser['ID']){ ?>
 				<a href="tools.php?action=recommend_alter&amp;groupid=<?=$GroupID?>">[Delete]</a>
-<?		} ?> 
+<?		} ?>
 			</li>
 <?	} ?>
 		</ul>
