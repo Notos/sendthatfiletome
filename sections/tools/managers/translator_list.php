@@ -17,12 +17,12 @@ show_header('Translator Manager');
           <textarea name="originalText" cols="70" rows="5" readonly="readonly"></textarea>
         </td></tr>
 
-  			<tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?> - Message translated to English (this is what you will see)</strong></td></tr>
+  			<tr><td colspan="2"><br><strong><? echo TOOLS::languageName('EN-US');?> - Message translated to English (this is what you will see)</strong></td></tr>
         <tr><td>
           <textarea name="originalText" cols="70" rows="5" readonly="readonly"></textarea>
         </td></tr>
 
-  			<tr><td colspan="2"><strong><? echo TOOLS::languageName('PT-BR');?> - Your translation goes here</strong></td></tr>
+  			<tr><td colspan="2"><br><strong><? echo TOOLS::languageName('PT-BR');?> - Your translation goes here</strong></td></tr>
         <tr><td>
           <textarea name="originalText" cols="70" rows="15"></textarea>
         </td></tr>
