@@ -13,8 +13,8 @@ class TOOLS {
     foreach($records as $record) {
       $index = $record[0];
       $value = $record[1];
-      echo "<option value='$index'";
-      if($value == $currentValue) { echo " selected='selected'"; }
+      echo "<option value=\"$index\"";
+      if($value == $currentValue) { echo " selected=\"selected\""; }
       echo ">";
       echo $value;
       echo "</option>\n";
