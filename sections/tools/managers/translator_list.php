@@ -11,7 +11,6 @@ if (!isset($language) or empty($language)) {
   $language = $LoggedUser['Language'];
 }
 
-$language = '';
 $messageHash = '';
 $originalMessage = '';
 $englishTranslation = '';
