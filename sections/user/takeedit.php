@@ -192,6 +192,8 @@ $Options['AutoSubscribe'] = (!empty($_POST['autosubscribe']) ? 1 : 0);
 $Options['DisableSmileys'] = (!empty($_POST['disablesmileys']) ? 1 : 0);
 $Options['DisableAvatars'] = (!empty($_POST['disableavatars']) ? 1 : 0);
 $Options['DisablePMAvatars'] = (!empty($_POST['disablepmavatars']) ? 1 : 0);
+$Options['Country'] = (!empty($_POST['country']) ? $_POST['country'] : '0');
+$Options['Language'] = (!empty($_POST['language']) ? $_POST['language'] : '');
 
 
 if(isset($LoggedUser['DisableFreeTorrentTop10'])) {
