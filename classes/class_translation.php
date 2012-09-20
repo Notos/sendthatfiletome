@@ -29,6 +29,9 @@ class TRANSLATION {
     }
 
     public function translate($message, $languageID = '', $countryCode = '') {
+      $this->loadUserLanguage(); /// to currentLanguage
+      
+      /// if no language is defined, use current
       if (!isset($languageID) or Empty($languageID)) $languageID = $this->currentLanguageID;
       if (!isset($countryCode) or Empty($countryCode)) $countryCode = $this->currentCountryCode;
 
@@ -44,8 +47,6 @@ class TRANSLATION {
     private function __translate($message, $languageID, $countryCode) {
       global $DB;
 
-      $this->checkCurrentLanguage();
-      
       if ( ! $this->languages[$languageID][$countryCode] ) { /// if the language is not enabled in the system, use default
         echo "-----------------using default language<br>";
         $languageID = $this->defaultLanguageID;
@@ -121,7 +122,7 @@ class TRANSLATION {
       $this->countryCode = $cc;
     }
 
-    private function checkCurrentLanguage() {
+    private function loadUserLanguage($languageID, $countryCode) {
       global $LoggedUser;
       
       list($this->currentLanguageID, $this->currentCountryCode) = explode("-",$LoggedUser['Language']);
