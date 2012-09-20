@@ -20,10 +20,10 @@ $DB->query("SELECT
 
 <table>
   <tr>
-    <td>
+    <td width="70%">
   		<div class="head colhead_dark"><strong>Translate it</strong></div>
     </td>
-    <td>
+    <td width="30%">
   		<div class="head colhead_dark"><strong>Available languages</strong></div>
     </td>
   </tr>
