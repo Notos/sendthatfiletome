@@ -43,7 +43,7 @@
 	'site_debug' => 'Developer access.',
 	'site_proxy_images' => 'Image proxy & Anti-Canary.',
 	'site_search_many' => 'Can go past low limit of search results.',
-    'site_translate' => 'Can use the translation manager.',
+  'site_translator' => 'Can use the translator tools.',
 
 	'users_edit_usernames' => 'Can edit usernames.',
 	'users_edit_ratio' => 'Can edit anyone\'s upload/download amounts.',
@@ -159,9 +159,9 @@ function permissions_form(){ ?>
 					<? display_perm('site_search_many', 'Can go past low limit of search results.'); ?>
 					<? display_perm('site_collages_recover', 'Can recover \'deleted\' collages.'); ?>
 					<? display_perm('site_forums_double_post', 'Can double post in the forums.'); ?>
-                    <? display_perm('site_translate', 'Can use tranlation manager.'); ?>
+          <? display_perm('site_translator', 'Can use tranlator tools.'); ?>
 					<? display_perm('project_team', 'Part of the project team.'); ?>
-                    site_translate
+                    
 				</td>
 			</tr>
 		</table>
