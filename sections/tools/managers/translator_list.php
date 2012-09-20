@@ -16,18 +16,12 @@ ORDER BY Missing desc
 ?>
 
 <div class="permissions">
-	<div class="permission_container" style="width:70%;">
-
-
+	<div class="permission_container" style="width:65%;">
 		<table>
 			<tr class="colhead">
-				<td colspan="2">Service</td>
+				<td colspan="2">Translate it!</td>
 			</tr>
 			<tr><td colspan="2"><strong>Threads (Active)</strong></td></tr>
-			<tr>
-				<td>Cache:</td>
-				<td>16 <span style="float:right;">(100.000%)</span></td>
-			</tr>
     </table>
   </div>
 </div>
@@ -36,26 +30,9 @@ ORDER BY Missing desc
 	<div class="permission_container" style="width:30%;">
 		<table>
 			<tr class="colhead">
-				<td colspan="2">Service</td>
+				<td colspan="2">Available languages</td>
 			</tr>
-			<tr><td colspan="2"><strong>Threads (Active)</strong></td></tr>
 			<tr>
-				<td>Cache:</td>
-				<td>16 <span style="float:right;">(100.000%)</span></td>
-			</tr>
-    </table>
-  </div>
-</div>
-
-<div class="thin">
-	<div class="box" id="recommended">
-    <table>
-      <tr>
-        <td width="70%">
-      		<div class="head colhead_dark"><strong>Translate it</strong></div>
-        </td>
-        <td width="30%">
-      		<div class="head colhead_dark"><strong>Available languages</strong></div>
       		<table>
       		  <tr>
       		    <td>Language</td> <td>Missing</td>
@@ -66,12 +43,12 @@ ORDER BY Missing desc
                 </tr>
             <?}?>
           </table>
-        </td>
       </tr>
     </table>
-	</div>
+  </div>
 </div>
 
+<br><br><br><br><br><br>
 <div class="thin">
 	<div class="box" id="recommended">
 		<div class="head colhead_dark"><strong>Translator Manager</strong></div>
