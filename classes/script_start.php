@@ -2470,7 +2470,7 @@ function isset_request($Request, $Keys=NULL, $AllowEmpty = False, $Error=0) {
 function TT($message) {
   global $TR,$LoggedUser; /// translation object
 
-  return $TR->translate($message, $LoggedUser['Language'], $LoggedUser['Country']);
+  return $TR->translate($message);
 }
 
 /**
