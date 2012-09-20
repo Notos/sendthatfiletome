@@ -47,11 +47,7 @@ class TRANSLATION {
     private function __translate($message, $languageID, $countryCode) {
       global $DB;
 
-      TOOLS::pa($this->languages);
-      echo "L=$languageID |1| CC=$countryCode<br>";
-      
       if ( ! $this->languages[$languageID][$countryCode] ) { /// if the language is not enabled in the system, use default
-        echo "-----------------using default language<br>";
         $languageID = $this->defaultLanguageID;
         $countryCode = $this->defaultCountryCode;
       }
@@ -129,8 +125,6 @@ class TRANSLATION {
       global $LoggedUser;
       
       list($this->currentLanguageID, $this->currentCountryCode) = explode("-",$LoggedUser['Language']);
-
-      echo "L=$this->currentLanguageID |0| CC=$this->currentCountryCode<br>";
     }
 }
 
