@@ -37,6 +37,8 @@ $Val->SetFields('new_pass_2',1,"compare","Your passwords do not match.",array('c
 if (check_perms('site_advanced_search')) {
 	$Val->SetFields('searchtype',1,"number","You forgot to select your default search preference.",array('minlength'=>0,'maxlength'=>1));
 }
+$Val->SetFields('language',1,"string","You forgot to select your language.",array('minlength'=>2,'maxlength'=>5));
+$Val->SetFields('country',1,"string","You forgot to select your country.",array('minlength'=>2,'maxlength'=>2));
 
 $Err = $Val->ValidateForm($_POST);
 
