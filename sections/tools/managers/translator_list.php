@@ -4,17 +4,14 @@ if(!check_perms('site_translator')){
 }
 show_header('Translator Manager');
 
-$DB->query("SELECT
-	tr.GroupID,
-	tr.UserID,
-	tg.Name,
-	tg.ArtistID,
-	ag.Name
-	FROM torrents_recommended AS tr
-	JOIN torrents_group AS tg ON tg.ID=tr.GroupID
-	LEFT JOIN artists_group AS ag ON ag.ArtistID=tg.ArtistID
-	ORDER BY tr.Time DESC
-	LIMIT 10
+$DB->query("
+SELECT
+  coalesce( concat( l.LanguageID, (case when l.CountryCode is not null and l.CountryCode <> '' then '-' else '' end), l.CountryCode) , '') LanguageID
+, concat(l.EnglishName, (case when c.Name is not null and c.Name <> '' then ' (' else '' end), (case when c.Name is not null and c.Name <> '' then c.Name else '' end), (case when c.Name is not null and c.Name <> ''  then ')' else ''  end)) LanguageName
+, (select count(*) from message xm where xm.LanguageID = 'EN' and xm.CountryCode = 'US' and xm.EnglishMessageHash not in (select xxm.EnglishMessageHash from message xxm where xxm.LanguageID = l.LanguageID and xxm.CountryCode = l.CountryCode)) Missing
+FROM language l left join country c on l.CountryCode = c.CountryCode
+WHERE Enabled = TRUE
+ORDER BY Missing desc
 	");
 ?>
 
@@ -26,6 +23,16 @@ $DB->query("SELECT
       </td>
       <td width="30%">
     		<div class="head colhead_dark"><strong>Available languages</strong></div>
+    		<table>
+    		  <tr>
+    		    <td>Language</td> <td>Missing</td>
+          </tr>
+          <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {?>
+              <tr>
+        		    <td><?=$LanguageName?></td> <td><?=$Missing?></td>
+              </tr>
+          <?}?>
+        </table>
       </td>
     </tr>
   </table>
