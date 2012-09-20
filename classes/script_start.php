@@ -376,9 +376,7 @@ function user_heavy_info($UserID) {
 			i.RestrictedForums,
 			i.PermittedForums,
 			m.FLTokens,
-			m.PermissionID,
-			m.Language,
-			m.Country
+			m.PermissionID
 			FROM users_main AS m
 			INNER JOIN users_info AS i ON i.UserID=m.ID
 			WHERE m.ID='$UserID'");
