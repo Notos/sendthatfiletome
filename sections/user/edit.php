@@ -19,7 +19,7 @@ $DB->query("SELECT
 			i.StyleURL,
 			i.SiteOptions,
 			i.UnseededAlerts,
-			p.Level AS Class,
+			p.Level AS Class
 			FROM users_main AS m
 			JOIN users_info AS i ON i.UserID = m.ID
 			LEFT JOIN permissions AS p ON p.ID=m.PermissionID
