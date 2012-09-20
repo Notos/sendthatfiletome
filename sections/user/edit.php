@@ -1,11 +1,11 @@
 <?
 
+// require(SERVER_ROOT.'/classes/class_tools.php');
+
 $UserID = $_REQUEST['userid'];
 if(!is_number($UserID)){
 	error(404);
 }
-
-require(SERVER_ROOT.'/classes/class_tools.php');
 
 $DB->query("SELECT
 			m.Username,
