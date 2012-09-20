@@ -10,35 +10,45 @@ if (!isset($language) or empty($language)) {
   global $LoggedUser; 
   $language = $LoggedUser['Language'];
 }
+
+$language = '';
+$hash = '';
+$originalMessage = '';
+$englishTranslation = '';
+$currentTranslation = '';
+
+getNextUntranslatedMessage($language, $messageHash, $originalMessage, $englishTranslation, $currentTranslation);
  
  // setcookie('redirect','',time()-60*60*24,'/','',false);
 
 ?>
 
 <div class="permissions">
-	<div class="permission_container" style="width:65%;">
-		<table>
-			<tr class="colhead">
-				<td colspan="2">Translate it!</td>
-			</tr>
-			<form>
-  			<tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?> - Original message or code</strong></td></tr>
-        <tr><td>
-          <textarea name="originalText" cols="70" rows="5" readonly="readonly"></textarea>
-        </td></tr>
+  <div class="permission_container" style="width:65%;">
+    <table>
+      <tr class="colhead">
+        <td colspan="2">Translate it!</td>
+      </tr>
+      <form>
+        <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
 
-  			<tr><td colspan="2"><br><strong><? echo TOOLS::languageName('EN-US');?> - Message translated to English (this is what you will see)</strong></td></tr>
+        <tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?> - Original message or code</strong></td></tr>
         <tr><td>
-          <textarea name="originalText" cols="70" rows="5" readonly="readonly"></textarea>
-        </td></tr>
-  			<tr><td colspan="2"><br><strong><? echo TOOLS::languageName($language);?> - Your translation goes here</strong></td></tr>
+            <textarea name="originalMessage" cols="70" rows="5" readonly="readonly" value="<?=$originalMessage?>"></textarea>
+          </td></tr>
+
+        <tr><td colspan="2"><br><strong><? echo TOOLS::languageName('EN-US');?> - Message translated to English (this is what you will see)</strong></td></tr>
         <tr><td>
-          <textarea name="originalText" cols="70" rows="15"></textarea>
-        </td></tr>
+            <textarea name="englishTranslation" cols="70" rows="5" readonly="readonly" value="<?=$englishTranslation?>"></textarea>
+          </td></tr>
+        <tr><td colspan="2"><br><strong><? echo TOOLS::languageName($language);?> - Your translation goes here</strong></td></tr>
+        <tr><td>
+            <textarea name="currentTranslation" cols="70" rows="15" value="<?=$currentTranslation?>"></textarea>
+          </td></tr>
 
         <tr><td>
-          <input type="submit" value="Add translation" />
-        </td></tr>
+            <input type="submit" value="Add translation" />
+          </td></tr>
       </form>
     </table>
   </div>
