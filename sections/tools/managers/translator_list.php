@@ -15,6 +15,36 @@ ORDER BY Missing desc
 	");
 ?>
 
+<div class="permissions">
+	<div class="permission_container">
+		<table>
+			<tr class="colhead">
+				<td colspan="2">Service</td>
+			</tr>
+			<tr><td colspan="2"><strong>Threads (Active)</strong></td></tr>
+			<tr>
+				<td>Cache:</td>
+				<td>16 <span style="float:right;">(100.000%)</span></td>
+			</tr>
+    </table>
+  </div>
+</div>
+
+<div class="permissions">
+	<div class="permission_container">
+		<table>
+			<tr class="colhead">
+				<td colspan="2">Service</td>
+			</tr>
+			<tr><td colspan="2"><strong>Threads (Active)</strong></td></tr>
+			<tr>
+				<td>Cache:</td>
+				<td>16 <span style="float:right;">(100.000%)</span></td>
+			</tr>
+    </table>
+  </div>
+</div>
+
 <div class="thin">
 	<div class="box" id="recommended">
     <table>
