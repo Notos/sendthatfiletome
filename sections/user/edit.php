@@ -92,6 +92,15 @@ echo $Val->GenerateJS('userform');
 					External CSS: <input type="text" size="40" name="styleurl" id="styleurl" value="<?=display_str($StyleURL)?>" />
 				</td>
 			</tr>
+            
+            <tr>
+                <td class="label"><strong>Site language</strong></td>
+                <td>
+                  <? $query = "SELECT coalesce( concat( l.LanguageID, (case when l.CountryCode is not null and l.CountryCode <> '' then '-' else '' end), l.CountryCode) , '') LanguageID , concat(l.EnglishName, (case when c.Name is not null and c.Name <> '' then ' (' else '' end), (case when c.Name is not null and c.Name <> '' then c.Name else '' end), (case when c.Name is not null and c.Name <> ''  then ')' else ''  end)) LanguageName FROM language l left join country c on l.CountryCode = c.CountryCode order by l.EnglishName, c.Name where Enabled = TRUE";
+                     TOOLS::htmlSelect('language', $query, 'LanguageID', 'LanguageName', $SiteOptions['Language']); ?>
+                </td>
+            </tr>
+            
 <? if (check_perms('site_advanced_search')) { ?>
 			<tr>
 				<td class="label"><strong>Default Search Type</strong></td>
@@ -257,14 +266,6 @@ echo $Val->GenerateJS('userform');
                 </td>
             </tr>
 
-            <tr>
-                <td class="label"><strong>Language</strong></td>
-                <td>
-                  <? $query = "SELECT coalesce( concat( l.LanguageID, (case when l.CountryCode is not null and l.CountryCode <> '' then '-' else '' end), l.CountryCode) , '') LanguageID , concat(l.EnglishName, (case when c.Name is not null and c.Name <> '' then ' (' else '' end), (case when c.Name is not null and c.Name <> '' then c.Name else '' end), (case when c.Name is not null and c.Name <> ''  then ')' else ''  end)) LanguageName FROM language l left join country c on l.CountryCode = c.CountryCode order by l.EnglishName, c.Name"; 
-                     TOOLS::htmlSelect('language', $query, 'LanguageID', 'LanguageName', $SiteOptions['Language']); ?>
-                </td>
-            </tr>
-            
 			<tr>
 				<td class="label"><strong>Avatar URL</strong></td>
 				<td>

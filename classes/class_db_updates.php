@@ -658,6 +658,15 @@ alter table users_main modify Language char(5); /* PT-BR */
 
 EOT;
 
+/*--------------------------------------------------------------------------------------------------*/
+      $this->versions['1.006'] = <<<EOT
+/*--------------------------------------------------------------------------------------------------*/
+
+alter table users_main modify Language char(2);
+alter table users_main drop Country;
+alter table language set Enabled = TRUE where LanguageID = 'EN' and CountryCode = 'US';
+
+EOT;
 
     }
 }
