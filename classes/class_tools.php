@@ -2,13 +2,13 @@
 
 class TOOLS {
   
-  public function htmlSelect($name, $query, $fieldIndex, $fieldValue, $currentValue, $onChange) {
+  public function htmlSelect($name, $query, $fieldIndex, $fieldValue, $currentValue, $onChange = '') {
     global $DB;
     
     $DB->query($query); /// this query result must have only 2 fields (index and value)
     $records = $DB->to_array(0, MYSQLI_NUM);
     
-    echo "<select name=\"$name\" onchange=\"$onChange\">";
+    echo "<select name=\"$name\" id=\"$name\" onchange=\"$onChange\">";
     echo "<option value=\"\">---</option>";
     foreach($records as $record) {
       $index = $record[0];
