@@ -1,5 +1,7 @@
 <?
 
+require(SERVER_ROOT.'/classes/class_tools.php');
+
 class TRANSLATION {
     private $messages;
     private $languages;
@@ -120,6 +122,8 @@ class TRANSLATION {
 
     private function checkCurrentLanguage() {
       global $LoggedUser;
+      
+      TOOLS::pa( explode("-",$LoggedUser['Language']) );
       
       list($this->currentLanguageID, $this->currentCountryCode) = explode("-",$LoggedUser['Language']);
       
