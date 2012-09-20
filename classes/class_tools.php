@@ -36,7 +36,7 @@ class TOOLS {
 
     list($name) = $DB->next_record();
 
-    return $name
+    return $name;
   }
 
   public function p($s,$f=false) {
