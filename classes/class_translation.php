@@ -121,7 +121,7 @@ class TRANSLATION {
     private function checkCurrentLanguage() {
       global $LoggedUser;
       
-      list($this->currentLanguageID, $this->currentCountryCode) = $LoggedUser['Language'];
+      list($this->currentLanguageID, $this->currentCountryCode) = explode("-",$LoggedUser['Language']);
       
       echo "L=".$this->currentLanguageID."- CC=".$this->currentCountryCode."<br>";
     }
