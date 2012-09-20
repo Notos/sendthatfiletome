@@ -92,7 +92,7 @@ echo $Val->GenerateJS('userform');
 					External CSS: <input type="text" size="40" name="styleurl" id="styleurl" value="<?=display_str($StyleURL)?>" />
 				</td>
 			</tr>
-            
+                   
             <tr>
                 <td class="label"><strong>Site language</strong></td>
                 <td>
