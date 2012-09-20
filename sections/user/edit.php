@@ -255,7 +255,15 @@ echo $Val->GenerateJS('userform');
             <tr>
                 <td class="label"><strong>Country</strong></td>
                 <td>
-                  <? TOOLS::htmlSelect('Country', 'select CountryCode, Name from country order by Name', 'CountryID', 'Name', ''); ?>;
+                  <? TOOLS::htmlSelect('Country', 'select CountryCode, CountryName from country order by Name', 'CountryCode', 'CountryName', ''); ?>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label"><strong>Language</strong></td>
+                <td>
+                  <? $query = "SELECT coalesce( concat( l.LanguageID, (case when l.CountryCode is not null and l.CountryCode <> '' then '-' else '' end), l.CountryCode) , '') LanguageID , concat(l.EnglishName, (case when c.Name is not null and c.Name <> '' then ' (' else '' end), (case when c.Name is not null and c.Name <> '' then c.Name else '' end), (case when c.Name is not null and c.Name <> ''  then ')' else ''  end)) LanguageName FROM language l left join country c on l.CountryCode = c.CountryCode order by l.EnglishName, c.Name"; 
+                     TOOLS::htmlSelect('Language', $query, 'LanguageID', 'LanguageName', ''); ?>
                 </td>
             </tr>
             
