@@ -1,8 +1,6 @@
 <?
 authorize();
 
-require(SERVER_ROOT.'/classes/class_tools.php');
-
 $UserID = $_REQUEST['userid'];
 if(!is_number($UserID)) {
 	error(404);
