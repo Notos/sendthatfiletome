@@ -12,16 +12,31 @@ if (!isset($language) or empty($language)) {
 }
 
 $language = '';
-$hash = '';
+$messageHash = '';
 $originalMessage = '';
 $englishTranslation = '';
 $currentTranslation = '';
 
-getNextUntranslatedMessage($language, $messageHash, $originalMessage, $englishTranslation, $currentTranslation);
- 
- // setcookie('redirect','',time()-60*60*24,'/','',false);
+list($lid, $lcc) = explode("-", $language);
 
-?>
+$DB->query("
+  select 
+    m.EnglishMessageHash messageHash
+  , m.EnglishMessage originalMessage   
+  , (select TranslatedMessage from message mx where mx.EnglishMessageHash = m.EnglishMessageHash and LanguageID = 'EN' and CountryCode = 'US') EnglishTranslation
+  , m.TranslatedMessage currentTranslation
+  from message m
+  where case when '$messageHash' = '' then ( m.LanguageID = 'EN' and m.CountryCode = 'US' and m.EnglishMessageHash not in (select mmx.EnglishMessageHash from message mmx where mmx.LanguageID = '$lid' and mmx.CountryCode = '$lcc') )
+             else m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$lid' and m.CountryCode = '$lcc'
+             end
+  limit 0 , 1
+");
+
+list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record()
+
+if (!isset($messageHash) or empty($messageHash)) {
+  echo "There are no untranslated messages for ".TOOLS::languageName($language);
+} else { /// start of form block ?>
 
 <div class="permissions">
   <div class="permission_container" style="width:65%;">
@@ -85,4 +100,8 @@ getNextUntranslatedMessage($language, $messageHash, $originalMessage, $englishTr
   </div>
 </div>
 
-<? show_footer(); ?>
+<? } /// end of form block
+
+show_footer(); 
+
+?>
