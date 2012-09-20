@@ -12,15 +12,14 @@ show_header('Translator Manager');
 				<td colspan="2">Translate it!</td>
 			</tr>
 			<form>
-  			<input type="hidden" name="translationLanguage" value="recommend_add" />
-  			<tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US') -- Original message;?></strong></td></tr>
+  			<tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?></strong></td></tr>
         <tr><td>
-          <textarea name="originalText" cols="40" rows="10"></textarea>
+          <textarea name="originalText" cols="95" rows="15"></textarea>
         </td></tr>
 
   			<tr><td colspan="2"><strong><? echo TOOLS::languageName('PT-BR');?></strong></td></tr>
         <tr><td>
-          <textarea name="originalText" cols="40" rows="10"></textarea>
+          <textarea name="originalText" cols="95" rows="15"></textarea>
         </td></tr>
 
         <tr><td>
