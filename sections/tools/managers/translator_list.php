@@ -12,8 +12,7 @@ show_header('Translator Manager');
 				<td colspan="2">Translate it!</td>
 			</tr>
 			<form>
-  			<input type="hidden" name="translationLanguage" value="PT-BR" />
-
+  			<input type="hidden" name="translationLanguage" value="recommend_add" />
   			<tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US') -- Original message;?></strong></td></tr>
         <tr><td>
           <textarea name="originalText" cols="40" rows="10"></textarea>
@@ -21,7 +20,7 @@ show_header('Translator Manager');
 
   			<tr><td colspan="2"><strong><? echo TOOLS::languageName('PT-BR');?></strong></td></tr>
         <tr><td>
-          <textarea name="translatedText" cols="40" rows="10"></textarea>
+          <textarea name="originalText" cols="40" rows="10"></textarea>
         </td></tr>
 
         <tr><td>
@@ -63,4 +62,38 @@ show_header('Translator Manager');
   </div>
 </div>
 
+<br><br><br><br><br><br>
+<div class="thin">
+	<div class="box" id="recommended">
+		<div class="head colhead_dark"><strong>Translator Manager</strong></div>
+<?		if(!in_array($LoggedUser['ID'], $DB->collect('UserID'))){ ?>
+		<form action="tools.php" method="post" class="pad">
+			<input type="hidden" name="action" value="recommend_add" />
+			<input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
+			<table cellpadding="6" cellspacing="1" border="0" class="layout border" width="100%">
+				<tr>
+					<td rowspan="2" class="label"><strong>Add Recommendation:</strong></td>
+					<td>Link to a torrent group on site. E.g. <strong>http://<?=NONSSL_SITE_URL?>/torrents.php?id=10000</strong></td>
+				</tr>
+			</table>
+		</form>
+<?		} ?>
+		<ul class="nobullet">
+<?
+	while(list($GroupID, $UserID, $GroupName, $ArtistID, $ArtistName)=$DB->next_record()) {
+?>
+			<li>
+				<strong><?=format_username($UserID, false, false, false)?></strong>
+<?		if($ArtistID){ ?>
+				- <a href="artist.php?id=<?=$ArtistID?>"><?=$ArtistName?></a>
+<?		} ?>
+				- <a href="torrents.php?id=<?=$GroupID?>"><?=$GroupName?></a>
+<?		if(check_perms('site_manage_recommendations') || $UserID == $LoggedUser['ID']){ ?>
+				<a href="tools.php?action=recommend_alter&amp;groupid=<?=$GroupID?>">[Delete]</a>
+<?		} ?>
+			</li>
+<?	} ?>
+		</ul>
+	</div>
+</div>
 <? show_footer(); ?>
