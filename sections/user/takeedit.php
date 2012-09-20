@@ -201,7 +201,9 @@ echo "----O------------------ ".$Options['Country']."<br>";
 echo "----O------------------ ".$Options['Language']."<br>";
 echo "----P------------------ ".$_POST['country']."<br>";
 echo "----P------------------ ".$_POST['language']."<br>";
+die;
 
+TOOLS::pt($Options);
 
 if(isset($LoggedUser['DisableFreeTorrentTop10'])) {
 	$Options['DisableFreeTorrentTop10'] = $LoggedUser['DisableFreeTorrentTop10'];
