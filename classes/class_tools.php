@@ -11,8 +11,8 @@ class TOOLS {
     echo "<select name=\"$name\" onchange=\"$onChange\">";
     echo "<option value=\"\">---</option>";
     foreach($records as $record) {
-      $value = $record[$fieldValue];
-      $index = $record[$fieldIndex];
+      $index = $record[1];
+      $value = $record[0];
       echo "<option value='$index'";
       if($value == $currentValue) { echo " selected='selected'"; }
       echo ">";
