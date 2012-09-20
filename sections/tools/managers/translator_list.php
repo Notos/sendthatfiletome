@@ -16,7 +16,9 @@ ORDER BY Missing desc
 ?>
 
 <div class="permissions">
-	<div class="permission_container" width="70%">
+	<div class="permission_container" style="width:70%;">
+
+
 		<table>
 			<tr class="colhead">
 				<td colspan="2">Service</td>
@@ -31,7 +33,7 @@ ORDER BY Missing desc
 </div>
 
 <div class="permissions">
-	<div class="permission_container"  width="30%">
+	<div class="permission_container" style="width:30%;">
 		<table>
 			<tr class="colhead">
 				<td colspan="2">Service</td>
