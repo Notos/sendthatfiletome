@@ -1,6 +1,8 @@
 <?
 authorize();
 
+require(SERVER_ROOT.'/classes/class_tools.php');
+
 $UserID = $_REQUEST['userid'];
 if(!is_number($UserID)) {
 	error(404);
@@ -201,9 +203,10 @@ echo "----O------------------ ".$Options['Country']."<br>";
 echo "----O------------------ ".$Options['Language']."<br>";
 echo "----P------------------ ".$_POST['country']."<br>";
 echo "----P------------------ ".$_POST['language']."<br>";
-die;
 
 TOOLS::pt($Options);
+
+die;
 
 if(isset($LoggedUser['DisableFreeTorrentTop10'])) {
 	$Options['DisableFreeTorrentTop10'] = $LoggedUser['DisableFreeTorrentTop10'];
