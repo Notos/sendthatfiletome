@@ -392,6 +392,18 @@ switch ($_REQUEST['action']){
 		}
 		break;
 
+	case 'translator':
+		include('managers/translator_list.php');
+		break;
+
+	case 'translator_add':
+		include('managers/translator_add.php');
+		break;
+
+	case 'translator_alter':
+		include('managers/translator_alter.php');
+		break;
+
 	default:
 		include(SERVER_ROOT.'/sections/tools/tools.php');
 }

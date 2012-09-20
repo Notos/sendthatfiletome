@@ -161,7 +161,7 @@ if($NewSubscriptions === FALSE) {
 			<li id="nav_friends"><a onmousedown="Stats('friends');" href="friends.php">Friends</a></li>
 <?
 if(check_perms('site_translator')) {
-   ?> <li id="nav_translator"><a onmousedown="Stats('translator');" href="translator.php">Translator</a></li> <?
+   ?> <li id="nav_translator"><a onmousedown="Stats('translator');" href="tools.php?action=translator">Translator</a></li> <?
 }
 ?>
 
