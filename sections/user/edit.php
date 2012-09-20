@@ -5,7 +5,7 @@ if(!is_number($UserID)){
 	error(404);
 }
 
-
+require(SERVER_ROOT.'/classes/class_tools.php');
 
 $DB->query("SELECT
 			m.Username,
@@ -251,6 +251,14 @@ echo $Val->GenerateJS('userform');
 					<strong>User info</strong>
 				</td>
 			</tr>
+            
+            <tr>
+                <td class="label"><strong>Country</strong></td>
+                <td>
+                  <? TOOLS::htmlSelect('Country', 'select CountryID, Name from country order by Name', 'CountryID', 'Name', ''); ?>;
+                </td>
+            </tr>
+            
 			<tr>
 				<td class="label"><strong>Avatar URL</strong></td>
 				<td>
