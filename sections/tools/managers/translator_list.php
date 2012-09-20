@@ -16,26 +16,28 @@ ORDER BY Missing desc
 ?>
 
 <div class="thin">
-  <table>
-    <tr>
-      <td width="70%">
-    		<div class="head colhead_dark"><strong>Translate it</strong></div>
-      </td>
-      <td width="30%">
-    		<div class="head colhead_dark"><strong>Available languages</strong></div>
-    		<table>
-    		  <tr>
-    		    <td>Language</td> <td>Missing</td>
-          </tr>
-          <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {?>
-              <tr>
-        		    <td><?=$LanguageName?></td> <td><?=$Missing?></td>
-              </tr>
-          <?}?>
-        </table>
-      </td>
-    </tr>
-  </table>
+	<div class="box" id="recommended">
+    <table>
+      <tr>
+        <td width="70%">
+      		<div class="head colhead_dark"><strong>Translate it</strong></div>
+        </td>
+        <td width="30%">
+      		<div class="head colhead_dark"><strong>Available languages</strong></div>
+      		<table>
+      		  <tr>
+      		    <td>Language</td> <td>Missing</td>
+            </tr>
+            <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {?>
+                <tr>
+          		    <td><?=$LanguageName?></td> <td><?=$Missing?></td>
+                </tr>
+            <?}?>
+          </table>
+        </td>
+      </tr>
+    </table>
+	</div>
 </div>
 
 <div class="thin">
