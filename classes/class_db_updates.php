@@ -664,7 +664,7 @@ EOT;
 
 alter table users_main modify Language char(2);
 alter table users_main drop Country;
-alter table language set Enabled = TRUE where LanguageID = 'EN' and CountryCode = 'US';
+update language set Enabled = TRUE where LanguageID = 'EN' and CountryCode = 'US';
 
 EOT;
 
