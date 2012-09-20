@@ -47,6 +47,7 @@ class TRANSLATION {
       $this->checkCurrentLanguage();
       
       if ( ! $this->languages[$languageID][$countryCode] ) { /// if the language is not enabled in the system, use default
+        echo "-----------------using default language<br>";
         $languageID = $this->defaultLanguageID;
         $countryCode = $this->defaultCountryCode;
       }
@@ -123,11 +124,7 @@ class TRANSLATION {
     private function checkCurrentLanguage() {
       global $LoggedUser;
       
-      TOOLS::pa( explode("-",$LoggedUser['Language']) );
-      
       list($this->currentLanguageID, $this->currentCountryCode) = explode("-",$LoggedUser['Language']);
-      
-      echo "L=".$this->currentLanguageID."- CC=".$this->currentCountryCode."<br>";
     }
 }
 
