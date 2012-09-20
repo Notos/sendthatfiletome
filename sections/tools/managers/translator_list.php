@@ -8,7 +8,7 @@ $language = $_COOKIE['translatingLanguage'];
 
 if (!isset($language) or empty($language)) {
   global $LoggedUser; 
-  $language = $LoggedUser['Language']
+  $language = $LoggedUser['Language'];
 }
  
  // setcookie('redirect','',time()-60*60*24,'/','',false);
