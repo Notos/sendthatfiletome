@@ -1,46 +1,46 @@
 <?
-if(!check_perms('site_translator')){
-	error(403);
-}
-show_header('Translator Manager');
+  if(!check_perms('site_translator')){
+    error(403);
+  }
+  show_header('Translator Manager');
 
-$setLanguage = $_GET['setLanguage'];
+  $setLanguage = $_GET['setLanguage'];
 
-if(isset($setLanguage) and !empty($setLanguage)) {
-  setcookie("translatingLanguage",$setLanguage);
-  $language = $setLanguage;
-} else {
-  $language = $_COOKIE['translatingLanguage'];
-}
+  if(isset($setLanguage) and !empty($setLanguage)) {
+    setcookie("translatingLanguage",$setLanguage);
+    $language = $setLanguage;
+  } else {
+    $language = $_COOKIE['translatingLanguage'];
+  }
 
-if (!isset($language) or empty($language)) {
-  global $LoggedUser; 
-  $language = $LoggedUser['Language'];
-}
+  if (!isset($language) or empty($language)) {
+    global $LoggedUser; 
+    $language = $LoggedUser['Language'];
+  }
 
-$messageHash = '';
-$originalMessage = '';
-$englishTranslation = '';
-$currentTranslation = '';
+  $messageHash = '';
+  $originalMessage = '';
+  $englishTranslation = '';
+  $currentTranslation = '';
 
-list($languageID, $countryCode) = explode("-", $language);
+  list($languageID, $countryCode) = explode("-", $language);
 
-$query = "
+  $query = "
   select 
-    m.EnglishMessageHash messageHash
+  m.EnglishMessageHash messageHash
   , m.EnglishMessage originalMessage   
   , (select TranslatedMessage from message mx where mx.EnglishMessageHash = m.EnglishMessageHash and LanguageID = 'EN' and CountryCode = 'US') EnglishTranslation
   , m.TranslatedMessage currentTranslation
   from message m
   where case when '$messageHash' = '' then ( m.LanguageID = 'EN' and m.CountryCode = 'US' and m.EnglishMessageHash not in (select mmx.EnglishMessageHash from message mmx where mmx.LanguageID = '$languageID' and mmx.CountryCode = '$countryCode') )
-             else m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'
-             end
+  else m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'
+  end
   limit 0 , 1
-";
+  ";
 
-$DB->query($query);
+  $DB->query($query);
 
-list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
+  list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
 
 ?>
 
@@ -119,24 +119,19 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
   </div>
 </div>
 
-<div id="more_news" class="box">
-  <div class="head"> <? T("Search to edit translated messages"); ?> </div>
-  Line1 <br />
-  Line2 <br />
-  Line3 <br />
-  Line4 <br />
-</div>
-        
 <table class="torrent_table cats numbering border">
-  <tr class="colhead">
-    <td colspan="2"></td>
-  </tr>
-  <tr class="rowb">
-    <td colspan="9" class="center">
-      Found no torrents matching the criteria
-    </td>
-    
-  </tr>
+  <tr class="colhead"><td><? T("Search to edit translated messages"); ?></td></tr>
+  <tr><td>
+      <form action="tools.php" method="post" class="pad">
+        <input type="hidden" name="action" value="translator_update" />
+        <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
+        <input type="hidden" name="languageID" value="<?=$languageID?>" />
+        <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
+        <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
+        Search
+        <input type="text" spellcheck="false" size="40" name="search" class="inputtext smaller" value="" />
+      </form>
+  </td></tr>
 </table>
         
 <? show_footer(); ?>
