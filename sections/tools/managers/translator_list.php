@@ -124,46 +124,49 @@
   </div>
 </div>
 
-<table class="torrent_table cats numbering border">
-  <tr class="colhead"><td><? T("Search to edit translated messages"); ?></td></tr>
-  <tr><td>
-      <form action="tools.php" method="post" class="pad">
-        <input type="hidden" name="action" value="translator" />
-        <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
-        <input type="hidden" name="languageID" value="<?=$languageID?>" />
-        <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
-        <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
-        Search
-        <input type="text" spellcheck="false" size="40" name="search" class="inputtext smaller" value="" />
-      </form>
-  </td></tr>
-</table>
+<div>
+  <table class="torrent_table cats numbering border">
+    <tr class="colhead"><td><? T("Search to edit translated messages"); ?></td></tr>
+    <tr><td>
+        <form action="tools.php" method="post" class="pad">
+          <input type="hidden" name="action" value="translator" />
+          <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
+          <input type="hidden" name="languageID" value="<?=$languageID?>" />
+          <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
+          <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
+          Search
+          <input type="text" spellcheck="false" size="40" name="search" class="inputtext smaller" value="" />
+        </form>
+      </td></tr>
+  </table>
+</div>
 
 <? if(isset($searchString) and !empty($searchString)) { ?>
+<div>
   <table class="torrent_table cats numbering border">
     <tr class="colhead"><td><? T("Click on a message to edit it"); ?></td></tr>
     <?
       echo "<tr><td><strong>".TOOLS::languageName('EN-US')."</strong></td> <td><strong>".TOOLS::languageName($language)."</strong></td></tr>";
       $DB->query("select 
-                LanguageID
-              , CountryCode
-              , EnglishMessageHash
-              , EnglishMessage
-              , TranslatedMessage 
-              from message 
-              where (EnglishMessage like '%$searchString%' and ((LanguageID = 'EN' and CountryCode = 'US')))
-                 or (TranslatedMessage like '%$searchString%' and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
-             ");
+      LanguageID
+      , CountryCode
+      , EnglishMessageHash
+      , EnglishMessage
+      , TranslatedMessage 
+      from message 
+      where (EnglishMessage like '%$searchString%' and ((LanguageID = 'EN' and CountryCode = 'US')))
+      or (TranslatedMessage like '%$searchString%' and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
+      ");
 
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
-       echo "<tr><td>line =======</td> <td>column</td></tr>";
-        //$link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
-        //$link1 = "<a href=\"$link\">$EnglishMessage</a>";
-        //$link2 = "<a href=\"$link\">$TranslatedMessage</a>";
-        //echo "<tr><td>$link1</td> <td>$link2</td></tr>";
+        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
+        $link1 = "<a href=\"$link\">$EnglishMessage</a>";
+        $link2 = "<a href=\"$link\">$TranslatedMessage</a>";
+        echo "<tr><td>$link1</td> <td>$link2</td></tr>";
       }
     ?>
   </table>
+</div>
 <? } ?>
         
 <? show_footer(); ?>
