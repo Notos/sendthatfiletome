@@ -135,8 +135,8 @@
         <form action="tools.php" method="post" class="pad">
           <input type="hidden" name="action" value="translator" />
           <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
-          Search
-          <input type="text" spellcheck="false" size="40" name="search" class="inputtext smaller" value="" />
+          <? T("Search"); ?>
+          <input type="text" spellcheck="false" size="40" name="search" class="inputtext smaller" value="<?=$searchString?>" />
         </form>
       </td></tr>
   </table>
