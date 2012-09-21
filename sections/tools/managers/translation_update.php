@@ -6,6 +6,10 @@ if(!check_perms('site_translator')){
 	error(403);
 }
 
+TOOLS::pa($_REQUEST);
+TOOLS::pa($_POST);
+TOOLS::pa($_GET);
+
 $messageHash = $_POST['messageHash'];
 $originalMessage = $_POST['originalMessage'];
 $englishTranslation = $_POST['englishTranslation'];
