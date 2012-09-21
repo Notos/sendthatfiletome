@@ -33,9 +33,11 @@ $query = "
 
 $DB->query($query);
 
-echo "$query";
+echo "$query<br>";
 
 list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
+
+echo "$messageHash, $originalMessage, $englishTranslation, $currentTranslation<br>";
 
 if ( !isset($messageHash) or empty($messageHash) ) {
   echo "There are no untranslated messages for ".TOOLS::languageName($language);
