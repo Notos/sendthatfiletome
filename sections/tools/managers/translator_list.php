@@ -18,7 +18,7 @@ $currentTranslation = '';
 
 list($lid, $lcc) = explode("-", $language);
 
-$DB->query("
+$query = "
   select 
     m.EnglishMessageHash messageHash
   , m.EnglishMessage originalMessage   
@@ -30,6 +30,10 @@ $DB->query("
              end
   limit 0 , 1
 ");
+
+$DB->query($query);
+
+echo "$query";
 
 list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
 
