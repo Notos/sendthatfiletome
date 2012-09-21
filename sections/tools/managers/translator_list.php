@@ -97,9 +97,9 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
               WHERE Enabled = TRUE
               ORDER BY Missing desc
               	");?>
-            <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {?>
+            <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {
                 $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
-                $link = "<a href=\"$link\">$LanguageName</a>";
+                $link = "<a href=\"$link\">$LanguageName</a>";?>
                 <tr>
           		    <td><?=$link?></td> <td><?=$Missing?></td>
                 </tr>
