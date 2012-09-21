@@ -124,6 +124,8 @@
   </div>
 </div>
 
+<h3>Top</h3>
+
 <div>
   <table class="torrent_table cats numbering border">
     <tr class="colhead"><td><? T("Search to edit translated messages"); ?></td></tr>
@@ -141,6 +143,8 @@
   </table>
 </div>
 
+<h3>Top</h3>
+
 <? if(isset($searchString) and !empty($searchString)) { ?>
 <div>
   <table class="torrent_table cats numbering border">
@@ -154,8 +158,7 @@
       , EnglishMessage
       , TranslatedMessage 
       from message 
-      where (EnglishMessage like '%$searchString%' and ((LanguageID = 'EN' and CountryCode = 'US')))
-      or (TranslatedMessage like '%$searchString%' and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
+      where (TranslatedMessage like '%$searchString%' and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
       ");
 
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
