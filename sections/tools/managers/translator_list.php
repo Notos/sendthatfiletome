@@ -118,7 +118,9 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
 </div>
 
 <table class="torrent_table cats numbering border">
-  <tr class="colhead"><? T("Search and edit messages"); ?></tr>
+  <tr class="colhead">
+    <td colspan="2"><? T("Search to edit translated messages"); ?></td>
+  </tr>
   <tr class="rowb">
     <td colspan="9" class="center">
       Found no torrents matching the criteria
