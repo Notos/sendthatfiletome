@@ -8,9 +8,10 @@ $setLanguage = $_GET['setLanguage'];
 
 if(isset($setLanguage) and !empty($setLanguage)) {
   setcookie("translatingLanguage",$setLanguage);
+  $language = $setLanguage;
+} else {
+  $language = $_COOKIE['translatingLanguage'];
 }
-
-$language = $_COOKIE['translatingLanguage'];
 
 if (!isset($language) or empty($language)) {
   global $LoggedUser; 
