@@ -142,6 +142,8 @@ class TRANSLATION {
 
       $message = substr($message,strlen($pre));
       $message = substr($message,0,strlen($message)-strlen($suf));
+      
+      echo "|||$message|||<br>";
     }
     
     public function setLanguage($lid, $cc) {
