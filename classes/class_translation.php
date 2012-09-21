@@ -36,7 +36,9 @@ class TRANSLATION {
       if (!isset($countryCode) or Empty($countryCode)) $countryCode = $this->currentCountryCode;
 
       $this->removePrefixAndSufix($message, $prefix, $sufix); /// spaces and punctuation before and after should not be translated
-      
+
+      echo "un pre su fixed: $message<br>";
+            
       $ret = $prefix . $this->__translate($message, $languageID, $countryCode) . $sufix;
 
       if (!isset($ret) or Empty($ret)) {
