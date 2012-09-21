@@ -6,8 +6,6 @@ show_header('Translator Manager');
 
 $setLanguage = $_GET['setLanguage'];
 
-echo " setLanguage = $setLanguage |||| lang = $language --- ";
-
 if(isset($setLanguage) and !empty($setLanguage)) {
   setcookie("translatingLanguage",$setLanguage);
   $language = $setLanguage;
@@ -15,25 +13,17 @@ if(isset($setLanguage) and !empty($setLanguage)) {
   $language = $_COOKIE['translatingLanguage'];
 }
 
-echo " lang = $language --- ";
-
 if (!isset($language) or empty($language)) {
   global $LoggedUser; 
   $language = $LoggedUser['Language'];
 }
-
-echo " lang = $language --- ";
 
 $messageHash = '';
 $originalMessage = '';
 $englishTranslation = '';
 $currentTranslation = '';
 
-echo " lang = $language --- ";
-
 list($languageID, $countryCode) = explode("-", $language);
-
-echo " lang = $language --- ";
 
 $query = "
   select 
