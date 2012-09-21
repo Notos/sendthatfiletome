@@ -143,7 +143,8 @@
   <table class="torrent_table cats numbering border">
     <tr class="colhead"><td><? T("Click on a message to edit it"); ?></td></tr>
     <?
-      $sql = "select 
+      echo "<tr><td><strong>".TOOLS::languageName('EN-US')."</strong></td> <td><strong>".TOOLS::languageName($language)."</strong></td></tr>";
+      $DB->query("select 
                 LanguageID
               , CountryCode
               , EnglishMessageHash
@@ -152,12 +153,8 @@
               from message 
               where (EnglishMessage like '%$searchString%' and ((LanguageID = 'EN' and CountryCode = 'US')))
                  or (TranslatedMessage like '%$searchString%' and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
-             ";
-      $DB->query($sql);
+             ");
 
-      echo "<tr><td><strong>".TOOLS::languageName('EN-US')."</strong></td> <td><strong>".TOOLS::languageName($language)."</strong></td></tr>";
-      echo "<tr><td>$sql || count=</td> <td>".$DB->record_count()."</td></tr>";
-      
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
        echo "<tr><td>line =======</td> <td>column</td></tr>";
         //$link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
