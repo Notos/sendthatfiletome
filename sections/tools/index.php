@@ -400,6 +400,10 @@ switch ($_REQUEST['action']){
 		include('managers/translator_update.php');
 		break;
 
+    case 'translator_languages':
+        include('managers/translator_languages.php');
+        break;
+        
 	default:
 		include(SERVER_ROOT.'/sections/tools/tools.php');
 }
