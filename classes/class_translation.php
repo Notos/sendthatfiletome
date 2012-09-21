@@ -35,7 +35,9 @@ class TRANSLATION {
       if (!isset($languageID) or Empty($languageID)) $languageID = $this->currentLanguageID;
       if (!isset($countryCode) or Empty($countryCode)) $countryCode = $this->currentCountryCode;
 
-      $ret = $this->__translate($message, $languageID, $countryCode);
+      $this->removePrefixAndSufix($message, $prefix, $sufix); /// spaces and punctuation before and after should not be translated
+      
+      $ret = $prefix . $this->__translate($message, $languageID, $countryCode) . $sufix;
 
       if (!isset($ret) or Empty($ret)) {
         $ret = $message; /// no empty messages, ever
@@ -116,6 +118,30 @@ class TRANSLATION {
       }
     }
 
+    private function removePrefixAndSufix(&$message, &$prefix, &$sufix) {
+      $prefix = '';
+      $sufix = '';
+      
+      $chars = array( "!"=>1,"\\"=>1,"\""=>1,"#"=>1,"\$"=>1,"%"=>1,"&"=>1,"'"=>1,"("=>1,")"=>1,"*"=>1,"+"=>1,","=>1,"-"=>1,"."=>1,"/"=>1,":"=>1,";"=>1,"<"=>1,"="=>1,">"=>1,"?"=>1,"@"=>1,"["=>1,"]"=>1,"^"=>1,"_"=>1,"`"=>1,"{"=>1,"|"=>1," "=>1,"}"=>1 );
+
+      $i = 0;
+      echo "\n";
+      while ($i < strlen($message) and isset($chars[$message[$i]])) {
+        echo $chars[$message[$i]]." - $i\n";
+        $prefix .= $message[$i];
+        $i++;
+      }
+      $i = strlen($message)-1;
+      while ($i > -1 and isset($chars[$message[$i]])) {
+        echo $chars[$message[$i]]." - $i\n";
+        $sufix = $message[$i] . $suf;
+        $i--;
+      }
+
+      $message = substr($message,strlen($pre));
+      $message = substr($message,0,strlen($message)-strlen($suf));
+    }
+    
     public function setLanguage($lid, $cc) {
       $this->languageID = $li;
       $this->countryCode = $cc;
