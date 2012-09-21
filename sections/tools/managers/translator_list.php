@@ -113,10 +113,12 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
             <?}?>
           </table>
       </tr>
-    </table><br>
+    </table>
   </div>
 </div>
-<br /><br />
+
+<table><tr><td>br>br></td></tr></table>
+
 <table class="torrent_table cats numbering border">
   <tr class="colhead">
     <td class="center" style="width:15px;"></td>
@@ -133,8 +135,8 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
       Found no torrents matching the criteria
     </td>
   </tr>
-        </table>
-        
+</table>
+       
         
 <? show_footer(); ?>
   
