@@ -98,8 +98,10 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
               ORDER BY Missing desc
               	");?>
             <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {?>
+                $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
+                $link = "<a href=\"$link\">$LanguageName</a>";
                 <tr>
-          		    <td><?=$LanguageName?></td> <td><?=$Missing?></td>
+          		    <td><?=$link?></td> <td><?=$Missing?></td>
                 </tr>
             <?}?>
           </table>
