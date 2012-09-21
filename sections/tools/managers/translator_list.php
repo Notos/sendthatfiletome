@@ -117,5 +117,24 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
   </div>
 </div>
 
+<table class="torrent_table cats numbering border">
+  <tr class="colhead">
+    <td class="center" style="width:15px;"></td>
+    <td></td>
+    <td><strong>Name</strong></td>
+    <td style="text-align:right"><strong>Data</strong></td>
+    <td style="text-align:right"><img src="static/styles/postmod/images/snatched.png" alt="Snatches" title="Snatches" /></td>
+    <td style="text-align:right"><img src="static/styles/postmod/images/seeders.png" alt="Seeders" title="Seeders" /></td>
+    <td style="text-align:right"><img src="static/styles/postmod/images/leechers.png" alt="Leechers" title="Leechers" /></td>
+    <td style="text-align:right"><strong>Peers</strong></td>
+  </tr>
+  <tr class="rowb">
+    <td colspan="9" class="center">
+      Found no torrents matching the criteria
+    </td>
+  </tr>
+        </table>
+        
+        
 <? show_footer(); ?>
   
