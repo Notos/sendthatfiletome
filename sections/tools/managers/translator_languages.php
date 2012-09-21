@@ -8,8 +8,6 @@ show_header('Translator language management');
 $toggle = $_GET['toggle'];
 $language = $_GET['language'];
 
-TOOLS::pa($_GET);
-
 list($languageID, $countryCode) = explode("-", $language);
 
 if ($toggle and $language) {
