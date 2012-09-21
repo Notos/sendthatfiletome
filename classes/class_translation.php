@@ -99,7 +99,7 @@ class TRANSLATION {
       $hash = SHA1($message);
       $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$lID', '$cCode', '$hash', '$message', '$translatedMessage');");
     }
-    
+                                                                   
     private function loadLanguages() {
       global $DB;
       

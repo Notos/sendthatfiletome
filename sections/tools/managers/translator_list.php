@@ -88,7 +88,7 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
 	<div class="permission_container" style="width:30%;">
 		<table>
 			<tr class="colhead">
-				<td colspan="2"><? T("Translate it!"); ?></td>
+				<td colspan="2"><? T("Available languages"); ?></td>
 			</tr>
 			<tr>
       		<table>
