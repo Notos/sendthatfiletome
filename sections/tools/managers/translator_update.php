@@ -10,8 +10,9 @@ $messageHash = $_POST['messageHash'];
 $originalMessage = $_POST['originalMessage'];
 $englishTranslation = $_POST['englishTranslation'];
 $currentTranslation = $_POST['currentTranslation'];
-$languageID = $_POST['languageID'];
-$countryCode = $_POST['countryCode'];
+$language = $_POST['language'];
+
+list($languageID, $countryCode) = explode("-", $language);
 
 $DB->query("update message m set TranslatedMessage = '$currentTranslation' where m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'");
 
