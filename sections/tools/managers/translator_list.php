@@ -54,7 +54,7 @@
 
 <h3><? T("Current language:"); ?> <? echo TOOLS::languageName($language);?></h3>
 
-<div>
+<div id="translator">
   <div class="permissions">
     <div class="permission_container" style="width:65%;">
       <table>
@@ -128,7 +128,7 @@
   </div>
 </div>
 
-<div>
+<div id="search_form">
   <table class="torrent_table cats numbering border">
     <tr class="colhead"><td><? T("Search to edit translated messages"); ?></td></tr>
     <tr><td>
@@ -145,7 +145,7 @@
 <h3></h3>
 
 <? if(isset($searchString) and !empty($searchString)) { ?>
-<div>
+<div id="search_result">
   <table class="torrent_table cats numbering border">
     <tr class="colhead"><td><? T("Click on a message to edit it"); ?></td></tr>
   </table>  
@@ -159,7 +159,7 @@
       , EnglishMessage
       , TranslatedMessage 
       from message 
-      where (TranslatedMessage like '%$searchString%' and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
+      where ((EnglishMessage like '%$searchString%' or TranslatedMessage like '%$searchString%') and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
       ");
 
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
