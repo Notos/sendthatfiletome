@@ -19,5 +19,5 @@ if ($DB->affected_rows() == 0) {
   $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$languageID','$countryCode','$messageHash','$originalMessage','$currentTranslation')");
 }
 
-header('Location: tools.php?action=translator');
+// header('Location: tools.php?action=translator');
 ?>
