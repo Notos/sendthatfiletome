@@ -134,7 +134,6 @@
     <tr><td>
         <form action="tools.php" method="post" class="pad">
           <input type="hidden" name="action" value="translator" />
-          <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
           <input type="hidden" name="languageID" value="<?=$languageID?>" />
           <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
           <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
