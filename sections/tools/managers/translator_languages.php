@@ -12,8 +12,7 @@ $DB->query("
               , (select count(*) from message xm where xm.LanguageID = 'EN' and xm.CountryCode = 'US' and xm.EnglishMessageHash not in (select xxm.EnglishMessageHash from message xxm where xxm.LanguageID = l.LanguageID and xxm.CountryCode = l.CountryCode)) Missing
               , l.Enabled Enabled
               FROM language l left join country c on l.CountryCode = c.CountryCode
-              WHERE Enabled = TRUE
-              ORDER BY Missing desc
+              ORDER BY Enabled, LanguageName
               ");
 ?>
                 
@@ -29,13 +28,17 @@ $DB->query("
             <td>Enabled/Disabled</td>
         </tr>
         <?while(list($LanguageID, $LanguageName, $Missing, $Enabled)=$DB->next_record()) {
-            $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&language='.$LanguageID;
-            $link = "<a href=\"$link\">$LanguageName</a>";?>
+            $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator_language&toggle=1&language='.$LanguageID;
+            if ($Enabled) {
+              $link = "[Enable][<a href=\"$link\">Disable</a>]";
+            } else {
+              $link = "[<a href=\"$link\">Enable</a>][Disable]";
+            }?>
           <tr>
             <td><?=$LanguageID?></td> 
             <td><?=$LanguageName?></td> 
             <td><?=$Missing?></td>
-            <td><?=$Enabled?></td>
+            <td><?=$link?></td>
           </tr>
           <?}?>
     </table>
