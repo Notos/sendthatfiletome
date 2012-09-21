@@ -86,8 +86,8 @@ echo "3 -- Add translation!<br>";
           return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// looks it has just a default language version of this message
         }
       }
-    }
 echo "4 -- Add translation!<br>";
+    }
 
     private function cacheIt() {
       $this->internalCache->cache_value('messages', $this->messages);
