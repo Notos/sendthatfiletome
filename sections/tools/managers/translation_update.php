@@ -13,11 +13,14 @@ $currentTranslation = $_GET['currentTranslation'];
 $languageID = $_GET['languageID'];
 $countryCode = $_GET['countryCode'];
 
-$DB->query("update message set TranslatedMessage = '$currentTranslation' where m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'");
+//$DB->query("update message set TranslatedMessage = '$currentTranslation' where m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'");
+echo "update message set TranslatedMessage = '$currentTranslation' where m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'";
 
 if ($DB->affected_rows() == 0) {
-  $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$languageID','$countryCode','$messageHash','$originalMessage',$currentTranslation')");
+//  $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$languageID','$countryCode','$messageHash','$originalMessage',$currentTranslation')");
+echo "insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$languageID','$countryCode','$messageHash','$originalMessage',$currentTranslation')";
 }
 
+die;
 header('Location: tools.php?action=translator');
 ?>

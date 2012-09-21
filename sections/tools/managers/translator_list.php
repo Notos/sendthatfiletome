@@ -50,24 +50,26 @@ if ( !isset($messageHash) or empty($messageHash) ) {
         <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
         <input type="hidden" name="languageID" value="<?=$languageID?>" />
         <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
+        <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
 
         <tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?> - Original message or code</strong></td></tr>
         <tr><td>
             <textarea name="originalMessage" cols="70" rows="5" readonly="readonly"><?=$originalMessage?></textarea>
-          </td></tr>
+        </td></tr>
 
         <tr><td colspan="2"><br><strong><? echo TOOLS::languageName('EN-US');?> - Message translated to English (this is what you will see)</strong></td></tr>
         <tr><td>
             <textarea name="englishTranslation" cols="70" rows="5" readonly="readonly"><?=$englishTranslation?></textarea>
-          </td></tr>
+        </td></tr>
+        
         <tr><td colspan="2"><br><strong><? echo TOOLS::languageName($language);?> - Your translation goes here</strong></td></tr>
         <tr><td>
             <textarea name="currentTranslation" cols="70" rows="15"><?=$currentTranslation?></textarea>
-          </td></tr>
+        </td></tr>
 
         <tr><td>
             <input type="submit" value="Add translation" />
-          </td></tr>
+        </td></tr>
       </form>
     </table>
   </div>
