@@ -16,7 +16,7 @@ $countryCode = $_POST['countryCode'];
 $DB->query("update message m set TranslatedMessage = '$currentTranslation' where m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'");
 
 if ($DB->affected_rows() == 0) {
-  $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$languageID','$countryCode','$messageHash','$originalMessage',$currentTranslation')");
+  $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$languageID','$countryCode','$messageHash','$originalMessage','$currentTranslation')");
 }
 
 header('Location: tools.php?action=translator');
