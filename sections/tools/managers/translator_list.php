@@ -35,6 +35,8 @@ $DB->query($query);
 
 list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
 
+?>
+
 <div class="permissions">
   <div class="permission_container" style="width:65%;">
     <table>
