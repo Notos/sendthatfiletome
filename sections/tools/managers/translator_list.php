@@ -159,10 +159,11 @@
       echo "<tr><td>$sql || count=</td> <td>".$DB->record_count()."</td></tr>";
       
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
-        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
-        $link1 = "<a href=\"$link\">$EnglishMessage</a>";
-        $link2 = "<a href=\"$link\">$TranslatedMessage</a>";
-        echo "<tr><td>$link1</td> <td>$link2</td></tr>";
+       echo "<tr><td>line =======</td> <td>column</td></tr>";
+        //$link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
+        //$link1 = "<a href=\"$link\">$EnglishMessage</a>";
+        //$link2 = "<a href=\"$link\">$TranslatedMessage</a>";
+        //echo "<tr><td>$link1</td> <td>$link2</td></tr>";
       }
     ?>
   </table>
