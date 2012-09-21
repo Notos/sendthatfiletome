@@ -12,7 +12,7 @@
   }
 
   $messageHash = $_POST['messageHash'];
-  if(!isset($searchString) or empty($searchString)) {
+  if(!isset($messageHash) or empty($messageHash)) {
     $messageHash = $_GET['messageHash'];
   }
   
