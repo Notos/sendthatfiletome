@@ -156,7 +156,7 @@
       $DB->query($sql);
 
       echo "<tr><td><strong>".TOOLS::languageName('EN-US')."</strong></td> <td><strong>".TOOLS::languageName($language)."</strong></td></tr>";
-      echo "<tr><td>count=</td> <td>".$DB->record_count()."</td></tr>";
+      echo "<tr><td>$sql || count=</td> <td>".$DB->record_count()."</td></tr>";
       
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
         $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
