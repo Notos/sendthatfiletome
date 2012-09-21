@@ -33,11 +33,7 @@ $query = "
 
 $DB->query($query);
 
-echo "$query<br>";
-
 list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
-
-echo "$messageHash, $originalMessage, $englishTranslation, $currentTranslation<br>";
 
 if ( !isset($messageHash) or empty($messageHash) ) {
   echo "There are no untranslated messages for ".TOOLS::languageName($language);
@@ -54,16 +50,16 @@ if ( !isset($messageHash) or empty($messageHash) ) {
 
         <tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?> - Original message or code</strong></td></tr>
         <tr><td>
-            <textarea name="originalMessage" cols="70" rows="5" readonly="readonly" value="<?=$originalMessage?>"></textarea>
+            <textarea name="originalMessage" cols="70" rows="5" readonly="readonly"><?=$originalMessage?></textarea>
           </td></tr>
 
         <tr><td colspan="2"><br><strong><? echo TOOLS::languageName('EN-US');?> - Message translated to English (this is what you will see)</strong></td></tr>
         <tr><td>
-            <textarea name="englishTranslation" cols="70" rows="5" readonly="readonly" value="<?=$englishTranslation?>"></textarea>
+            <textarea name="englishTranslation" cols="70" rows="5" readonly="readonly"><?=$englishTranslation?></textarea>
           </td></tr>
         <tr><td colspan="2"><br><strong><? echo TOOLS::languageName($language);?> - Your translation goes here</strong></td></tr>
         <tr><td>
-            <textarea name="currentTranslation" cols="70" rows="15" value="<?=$currentTranslation?>"></textarea>
+            <textarea name="currentTranslation" cols="70" rows="15"><?=$currentTranslation?></textarea>
           </td></tr>
 
         <tr><td>
