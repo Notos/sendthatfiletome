@@ -37,8 +37,6 @@ class TRANSLATION {
 
       $this->removePrefixAndSufix($message, $prefix, $sufix); /// spaces and punctuation before and after should not be translated
 
-      echo "un pre su fixed: $message<br>";
-            
       $ret = $prefix . $this->__translate($message, $languageID, $countryCode) . $sufix;
 
       if (!isset($ret) or Empty($ret)) {
@@ -109,8 +107,6 @@ class TRANSLATION {
       
       $this->languages = $this->internalCache->get_value('languages');
       if ( !isset($this->languages) or count($this->languages) < 10 ) {
-        // echo "loading... <pre>"; print_r($this->languages); echo "</pre><br>";
-
         $this->languages = array(); /// wasn't cached
         $DB->query("select LanguageID, CountryCode, EnglishName, OriginalName, Enabled from language"); /// get the full language listing
         $languages = $DB->to_array(0, MYSQLI_NUM);
@@ -127,23 +123,18 @@ class TRANSLATION {
       $chars = array( "!"=>1,"\\"=>1,"\""=>1,"#"=>1,"\$"=>1,"%"=>1,"&"=>1,"'"=>1,"("=>1,")"=>1,"*"=>1,"+"=>1,","=>1,"-"=>1,"."=>1,"/"=>1,":"=>1,";"=>1,"<"=>1,"="=>1,">"=>1,"?"=>1,"@"=>1,"["=>1,"]"=>1,"^"=>1,"_"=>1,"`"=>1,"{"=>1,"|"=>1," "=>1,"}"=>1 );
 
       $i = 0;
-      echo "\n";
       while ($i < strlen($message) and isset($chars[$message[$i]])) {
-        echo $chars[$message[$i]]." - $i\n";
         $prefix .= $message[$i];
         $i++;
       }
       $i = strlen($message)-1;
       while ($i > -1 and isset($chars[$message[$i]])) {
-        echo $chars[$message[$i]]." - $i\n";
         $sufix = $message[$i] . $suf;
         $i--;
       }
 
       $message = substr($message,strlen($prefix));
       $message = substr($message,0,strlen($message)-strlen($sufix));
-      
-      echo "|||$message|||<br>";
     }
     
     public function setLanguage($lid, $cc) {
