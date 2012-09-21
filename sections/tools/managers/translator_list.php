@@ -35,16 +35,15 @@ $DB->query($query);
 
 list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) = $DB->next_record();
 
-if ( !isset($messageHash) or empty($messageHash) ) {
-  echo "There are no untranslated messages for ".TOOLS::languageName($language);
-} else { /// start of form block ?>
-
 <div class="permissions">
   <div class="permission_container" style="width:65%;">
     <table>
       <tr class="colhead">
         <td colspan="2">Translate it!</td>
       </tr>
+<?if ( !isset($messageHash) or empty($messageHash) ) {
+  echo "There are no untranslated messages for ".TOOLS::languageName($language);
+} else { /// start of form block ?>
       <form action="tools.php" method="post" class="pad">
         <input type="hidden" name="action" value="translator_update" />
         <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
@@ -71,6 +70,7 @@ if ( !isset($messageHash) or empty($messageHash) ) {
             <input type="submit" value="Add translation" />
         </td></tr>
       </form>
+<? } /// end of form block ?>
     </table>
   </div>
 </div>
@@ -106,9 +106,5 @@ if ( !isset($messageHash) or empty($messageHash) ) {
   </div>
 </div>
 
-<? } /// end of form block
-
-show_footer(); 
-
-?>
+<? show_footer(); ?>
   
