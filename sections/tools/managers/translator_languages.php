@@ -4,6 +4,18 @@
   }
 
 show_header('Translator language management');
+
+$toggle = $_GET['toggle'];
+$language = $_POST['language'];
+
+list($languageID, $countryCode) = explode("-", $language);
+
+if ($toggle and $language) {
+  $DB->query("update language l set Enabled = not Enabled where l.LanguageID = '$languageID' and l.CountryCode = '$countryCode'");
+}
+
+$DB->query("update message m set TranslatedMessage = '$currentTranslation' where m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'");
+
   
 $DB->query("
               SELECT
