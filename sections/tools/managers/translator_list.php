@@ -52,6 +52,8 @@
 
 ?>
 
+<h3><? T("Current language:"); ?> <? echo TOOLS::languageName($language);?></h3>
+
 <div>
   <div class="permissions">
     <div class="permission_container" style="width:65%;">
