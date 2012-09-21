@@ -113,7 +113,7 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
             <?}?>
           </table>
       </tr>
-    </table><br /><br />
+    </table><br /><br />                                                         
   </div>
 </div>
 
