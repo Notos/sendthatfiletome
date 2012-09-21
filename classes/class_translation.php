@@ -62,14 +62,11 @@ class TRANSLATION {
       /// TOOD: find a messages in a near language (excluding country code)
       if ( $this->isDefaultLanguage($languageID, $countryCode) ) {
         $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."')");
-echo "1 -- default<br>";
       } else {
-        $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and (LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."') or (LanguageID = '$languageID' and CountryCode = '$countryCode') ");
-echo "2 -- default<br>";
+        $DB->query("select LanguageID, CountryCode, EnglishMessage, TranslatedMessage from message where EnglishMessage = '$message' and ((LanguageID = '".$this->defaultLanguageID."' and CountryCode = '".$this->defaultCountryCode."') or (LanguageID = '$languageID' and CountryCode = '$countryCode')) ");
       }
 
       if ($DB->record_count() == 0) { /// message still not in database, let's add a default language record for it
-echo "3 -- Add translation!<br>";
         $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode] = $message;
         $this->addTranslationToDatabase($message, $this->defaultLanguageID, $this->defaultCountryCode, $message);
         $this->cacheIt();
@@ -86,7 +83,6 @@ echo "3 -- Add translation!<br>";
           return $this->messages[$message][$this->defaultLanguageID][$this->defaultCountryCode]; /// looks it has just a default language version of this message
         }
       }
-echo "4 -- Add translation!<br>";
     }
 
     private function cacheIt() {
@@ -102,8 +98,6 @@ echo "4 -- Add translation!<br>";
 
       $hash = SHA1($message);
       $DB->query("insert into message (LanguageID, CountryCode, EnglishMessageHash, EnglishMessage, TranslatedMessage) values ('$lID', '$cCode', '$hash', '$message', '$translatedMessage');");
-echo "X -- Adding translation!<br>";
-      
     }
     
     private function loadLanguages() {
