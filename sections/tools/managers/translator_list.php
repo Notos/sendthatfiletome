@@ -146,6 +146,7 @@
       $sql = "select 
                 LanguageID
               , CountryCode
+              , EnglishMessageHash
               , EnglishMessage
               , TranslatedMessage 
               from message 
@@ -154,13 +155,14 @@
              ";
       $DB->query($sql);
 
-      echo "<tr><td>".TOOLS::languageName('EN-US')."</td> <td>".TOOLS::languageName($language)."</td></tr>";
+      echo "<tr><td><strong>".TOOLS::languageName('EN-US')."</strong></td> <td><strong>".TOOLS::languageName($language)."</strong></td></tr>";
+      echo "<tr><td>count=</td> <td>".$DB->record_count()."</td></tr>";
       
-      while(list($LanguageID, $CountryCode, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
+      while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
         $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
         $link1 = "<a href=\"$link\">$EnglishMessage</a>";
         $link2 = "<a href=\"$link\">$TranslatedMessage</a>";
-        echo "<tr><td><?=$link1?></td> <td><?=$link2?></td></tr>";
+        echo "<tr><td>$link1</td> <td>$link2</td></tr>";
       }
     ?>
   </table>
