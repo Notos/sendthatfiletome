@@ -76,7 +76,7 @@ class TRANSLATION {
       } else {
         $translations = $DB->to_array(0, MYSQLI_NUM);
         foreach($translations as $record) {
-          $this->messages[$record[2]][$record[0]][$record[1]] = $record[3];
+          $this->messages[$record[2]][$record[0]][$record[1]] = '|'.$record[3];
         }
         $this->cacheIt();
         if ( isset($this->messages[$message][$languageID][$countryCode])  ) {
