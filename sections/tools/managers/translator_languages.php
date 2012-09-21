@@ -43,12 +43,12 @@ $DB->query("
         </tr>
         <?while(list($LanguageID, $LanguageName, $Missing, $Enabled)=$DB->next_record()) {
             $link = "";
+            $strongOpen = "<strong>";
+            $strongClose = "</strong>";
             if ($LanguageID != "EN-US") {
               $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator_languages&toggle=1&language='.$LanguageID;
               if ($Enabled) {
                 $link = "[Enable] [<a href=\"$link\">Disable</a>]";
-                $strongOpen = "<strong>";
-                $strongClose = "</strong>";
               } else {
                 $link = "[<a href=\"$link\">Enable</a>] [Disable]";
                 $strongOpen = "";
