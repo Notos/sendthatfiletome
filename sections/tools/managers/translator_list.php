@@ -103,7 +103,7 @@
         <tr>
           <table>
             <tr>
-              <td><strong>Language</strong></td> <td><strong>Missing</strong></td>
+              <td><strong><? T("Language"); ?></strong></td> <td><strong><? T("Missing"); ?></strong></td>
             </tr>
             <?$DB->query("
               SELECT
