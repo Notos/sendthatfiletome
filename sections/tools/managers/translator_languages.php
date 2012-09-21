@@ -6,7 +6,7 @@
 show_header('Translator language management');
 
 $toggle = $_GET['toggle'];
-$language = $_POST['language'];
+$language = $_GET['language'];
 
 list($languageID, $countryCode) = explode("-", $language);
 
