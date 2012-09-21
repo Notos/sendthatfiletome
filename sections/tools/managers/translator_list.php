@@ -4,7 +4,7 @@ if(!check_perms('site_translator')){
 }
 show_header('Translator Manager');
 
-$setLanguage = $_POST['setLanguage'];
+$setLanguage = $_GET['setLanguage'];
 
 if(isset($setLanguage) and !empty($setLanguage)) {
   setcookie("translatingLanguage",$setLanguage);
