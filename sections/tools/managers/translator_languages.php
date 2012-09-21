@@ -28,7 +28,7 @@ $DB->query("
             <td>Enabled/Disabled</td>
         </tr>
         <?while(list($LanguageID, $LanguageName, $Missing, $Enabled)=$DB->next_record()) {
-            $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator_language&toggle=1&language='.$LanguageID;
+            $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator_languages&toggle=1&language='.$LanguageID;
             if ($Enabled) {
               $link = "[Enable] [<a href=\"$link\">Disable</a>]";
               $strongOpen = "<strong>";
