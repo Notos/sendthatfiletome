@@ -16,7 +16,7 @@ $originalMessage = '';
 $englishTranslation = '';
 $currentTranslation = '';
 
-list($lid, $lcc) = explode("-", $language);
+list($languageID, $countryCode) = explode("-", $language);
 
 $query = "
   select 
@@ -25,8 +25,8 @@ $query = "
   , (select TranslatedMessage from message mx where mx.EnglishMessageHash = m.EnglishMessageHash and LanguageID = 'EN' and CountryCode = 'US') EnglishTranslation
   , m.TranslatedMessage currentTranslation
   from message m
-  where case when '$messageHash' = '' then ( m.LanguageID = 'EN' and m.CountryCode = 'US' and m.EnglishMessageHash not in (select mmx.EnglishMessageHash from message mmx where mmx.LanguageID = '$lid' and mmx.CountryCode = '$lcc') )
-             else m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$lid' and m.CountryCode = '$lcc'
+  where case when '$messageHash' = '' then ( m.LanguageID = 'EN' and m.CountryCode = 'US' and m.EnglishMessageHash not in (select mmx.EnglishMessageHash from message mmx where mmx.LanguageID = '$languageID' and mmx.CountryCode = '$countryCode') )
+             else m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'
              end
   limit 0 , 1
 ";
@@ -45,8 +45,11 @@ if ( !isset($messageHash) or empty($messageHash) ) {
       <tr class="colhead">
         <td colspan="2">Translate it!</td>
       </tr>
-      <form>
+      <form action="tools.php" method="post" class="pad">
+        <input type="hidden" name="action" value="translation_update" />
         <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
+        <input type="hidden" name="languageID" value="<?=$languageID?>" />
+        <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
 
         <tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?> - Original message or code</strong></td></tr>
         <tr><td>
