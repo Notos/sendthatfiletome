@@ -29,7 +29,7 @@ $query = "
              else m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$lid' and m.CountryCode = '$lcc'
              end
   limit 0 , 1
-");
+";
 
 $DB->query($query);
 
