@@ -163,7 +163,7 @@
       ");
 
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
-        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&language='.$language."&messageHash=$EnglishMessageHash";
+        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&language='.$language."&messageHash=$EnglishMessageHash&search=$searchString";
         $link1 = "<a href=\"$link\">$EnglishMessage</a>";
         $link2 = "<a href=\"$link\">$TranslatedMessage</a>";
         echo "<tr><td>$link1</td> <td>$link2</td></tr>";
