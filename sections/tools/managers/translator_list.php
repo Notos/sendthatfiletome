@@ -51,7 +51,7 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
         <td colspan="2"><? T("Translate it!"); ?></td>
       </tr>
 <?if ( !isset($messageHash) or empty($messageHash) ) {
-      echo '<tr><td colspan="2"><br><br><strong>'.T("There are no untranslated messages for").' '.TOOLS::languageName($language).', '.T("please select another one from the available languages").'.</strong><br><br><br></td></tr>';
+      echo '<tr><td colspan="2"><br><br><strong>'.TT("There are no untranslated messages for").' '.TOOLS::languageName($language).', '.TT("please select another one from the available languages").'.</strong><br><br><br></td></tr>';
 } else { /// start of form block ?>
       <form action="tools.php" method="post" class="pad">
         <input type="hidden" name="action" value="translator_update" />
