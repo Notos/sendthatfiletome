@@ -3,6 +3,8 @@
     error(403);
   }
 
+show_header('Translator language management');
+  
 $DB->query("
               SELECT
               coalesce( concat( l.LanguageID, (case when l.CountryCode is not null and l.CountryCode <> '' then '-' else '' end), l.CountryCode) , '') LanguageID
@@ -17,7 +19,7 @@ $DB->query("
                 
 <div class="thin">
     <div class="header">
-        <h2>Translator languages management</h2>
+        <h2>Translator language management</h2>
     </div>
     <table width="100%">
         <tr class="colhead">
