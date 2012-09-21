@@ -5,6 +5,11 @@
   show_header('Translator Manager');
 
   $setLanguage = $_GET['setLanguage'];
+  
+  $searchString = $_POST['search'];
+  if(!isset($searchString) or empty($searchString)) {
+    $searchString = $_GET['search'];
+  }
 
   if(isset($setLanguage) and !empty($setLanguage)) {
     setcookie("translatingLanguage",$setLanguage);
@@ -77,7 +82,7 @@
               </td></tr>
 
             <tr><td>
-                <input type="submit" value="Add translation" />
+                <input type="submit" value="<? T("Add translation"); ?>" />
               </td></tr>
           </form>
           <? } /// end of form block ?>
@@ -123,7 +128,7 @@
   <tr class="colhead"><td><? T("Search to edit translated messages"); ?></td></tr>
   <tr><td>
       <form action="tools.php" method="post" class="pad">
-        <input type="hidden" name="action" value="translator_update" />
+        <input type="hidden" name="action" value="translator" />
         <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
         <input type="hidden" name="languageID" value="<?=$languageID?>" />
         <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
@@ -133,6 +138,37 @@
       </form>
   </td></tr>
 </table>
+
+<? if(isset($searchString) and !empty($searchString)) { ?>
+  <table class="torrent_table cats numbering border">
+    <tr class="colhead"><td><? T("Click on a message to edit it"); ?></td></tr>
+    <?
+      $sql = "select 
+                LanguageID
+              , CountryCode
+              , EnglishMessage
+              , TranslatedMessage 
+              from message 
+              where (EnglishMessage like '%$searchString%' and ((LanguageID = 'EN' and CountryCode = 'US')))
+                 or (TranslatedMessage like '%$searchString%' and ((LanguageID = '$languageID' and CountryCode = '$countryCode')))
+             ";
+      $DB->query($sql);
+
+      echo "<tr><td>".TOOLS::languageName('EN-US')."</td> <td>".TOOLS::languageName($language)."</td></tr>";
+      
+      while(list($LanguageID, $CountryCode, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
+        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
+        $link1 = "<a href=\"$link\">$EnglishMessage</a>";
+        $link2 = "<a href=\"$link\">$TranslatedMessage</a>";
+        echo "<tr><td><?=$link1?></td> <td><?=$link2?></td></tr>";
+      }
+    ?>
+  </table>
+<? } ?>
         
 <? show_footer(); ?>
   
+  
+
+
+   
