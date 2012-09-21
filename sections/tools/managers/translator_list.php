@@ -113,11 +113,9 @@ list($messageHash, $originalMessage, $englishTranslation, $currentTranslation) =
             <?}?>
           </table>
       </tr>
-    </table>
+    </table><br /><br />
   </div>
 </div>
-
-<table><tr><td>br>br></td></tr></table>
 
 <table class="torrent_table cats numbering border">
   <tr class="colhead">
