@@ -11,6 +11,11 @@
     $searchString = $_GET['search'];
   }
 
+  $messageHash = $_POST['messageHash'];
+  if(!isset($searchString) or empty($searchString)) {
+    $messageHash = $_GET['messageHash'];
+  }
+  
   if(isset($setLanguage) and !empty($setLanguage)) {
     setcookie("translatingLanguage",$setLanguage);
     $language = $setLanguage;
@@ -23,7 +28,6 @@
     $language = $LoggedUser['Language'];
   }
 
-  $messageHash = '';
   $originalMessage = '';
   $englishTranslation = '';
   $currentTranslation = '';
@@ -41,7 +45,7 @@
   else m.EnglishMessageHash = '$messageHash' and m.LanguageID = '$languageID' and m.CountryCode = '$countryCode'
   end
   limit 0 , 1
-  ";
+  ";   
 
   $DB->query($query);
 
@@ -162,7 +166,7 @@
       ");
 
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
-        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
+        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID."&messageHash=$EnglishMessageHash";
         $link1 = "<a href=\"$link\">$EnglishMessage</a>";
         $link2 = "<a href=\"$link\">$TranslatedMessage</a>";
         echo "<tr><td>$link1</td> <td>$link2</td></tr>";
