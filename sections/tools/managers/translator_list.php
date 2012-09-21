@@ -4,7 +4,7 @@
   }
   show_header('Translator Manager');
 
-  $setLanguage = $_GET['setLanguage'];
+  $language = $_GET['language'];
   
   $searchString = $_POST['search'];
   if(!isset($searchString) or empty($searchString)) {
@@ -16,9 +16,8 @@
     $messageHash = $_GET['messageHash'];
   }
   
-  if(isset($setLanguage) and !empty($setLanguage)) {
-    setcookie("translatingLanguage",$setLanguage);
-    $language = $setLanguage;
+  if(isset($language) and !empty($language)) {
+    setcookie("translatingLanguage",$language);
   } else {
     $language = $_COOKIE['translatingLanguage'];
   }
@@ -66,8 +65,7 @@
           <form action="tools.php" method="post" class="pad">
             <input type="hidden" name="action" value="translator_update" />
             <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
-            <input type="hidden" name="languageID" value="<?=$languageID?>" />
-            <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
+            <input type="hidden" name="language" value="<?=$language?>" />
             <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
 
             <tr><td colspan="2"><strong><? echo TOOLS::languageName('EN-US');?> - Original message or code</strong></td></tr>
@@ -115,7 +113,7 @@
               ORDER BY Missing desc
               ");?>
             <?while(list($LanguageID, $LanguageName, $Missing)=$DB->next_record()) {
-                $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID;
+                $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&language='.$LanguageID;
                 $link = "<a href=\"$link\">$LanguageName</a>";?>
               <tr>
                 <td><?=$link?></td> <td><?=$Missing?></td>
@@ -134,8 +132,6 @@
     <tr><td>
         <form action="tools.php" method="post" class="pad">
           <input type="hidden" name="action" value="translator" />
-          <input type="hidden" name="languageID" value="<?=$languageID?>" />
-          <input type="hidden" name="countryCode" value="<?=$countryCode?>" />
           <input type="hidden" name="auth" value="<?=$LoggedUser['AuthKey']?>" />
           Search
           <input type="text" spellcheck="false" size="40" name="search" class="inputtext smaller" value="" />
@@ -155,7 +151,7 @@
     <?
       echo "<tr><td><strong>".TOOLS::languageName('EN-US')."</strong></td> <td><strong>".TOOLS::languageName($language)."</strong></td></tr>";
       $DB->query("select 
-      LanguageID
+        LanguageID
       , CountryCode
       , EnglishMessageHash
       , EnglishMessage
@@ -165,7 +161,7 @@
       ");
 
       while(list($LanguageID, $CountryCode, $EnglishMessageHash, $EnglishMessage, $TranslatedMessage)=$DB->next_record()) {
-        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&setLanguage='.$LanguageID."&messageHash=$EnglishMessageHash";
+        $link = 'http'.($SSL?'s':'').'://'.SITE_URL.'/tools.php?action=translator&language='.$language."&messageHash=$EnglishMessageHash";
         $link1 = "<a href=\"$link\">$EnglishMessage</a>";
         $link2 = "<a href=\"$link\">$TranslatedMessage</a>";
         echo "<tr><td>$link1</td> <td>$link2</td></tr>";
