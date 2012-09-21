@@ -4,6 +4,11 @@ if(!check_perms('site_translator')){
 }
 show_header('Translator Manager');
 
+$setLanguage = $_POST['setLanguage'];
+if(isset($setLanguage) and not empty($setLanguage)) {
+  setcookie("translatingLanguage",$setLanguage)
+}
+
 $language = $_COOKIE['translatingLanguage'];
 
 if (!isset($language) or empty($language)) {
