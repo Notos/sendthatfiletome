@@ -140,8 +140,8 @@ class TRANSLATION {
         $i--;
       }
 
-      $message = substr($message,strlen($pre));
-      $message = substr($message,0,strlen($message)-strlen($suf));
+      $message = substr($message,strlen($prefix));
+      $message = substr($message,0,strlen($message)-strlen($sufix));
       
       echo "|||$message|||<br>";
     }
