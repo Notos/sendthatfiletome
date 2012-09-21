@@ -46,7 +46,7 @@ if ( !isset($messageHash) or empty($messageHash) ) {
         <td colspan="2">Translate it!</td>
       </tr>
       <form action="tools.php" method="post" class="pad">
-        <input type="hidden" name="action" value="translation_update" />
+        <input type="hidden" name="action" value="translator_update" />
         <input type="hidden" name="messageHash" value="<?=$messageHash?>" />
         <input type="hidden" name="languageID" value="<?=$languageID?>" />
         <input type="hidden" name="countryCode" value="<?=$countryCode?>" />

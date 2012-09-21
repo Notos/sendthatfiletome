@@ -396,12 +396,8 @@ switch ($_REQUEST['action']){
 		include('managers/translator_list.php');
 		break;
 
-	case 'translator_add':
-		include('managers/translator_add.php');
-		break;
-
-	case 'translator_alter':
-		include('managers/translator_alter.php');
+	case 'translator_update':
+		include('managers/translator_update.php');
 		break;
 
 	default:
